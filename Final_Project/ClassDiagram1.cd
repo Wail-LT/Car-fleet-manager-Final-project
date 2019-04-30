@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Final_Project.Program" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Final_Project.Vehicule">
+    <Position X="10" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Modeles\Vehicules\Vehicule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Final_Project.Voiture">
+    <Position X="11.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Modeles\Vehicules\Voiture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Final_Project.Moto">
+    <Position X="9.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modeles\Vehicules\Moto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Final_Project.Camion">
+    <Position X="7" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modeles\Vehicules\Camion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Final_Project.Vue">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QABBAkAAACAABAMAAACAAAAIAEAAEAAAEAgAAAAAEAA=</HashCode>
+      <FileName>MVC\Vue.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="controller" />
+      <Field Name="gestionFlotte" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Final_Project.Controller">
+    <Position X="2.75" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAIAAAJAIAAACAAAAIgAAAEAAAEAAAAAAAAAA=</HashCode>
+      <FileName>MVC\Controller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gestionFlotte" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Final_Project.GestionFlotte">
+    <Position X="6.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modeles\GestionFlotte.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="vehiculeList" />
+      <Field Name="clientList" />
+      <Field Name="trajetList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Final_Project.Client">
+    <Position X="6.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modeles\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Final_Project.Trajet">
+    <Position X="3.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Modeles\Trajet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="client" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
