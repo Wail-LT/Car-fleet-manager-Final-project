@@ -7,7 +7,33 @@ namespace Final_Project
 {
     public sealed class Voiture : Vehicule
     {
-        private int nbPortes;
-        private int puissance;
+        private readonly int nbPortes;
+        private readonly int puissance;
+
+        /**
+         * Constructeur pour vehicule neuf
+         */
+
+        public Voiture(string marque, string modele, string couleur, int nbPortes, int puissance) : base(marque, modele, couleur)
+        {
+            this.nbPortes = nbPortes;
+            this.puissance = puissance;
+        }
+
+        /**
+         * Constructeur pour vehicule d'occasion
+         */
+
+        public Voiture(string marque, string modele, int km, string couleur, int nbPortes, int puissance) : base(marque, modele, km, couleur)
+        {
+            this.nbPortes = nbPortes;
+            this.puissance = puissance;
+        }
+
+        /* Properties */
+        
+        public int NbPortes => nbPortes;
+
+        public int Puissance => puissance;
     }
 }

@@ -33,11 +33,18 @@ namespace Final_Project
          * @Params km        int      : km au compteur
          * @Params marque    string   : marque du véhicule
          * @Params modele    string   : modele du véhicule
-         * @Params à définir
+         * @Params nbPortes  int      : nombre de portes
+         * @Params puissance int      : puissance moteur (nombre de chevaux)
          */
-        public void AjoutVoiture(string couleur, int km, string marque, string modele /*, a definir*/)
+        public void AjoutVoiture(string couleur, int km, string marque, string modele, int nbPortes, int puissance)
         {
             CheckVehicule(couleur, km, marque, modele);
+
+            if (nbPortes < 3 || nbPortes > 5)
+                throw new NotImplementedException("ERREUR : le nombre de porte saisie est incorrect il doit être compris entre 3 et 5");
+            if (puissance<70 && puissance>650)
+                throw new NotImplementedException("ERREUR : la puissance saisie est incorrect elle doit être comprise entre 70 et 650ch");
+            gestionFlotte.AjoutVehicule();
         }
 
         /**

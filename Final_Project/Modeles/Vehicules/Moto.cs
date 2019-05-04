@@ -7,6 +7,30 @@ namespace Final_Project
 {
     public sealed class Moto : Vehicule
     {
-        private int cylindre;
+        private readonly int cylindre;
+
+        /**
+         * Constructeur pour vehicule neuf
+         */
+
+        public Moto(string marque, string modele, string couleur, int cylindre) : base (marque, modele, couleur)
+        {
+            this.cylindre = cylindre;
+        }
+
+        /**
+         * Constructeur pour vehicule d'occasion
+         */
+
+
+        public Moto(string marque, string modele, int km, string couleur, int cylindre) : base(marque, modele, km, couleur)
+        {
+            this.cylindre = cylindre;
+        }
+
+
+        /* Properties */
+
+        public int Cylindre => cylindre;
     }
 }

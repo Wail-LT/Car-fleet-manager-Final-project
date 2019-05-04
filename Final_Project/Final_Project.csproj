@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modeles\Enums\EPermis.cs" />
     <Compile Include="Modeles\Vehicules\Camion.cs" />
     <Compile Include="Modeles\Client.cs" />
     <Compile Include="MVC\Controller.cs" />
@@ -61,5 +62,6 @@
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

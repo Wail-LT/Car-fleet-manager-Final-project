@@ -11,15 +11,20 @@ namespace Final_Project
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"C:\Users\latif\Desktop\test.txt", "");
+            /*System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"C:\Users\latif\Desktop\IP.csv", "");
 
             System.Diagnostics.Process.Start(psi);
 
-            Thread.Sleep(1000);
+            Thread.Sleep(15000);
 
-            File.Delete(@"C:\Users\latif\Desktop\test.txt");
+            File.Delete(@"C:\Users\latif\Desktop\IP.csv");*/
+
+
+            Console.Read();
+
         }
     }
 }
