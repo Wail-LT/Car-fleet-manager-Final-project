@@ -10,24 +10,13 @@ namespace Final_Project
         private readonly int capacite;
 
         /**
-        * Constructeur pour vehicule neuf
+        * Constructeur pour vehicule d'occasion
         */
-
-        public Camion(string marque, string modele, string couleur, int capacite) : base(marque, modele, couleur)
-        {
-            this.capacite = capacite;
-        }
-
-
-        /**
-         * Constructeur pour vehicule d'occasion
-         */
 
         public Camion(string marque, string modele, int km, string couleur, int capacite) : base(marque, modele, km, couleur)
         {
             this.capacite = capacite;
         }
-
 
         /* Properties */
 

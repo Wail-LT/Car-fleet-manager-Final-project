@@ -11,18 +11,8 @@ namespace Final_Project
         private readonly int puissance;
 
         /**
-         * Constructeur pour vehicule neuf
-         */
-
-        public Voiture(string marque, string modele, string couleur, int nbPortes, int puissance) : base(marque, modele, couleur)
-        {
-            this.nbPortes = nbPortes;
-            this.puissance = puissance;
-        }
-
-        /**
-         * Constructeur pour vehicule d'occasion
-         */
+        * Constructeur pour vehicule d'occasion
+        */
 
         public Voiture(string marque, string modele, int km, string couleur, int nbPortes, int puissance) : base(marque, modele, km, couleur)
         {

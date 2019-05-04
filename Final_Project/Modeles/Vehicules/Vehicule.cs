@@ -16,20 +16,6 @@ namespace Final_Project
         private bool isDisponible;
 
         /**
-         * Constructeur pour vehicule neuf
-         */
-
-        protected Vehicule(string marque, string modele, string couleur)
-        {
-            this.nVehicule = -1;
-            this.marque = marque;
-            this.modele = modele;
-            this.km = 0;
-            this.couleur = couleur;
-            this.isDisponible = true;
-        }
-
-        /**
          * Constructeur pour vehicule d'occasion
          */
 
@@ -43,7 +29,7 @@ namespace Final_Project
             this.isDisponible = true;
         }
 
-
+        
         /* Properties */
 
         public string Marque => marque;
