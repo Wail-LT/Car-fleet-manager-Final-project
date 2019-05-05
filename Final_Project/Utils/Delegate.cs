@@ -2,6 +2,6 @@
 {
     public class Delegate
     {
-        public static 
+        
     }
 }

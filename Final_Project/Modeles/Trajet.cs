@@ -10,8 +10,8 @@ namespace Final_Project
     public class Trajet
     {
         private int nTrajet;
-        private Client client;
-        private Vehicule vehicule;
+        private readonly Client client;
+        private readonly Vehicule vehicule;
         private int distance;
 
 
@@ -30,12 +30,15 @@ namespace Final_Project
         public int Distance { get => distance; set => distance = value; }
         public int NTrajet { get => nTrajet; set => nTrajet = value; }
 
+        public Client Client => client;
+        public Vehicule Vehicule => vehicule;
+
 
         /* Public Methodes */
 
         public void Supprimer()
         {
-            vehicule.Km -= distance;
+            Vehicule.Km -= distance;
         }
     }
 } 
