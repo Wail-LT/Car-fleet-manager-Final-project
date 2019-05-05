@@ -170,7 +170,7 @@ namespace Final_Project
         {
             if (nTrajet > gestionFlotte.NumTrajetMax)
                 throw new NotImplementedException("ERREUR : le numéro saisie ne correspond à aucun trajet");
-
+            
             gestionFlotte.SupTrajet(nTrajet);
         }
 
