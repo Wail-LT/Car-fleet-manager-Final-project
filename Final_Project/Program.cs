@@ -29,16 +29,6 @@ namespace Final_Project
                 list.Add(i);
 
             list.ForEach(x=>Console.Write(x+" | "));
-            Console.WriteLine();
-
-            int k = 0;
-            list.ForEach(x=>
-            {
-                if (x > 5) k++;
-            });
-
-            Console.Write(k + " | ");
-
             Console.Read();
 
         }

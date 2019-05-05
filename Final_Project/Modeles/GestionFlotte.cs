@@ -7,9 +7,9 @@ namespace Final_Project
 {
     public class GestionFlotte
     {
-        private List<Vehicule> vehiculeList;
-        private List<Client> clientList;
-        private List<Trajet> trajetList;
+        private readonly List<Vehicule> vehiculeList;
+        private readonly List<Client> clientList;
+        private readonly List<Trajet> trajetList;
 
 
 
@@ -26,6 +26,10 @@ namespace Final_Project
         public int NumVehiculeMax => vehiculeList.Count - 1;
         public int NumClientMax => clientList.Count - 1;
         public int NumTrajetMax => trajetList.Count - 1;
+
+        public List<Vehicule> VehiculeList => vehiculeList;
+        public List<Client> ClientList => clientList;
+        public List<Trajet> TrajetList => trajetList;
 
 
         /* Public Methodes */
