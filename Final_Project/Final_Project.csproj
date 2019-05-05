@@ -57,6 +57,7 @@
     <Compile Include="Modeles\Vehicules\Vehicule.cs" />
     <Compile Include="Modeles\Vehicules\Voiture.cs" />
     <Compile Include="MVC\Vue.cs" />
+    <Compile Include="Utils\Delegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

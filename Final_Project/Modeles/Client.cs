@@ -14,13 +14,13 @@ namespace Final_Project
         private readonly string adresse;
         private List<EPermis> permisList;
 
-        public Client(string nom, string prenom, string adresse)
+        public Client(string nom, string prenom, string adresse, List<EPermis> permisList)
         {
             this.nClient = -1;
             this.nom = nom;
             this.prenom = prenom;
             this.adresse = adresse;
-            this.permisList = new List<EPermis>(2);
+            this.permisList = new List<EPermis>(permisList);
         }
 
 
