@@ -12,7 +12,7 @@ namespace Final_Project
         private readonly string nom;
         private readonly string prenom;
         private readonly string adresse;
-        private List<EPermis> permisList;
+        private readonly List<EPermis> permisList;
 
         public Client(string nom, string prenom, string adresse, List<EPermis> permisList)
         {
@@ -31,6 +31,8 @@ namespace Final_Project
         public string Adresse => adresse;
 
         public int NClient { get => nClient; set => nClient = value; }
+
+        public List<EPermis> PermisList => permisList;
 
         /* Public Methodes */
 
