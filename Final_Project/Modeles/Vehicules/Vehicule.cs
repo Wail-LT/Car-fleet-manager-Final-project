@@ -19,9 +19,9 @@ namespace Final_Project
          * Constructeur pour vehicule d'occasion
          */
 
-        protected Vehicule(string marque, string modele, int km, string couleur)
+        protected Vehicule(int nVehicule, string marque, string modele, int km, string couleur)
         {
-            this.nVehicule = -1;
+            this.nVehicule = nVehicule;
             this.marque = marque;
             this.modele = modele;
             this.km = km;

@@ -43,6 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\Client\AdresseVide.cs" />
+    <Compile Include="Exceptions\Client\ErreurNClient.cs" />
+    <Compile Include="Exceptions\Client\ErreurPermis.cs" />
+    <Compile Include="Exceptions\Client\NomVide.cs" />
+    <Compile Include="Exceptions\Client\PrenomVide.cs" />
+    <Compile Include="Exceptions\Trajet\ErreurDistance.cs" />
+    <Compile Include="Exceptions\Vehicule\Camion\ErreurCapacite.cs" />
+    <Compile Include="Exceptions\Vehicule\ErreurCouleur.cs" />
+    <Compile Include="Exceptions\Vehicule\ErreurKm.cs" />
+    <Compile Include="Exceptions\Vehicule\ErreurMarque.cs" />
+    <Compile Include="Exceptions\Vehicule\ErreurModele.cs" />
+    <Compile Include="Exceptions\Vehicule\Voiture\ErreurNBPortes.cs" />
+    <Compile Include="Exceptions\Vehicule\ErreurNVehicule.cs" />
+    <Compile Include="Exceptions\Vehicule\Voiture\ErreurPuissance.cs" />
+    <Compile Include="Exceptions\Vehicule\Moto\ErreurCylindre.cs" />
     <Compile Include="Modeles\Enums\EPermis.cs" />
     <Compile Include="Modeles\Vehicules\Camion.cs" />
     <Compile Include="Modeles\Client.cs" />

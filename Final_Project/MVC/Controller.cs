@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Final_Project.Enums;
+using Final_Project.Exceptions;
+using Final_Project.Exceptions.Trajet;
+using Final_Project.Exceptions.Voiture;
+using Final_Project.Exceptions.Voiture.Camion;
+using Final_Project.Exceptions.Voiture.Moto;
 
 namespace Final_Project
 {
@@ -30,11 +35,11 @@ namespace Final_Project
         public void AjoutClient(string nom, string prenom, string adresse, List<string> srtPermisList)
         {
             if(string.IsNullOrWhiteSpace(nom))
-                throw new NotImplementedException("ERREUR : le champ nom est obligatoire");
+                throw new NomVide();
             if (string.IsNullOrWhiteSpace(prenom))
-                throw new NotImplementedException("ERREUR : le champ prénom est obligatoire");
+                throw new PrenomVide();
             if (string.IsNullOrWhiteSpace(adresse))
-                throw new NotImplementedException("ERREUR : le champ adresse est obligatoire");
+                throw new AdresseVide();
 
             List<EPermis> permisList = new List<EPermis>();
 
@@ -62,11 +67,11 @@ namespace Final_Project
             CheckVehicule(couleur, km, marque, modele, out iKm);
       
             if (!int.TryParse(nbPortes, out iNbPortes) || iNbPortes < 3 || iNbPortes > 5)
-                throw new NotImplementedException("ERREUR : le nombre de porte saisie est incorrect il doit être compris entre 3 et 5");
+                throw new ErreurNBPortes();
             if (!int.TryParse(puissance, out iPuissances) || iPuissances < 70 || iPuissances > 650) 
-                throw new NotImplementedException("ERREUR : la puissance saisie est incorrect elle doit être comprise entre 70 et 650ch");
+                throw new ErreurPuissance();
 
-            gestionFlotte.AjoutVehicule(new Voiture(marque, modele, iKm, couleur, iNbPortes, iPuissances));
+            gestionFlotte.AjoutVehicule(new Voiture(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iNbPortes, iPuissances));
         }
 
         /**
@@ -84,9 +89,9 @@ namespace Final_Project
             CheckVehicule(couleur, km, marque, modele, out iKm);
 
             if (capacite < 2.75 || capacite > 22) 
-                throw new NotImplementedException("ERREUR : la capacité saisie est incorrect elle doit être comprise entre 2.75 et 22 m3");
+                throw new ErreurCapacite();
 
-            gestionFlotte.AjoutVehicule(new Camion(marque, modele, iKm, couleur, capacite));
+            gestionFlotte.AjoutVehicule(new Camion(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, capacite));
         }
 
         /**
@@ -104,9 +109,9 @@ namespace Final_Project
             CheckVehicule(couleur, km, marque, modele, out iKm);
 
             if (cylindre < 50 || cylindre > 1500)
-                throw new NotImplementedException("ERREUR : la cylindré saisie est incorrect elle doit être comprise entre 50 et 1500 cm3");
+                throw new ErreurCylindre();
 
-            gestionFlotte.AjoutVehicule(new Moto(marque, modele, iKm, couleur, cylindre));
+            gestionFlotte.AjoutVehicule(new Moto(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, cylindre));
         }
 
 
@@ -123,13 +128,13 @@ namespace Final_Project
             int distance = -1;
 
             if (!int.TryParse(strNClient, out nClient))
-                throw new NotImplementedException("ERREUR : le numéro saisie est incorrect ou ne correspond à aucun client");
+                throw new ErreurNClient();
             if (!int.TryParse(strNVehicule, out nVehicule))
-                throw new NotImplementedException("ERREUR : le numéro saisie est incorrect ne correspond à aucun vehicule");
+                throw new ErreurNVehicule();
             if (!int.TryParse(strDistance, out distance))
-                throw new NotImplementedException("ERREUR : le distance saisie est incorrect");
+                throw new ErreurDistance();
 
-            gestionFlotte.AjoutTrajet(new Trajet(gestionFlotte.NumTrajetMax, gestionFlotte.GetClient(nClient), gestionFlotte.GetVehicule(nVehicule), distance));
+            gestionFlotte.AjoutTrajet(new Trajet(gestionFlotte.LastNumTrajet + 1, gestionFlotte.GetClient(nClient), gestionFlotte.GetVehicule(nVehicule), distance));
         }
 
         /***** Fin Ajout *****/
@@ -144,8 +149,8 @@ namespace Final_Project
          */
         public void SupClient(int nClient)
         {
-            if (nClient > gestionFlotte.NumClientMax)
-                throw new NotImplementedException("ERREUR : le numéro saisie ne correspond à aucun client");
+            if (nClient > gestionFlotte.LastNumClient)
+                throw new ErreurNClient();
 
             gestionFlotte.SupClient(nClient);
         }
@@ -156,8 +161,8 @@ namespace Final_Project
          */
         public void SupVehicule(int nVehicule)
         {
-            if (nVehicule > gestionFlotte.NumVehiculeMax)
-                throw new NotImplementedException("ERREUR : le numéro saisie ne correspond à aucun véhicule de la flotte");
+            if (nVehicule > gestionFlotte.LastNumVehicule)
+                throw new ErreurNVehicule();
 
             gestionFlotte.SupVehicule(nVehicule);
         }
@@ -168,8 +173,8 @@ namespace Final_Project
          */
         public void SupTrajet(int nTrajet)
         {
-            if (nTrajet > gestionFlotte.NumTrajetMax)
-                throw new NotImplementedException("ERREUR : le numéro saisie ne correspond à aucun trajet");
+            if (nTrajet > gestionFlotte.LastNumTrajet)
+                throw new ErreurDistance();
             
             gestionFlotte.SupTrajet(nTrajet);
         }
@@ -194,13 +199,13 @@ namespace Final_Project
         {
           
             if (string.IsNullOrWhiteSpace(couleur))
-                throw new NotImplementedException("ERREUR : le champ couleur est obligatoire");
+                throw new ErreurCouleur();
             if (!int.TryParse(km, out iKm) || iKm < 0)
-                throw new NotImplementedException("ERREUR : le champ km est incorrect il doit être suppèrieur à 0");
+                throw new ErreurKm();
             if (string.IsNullOrWhiteSpace(marque))
-                throw new NotImplementedException("ERREUR : le champ marque est obligatoire");
+                throw new ErreurMarque();
             if (string.IsNullOrWhiteSpace(modele))
-                throw new NotImplementedException("ERREUR : le champ modele est obligatoire");
+                throw new ErreurModele();
         }
 
         /**
@@ -212,7 +217,7 @@ namespace Final_Project
         {
             EPermis permis;
             if (!Enum.TryParse(strPermis, true, out permis))
-                throw new NotImplementedException("ERREUR : Ce type de strPermis ne fait pas partie de la liste");
+                throw new ErreurPermis();
 
             permisList.Add(permis);    
         }

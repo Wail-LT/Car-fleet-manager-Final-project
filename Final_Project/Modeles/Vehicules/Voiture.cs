@@ -14,7 +14,7 @@ namespace Final_Project
         * Constructeur pour vehicule d'occasion
         */
 
-        public Voiture(string marque, string modele, int km, string couleur, int nbPortes, int puissance) : base(marque, modele, km, couleur)
+        public Voiture(int nVehicule, string marque, string modele, int km, string couleur, int nbPortes, int puissance) : base(nVehicule, marque, modele, km, couleur)
         {
             this.nbPortes = nbPortes;
             this.puissance = puissance;

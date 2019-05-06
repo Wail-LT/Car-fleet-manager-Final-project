@@ -23,9 +23,9 @@ namespace Final_Project
 
         /* Properties */
 
-        public int NumVehiculeMax => vehiculeList.Count - 1;
-        public int NumClientMax => clientList.Count - 1;
-        public int NumTrajetMax => trajetList.Count - 1;
+        public int LastNumVehicule => vehiculeList.Count - 1;
+        public int LastNumClient => clientList.Count - 1;
+        public int LastNumTrajet => trajetList.Count - 1;
 
         public List<Vehicule> VehiculeList => vehiculeList;
         public List<Client> ClientList => clientList;
@@ -70,7 +70,6 @@ namespace Final_Project
          */
         public void AjoutVehicule(Vehicule vehicule)
         {
-            vehicule.NVehicule = NumVehiculeMax + 1;
             vehiculeList.Add(vehicule);
         }
 
@@ -80,7 +79,6 @@ namespace Final_Project
          */
         public void AjoutClient(Client client)
         {
-            client.NClient = NumClientMax + 1;
             clientList.Add(client);
         }
 
@@ -90,7 +88,6 @@ namespace Final_Project
          */
         public void AjoutTrajet(Trajet trajet)
         {
-            //trajet. = NumVehiculeMax + 1;
             trajetList.Add(trajet);
         }
 
