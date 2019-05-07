@@ -12,8 +12,8 @@ namespace Final_Project
     {
         private int nTrajet;
         private readonly Client client;
-        private Vehicule vehicule;
-        private int distance;
+        private readonly Vehicule vehicule;
+        private readonly int distance;
         private double cout;
 
 
@@ -30,31 +30,14 @@ namespace Final_Project
 
         /* Properties */
 
-        public int Distance
-        {
-            get => distance;
-            set
-            {
-                distance = value;
-                CalculerCout();
-            }
-        }
+ 
 
         public int NTrajet { get => nTrajet; set => nTrajet = value; }
 
+        public int Distance => distance;
         public Client Client => client;
-
-        public Vehicule Vehicule
-        {
-            get => vehicule;
-            set
-            {
-                vehicule = value;
-                CalculerCout();
-            }
-        }
-
-        public double Cout { get => cout;}
+        public double Cout => cout;
+        public Vehicule Vehicule => vehicule;
 
 
         /* Public Methodes */
@@ -74,23 +57,11 @@ namespace Final_Project
         private void CalculerCout()
         {
             if (vehicule is Voiture)
-            {
                 cout = 0.25 * distance;
-                if (((Voiture) vehicule).Type == TypeVoiture.Break) 
-                    cout += ((Voiture)vehicule).Puissance;
-                else if (((Voiture) vehicule).Type == TypeVoiture.Berline) 
-                    cout += 1.5 * ((Voiture)vehicule).Puissance;
-                else if (((Voiture) vehicule).Type == TypeVoiture.Monospace) 
-                    cout += 1.25 * ((Voiture)vehicule).Puissance;
-            }else if (vehicule is Moto)
-            {
+            else
                 cout = 0.5 * distance;
-                cout += ((Moto) vehicule).Cylindre * 0.95;
-            }else if (vehicule is Camion)
-            {
-                cout = 0.5 * distance;
-                cout += ((Camion)vehicule).Capacite * 37.5;
-            }
+
+            cout += vehicule.Cout;
         }
     }
 } 

@@ -14,6 +14,7 @@ namespace Final_Project
         private int km;
         private string couleur;
         private bool isDisponible;
+        private double cout;
 
         /**
          * Constructeur pour vehicule d'occasion
@@ -27,6 +28,7 @@ namespace Final_Project
             this.km = km;
             this.couleur = couleur;
             this.isDisponible = true;
+            CalculerCout();
         }
 
         
@@ -39,5 +41,8 @@ namespace Final_Project
         public string Couleur { get => couleur; set => couleur = value; }
         public bool IsDisponible { get => isDisponible; set => isDisponible = value; }
         public int NVehicule { get => nVehicule; set => nVehicule = value; }
+        public double Cout { get => cout; set => cout = value; }
+
+        protected abstract void CalculerCout();
     }
 }

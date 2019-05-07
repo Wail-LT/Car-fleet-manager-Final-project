@@ -22,5 +22,9 @@ namespace Final_Project
 
         public int Capacite => capacite;
 
+        protected override void CalculerCout()
+        {
+            Cout = capacite * 37.5;
+        }
     }
 }

@@ -23,5 +23,10 @@ namespace Final_Project
         /* Properties */
 
         public int Cylindre => cylindre;
+
+        protected override void CalculerCout()
+        {
+            Cout = cylindre * 0.95;
+        }
     }
 }

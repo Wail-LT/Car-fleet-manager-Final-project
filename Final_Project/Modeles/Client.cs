@@ -13,6 +13,7 @@ namespace Final_Project
         private readonly string prenom;
         private readonly string adresse;
         private readonly List<EPermis> permisList;
+        private int totalLoc;
 
         public Client(string nom, string prenom, string adresse, List<EPermis> permisList)
         {
@@ -21,6 +22,7 @@ namespace Final_Project
             this.prenom = prenom;
             this.adresse = adresse;
             this.permisList = new List<EPermis>(permisList);
+            totalLoc = 0;
         }
 
 
@@ -33,6 +35,8 @@ namespace Final_Project
         public int NClient { get => nClient; set => nClient = value; }
 
         public List<EPermis> PermisList => permisList;
+
+        public int TotalLoc { get => totalLoc; set => totalLoc = value; }
 
         /* Public Methodes */
 

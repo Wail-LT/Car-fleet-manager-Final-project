@@ -30,5 +30,15 @@ namespace Final_Project
         public int Puissance => puissance;
 
         public TypeVoiture Type => type;
+
+        protected override void CalculerCout()
+        {
+            if (type == TypeVoiture.Break)
+                Cout = Puissance;
+            else if (type == TypeVoiture.Berline)
+                Cout = 1.5 * Puissance;
+            else if (type == TypeVoiture.Monospace)
+                Cout = 1.25 * Puissance;
+        }
     }
 }
