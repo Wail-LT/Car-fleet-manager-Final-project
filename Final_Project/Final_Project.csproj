@@ -59,6 +59,7 @@
     <Compile Include="Exceptions\Vehicule\Voiture\ErreurPuissance.cs" />
     <Compile Include="Exceptions\Vehicule\Moto\ErreurCylindre.cs" />
     <Compile Include="Modeles\Enums\EPermis.cs" />
+    <Compile Include="Modeles\Enums\TypeVoiture.cs" />
     <Compile Include="Modeles\Vehicules\Camion.cs" />
     <Compile Include="Modeles\Client.cs" />
     <Compile Include="MVC\Controller.cs" />

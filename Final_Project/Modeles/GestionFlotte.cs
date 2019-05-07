@@ -98,7 +98,7 @@ namespace Final_Project
          */
         public void SupVehicule(int nVehicule)
         {
-            Vehicule v = vehiculeList[nVehicule];
+            /*Vehicule v = vehiculeList[nVehicule];
             List<int> listNTrajet = new List<int>();
 
             trajetList.ForEach(x =>
@@ -107,9 +107,11 @@ namespace Final_Project
                     listNTrajet.Add(x.NTrajet);
             });
 
-            listNTrajet.ForEach(x => SupTrajet(trajetList[x].NTrajet));
+            listNTrajet.ForEach(x => SupTrajet(trajetList[x].NTrajet));*/
 
-            vehiculeList.Remove(v);
+            vehiculeList[nVehicule].NVehicule = -1;
+
+            vehiculeList.RemoveAt(nVehicule);
 
             for (int i = nVehicule; i < vehiculeList.Count; i++)
                 vehiculeList[i].NVehicule = i;
@@ -121,7 +123,7 @@ namespace Final_Project
          */
         public void SupClient(int nClient)
         {
-            Client c = clientList[nClient];
+            /*Client c = clientList[nClient];
             List<int> listNTrajet = new List<int>();
 
             trajetList.ForEach(x =>
@@ -130,9 +132,11 @@ namespace Final_Project
                     listNTrajet.Add(x.NTrajet);
             });
 
-            listNTrajet.ForEach(x => SupTrajet(trajetList[x].NTrajet));
+            listNTrajet.ForEach(x => SupTrajet(trajetList[x].NTrajet));*/
 
-            clientList.Remove(c);
+            clientList[nClient].NClient = -1;
+
+            clientList.RemoveAt(nClient);
 
             for (int i = nClient; i < clientList.Count; i++)
                 clientList[i].NClient = i;

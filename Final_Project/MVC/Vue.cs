@@ -25,7 +25,7 @@ namespace Final_Project
          */
         public void Start()
         {
-
+            AfficherAccueil();
         }
 
 
@@ -66,32 +66,36 @@ namespace Final_Project
             Console.Clear();
             Console.WriteLine("Visualisation");
             Console.WriteLine("Choisissez parmi ces choix : ");
-            Console.WriteLine("     1- List Clients");
-            Console.WriteLine("     2- Client");
-            Console.WriteLine("     3- List Véhicules");
-            Console.WriteLine("     4- Véhicule");
-            Console.WriteLine("     5- List Trajets");
-            Console.WriteLine("     6- Trajet");
+            Console.WriteLine("     1- Stats");
+            Console.WriteLine("     2- List Clients");
+            Console.WriteLine("     3- Client");
+            Console.WriteLine("     4- List Véhicules");
+            Console.WriteLine("     5- Véhicule");
+            Console.WriteLine("     6- List Trajets");
+            Console.WriteLine("     7- Trajet");
             Console.WriteLine("     #- Accueil");
-            string saisie = System.Console.ReadLine();
+            string saisie = Console.ReadLine();
             switch (saisie)
             {
                 case "1":
-                    AfficherClients();
+                    AfficherStats();
                     break;
                 case "2":
-                    AfficherClient();
+                    AfficherClients();
                     break;
                 case "3":
-                    AfficherVehicules();
+                    AfficherClient();
                     break;
                 case "4":
-                    AfficherVehicule();
+                    AfficherVehicules();
                     break;
                 case "5":
-                    AfficherTrajets();
+                    AfficherVehicule();
                     break;
                 case "6":
+                    AfficherTrajets();
+                    break;
+                case "7":
                     AfficherTrajet();
                     break;
                 case "#":
@@ -101,6 +105,17 @@ namespace Final_Project
                     Console.WriteLine("Default case");
                     break;
             }
+        }
+
+        /**
+        * Affiche les stats du gestionnaire de flotte
+        */
+        private void AfficherStats()
+        {
+            Console.WriteLine("Stats");
+            Console.WriteLine("     Nombre de Vehicules : {0}", gestionFlotte.LastNumVehicule+1);
+            Console.WriteLine("     Nombre de Clients   : {0}", gestionFlotte.LastNumClient + 1);
+            Console.WriteLine("     Nombre de Trajets   : {0}", gestionFlotte.LastNumTrajet + 1);
         }
 
         /**

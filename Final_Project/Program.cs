@@ -24,11 +24,10 @@ namespace Final_Project
 
             File.Delete(@"C:\Users\latif\Desktop\IP.csv");*/
 
-            List<int> list = new List<int>();
-            for (int i = 0; i < 10; i++)
-                list.Add(i);
+            IVue vueConsole = new Vue();
 
-            list.ForEach(x=>Console.Write(x+" | "));
+            vueConsole.Start();
+
             Console.Read();
 
         }
