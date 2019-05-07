@@ -51,6 +51,7 @@ namespace Final_Project
 
         /* Private Methodes */
 
+
         /**
          * VCalcule le coût total du trajet en fonction du vehicule et de la distance
          */
