@@ -54,6 +54,7 @@
     <Compile Include="Exceptions\Vehicule\ErreurKm.cs" />
     <Compile Include="Exceptions\Vehicule\ErreurMarque.cs" />
     <Compile Include="Exceptions\Vehicule\ErreurModele.cs" />
+    <Compile Include="Exceptions\Vehicule\Voiture\ErreurType.cs" />
     <Compile Include="Exceptions\Vehicule\Voiture\ErreurNBPortes.cs" />
     <Compile Include="Exceptions\Vehicule\ErreurNVehicule.cs" />
     <Compile Include="Exceptions\Vehicule\Voiture\ErreurPuissance.cs" />
