@@ -8,6 +8,7 @@ using Final_Project.Exceptions.Trajet;
 using Final_Project.Exceptions.Voiture;
 using Final_Project.Exceptions.Voiture.Camion;
 using Final_Project.Exceptions.Voiture.Moto;
+using Final_Project.Vehicules;
 
 namespace Final_Project
 {
@@ -58,20 +59,23 @@ namespace Final_Project
          * @Params nbPortes  int      : nombre de portes
          * @Params puissance int      : puissance moteur (nombre de chevaux)
          */
-        public void AjoutVoiture(string couleur, string km, string marque, string modele, string nbPortes, string puissance)
+        public void AjoutVoiture(string couleur, string km, string marque, string modele, string nbPortes, string puissance, string type)
         {
             int iKm = -1;
             int iNbPortes = -1;
             int iPuissances = -1;
-
+            TypeVoiture typeV;
             CheckVehicule(couleur, km, marque, modele, out iKm);
-      
+
+
+            if (!TypeVoiture.TryParse(type, true, out typeV)) 
+                throw new ErreurType();
             if (!int.TryParse(nbPortes, out iNbPortes) || iNbPortes < 3 || iNbPortes > 5)
                 throw new ErreurNBPortes();
             if (!int.TryParse(puissance, out iPuissances) || iPuissances < 70 || iPuissances > 650) 
                 throw new ErreurPuissance();
 
-            gestionFlotte.AjoutVehicule(new Voiture(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iNbPortes, iPuissances));
+            gestionFlotte.AjoutVehicule(new Voiture(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iNbPortes, iPuissances, typeV));
         }
 
         /**
@@ -82,16 +86,17 @@ namespace Final_Project
          * @Params modele    string   : modele du véhicule
          * @Params capacite  int      : capacité en m3 du camion
          */
-        public void AjoutCamion(string couleur, string km, string marque, string modele , int capacite)
+        public void AjoutCamion(string couleur, string km, string marque, string modele , string capacite)
         {
             int iKm = -1;
+            int iCapacite = -1;
 
             CheckVehicule(couleur, km, marque, modele, out iKm);
 
-            if (capacite < 2.75 || capacite > 22) 
+            if (!int.TryParse(capacite, out iCapacite) || iCapacite < 2.75 || iCapacite > 22) 
                 throw new ErreurCapacite();
 
-            gestionFlotte.AjoutVehicule(new Camion(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, capacite));
+            gestionFlotte.AjoutVehicule(new Camion(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iCapacite));
         }
 
         /**
@@ -102,16 +107,17 @@ namespace Final_Project
          * @Params modele    string   : modele du véhicule
          * @Params cylindre  int      : cylindré du véhicule en cm3
          */
-        public void AjoutMoto(string couleur, string km, string marque, string modele , int cylindre)
+        public void AjoutMoto(string couleur, string km, string marque, string modele , string cylindre)
         {
             int iKm = -1;
+            int iCylindre = -1;
 
             CheckVehicule(couleur, km, marque, modele, out iKm);
 
-            if (cylindre < 50 || cylindre > 1500)
+            if (!int.TryParse(cylindre, out iCylindre) || iCylindre < 50 || iCylindre > 1500)
                 throw new ErreurCylindre();
 
-            gestionFlotte.AjoutVehicule(new Moto(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, cylindre));
+            gestionFlotte.AjoutVehicule(new Moto(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iCylindre));
         }
 
 
@@ -216,7 +222,7 @@ namespace Final_Project
         private void StrToEPermis(string strPermis, List<EPermis> permisList)
         {
             EPermis permis;
-            if (!Enum.TryParse(strPermis, true, out permis))
+            if (!EPermis.TryParse(strPermis, true, out permis))
                 throw new ErreurPermis();
 
             permisList.Add(permis);    

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Final_Project.Enums;
 
-namespace Final_Project
+namespace Final_Project.Vehicules
 {
     public sealed class Voiture : Vehicule
     {
