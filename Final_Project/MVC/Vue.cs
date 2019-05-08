@@ -1,4 +1,5 @@
-﻿using Final_Project.Vehicules;
+﻿using Final_Project.Enums;
+using Final_Project.Vehicules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace Final_Project
             Console.WriteLine("Choisissez parmi ces choix : ");
             Console.WriteLine("1- Visualisation");
             Console.WriteLine("2- Ajout / Suppression");
-            string saisie = System.Console.ReadLine();
+            string saisie = Console.ReadLine();
             switch (saisie)
             {
                 case "1":
@@ -137,8 +138,8 @@ namespace Final_Project
         */
         private void AfficherClient()
         {
-            Console.WriteLine("Quel est le numéro du client que vous voulez afficher ?");
-            int numClient = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Saisir le numéro du client que vous voulez afficher ");
+            int numClient = int.Parse(Console.ReadLine());
             Client choisi =gestionFlotte.GetClient(numClient);
             Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ",choisi.NClient,choisi.Nom,choisi.Prenom,choisi.Adresse);
             choisi.PermisList.ForEach(permis => Console.Write(permis + ", "));
@@ -163,8 +164,8 @@ namespace Final_Project
         */
         private void AfficherVehicule()
         {
-            Console.WriteLine("Quel est le numéro du véhicule que vous voulez afficher ?");
-            int numVehicule = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Saisir le numéro du véhicule que vous voulez afficher");
+            int numVehicule = int.Parse(Console.ReadLine());
             Vehicule choisi = gestionFlotte.GetVehicule(numVehicule);
             Console.Write("\t NUM :{0}  MARQUE :{1} , MODELE : {2} , KM :{3}, COULEUR : {4}, DISPONIBLE :{5},COUT :{6}", choisi.NVehicule, choisi.Marque, choisi.Modele, choisi.Km, choisi.Couleur, choisi.IsDisponible,choisi.Cout);
             Console.WriteLine();
@@ -186,8 +187,8 @@ namespace Final_Project
         */
         private void AfficherTrajet()
         {
-            Console.WriteLine("Quel est le numéro de trajet que vous voulez afficher ?");
-            int numTrajet = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Saisir le numéro de trajet que vous voulez afficher");
+            int numTrajet = int.Parse(Console.ReadLine());
             Trajet choisi = gestionFlotte.GetTrajet(numTrajet);
             Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", choisi.NTrajet, choisi.Client.NClient, choisi.Vehicule.NVehicule, choisi.Distance, choisi.Cout);
             Console.WriteLine();
@@ -213,7 +214,7 @@ namespace Final_Project
             Console.WriteLine("     5- Ajouter véhicule");
             Console.WriteLine("     6- Supprimer véhicule");
             Console.WriteLine("     #- Accueil");
-            string saisie = System.Console.ReadLine();
+            string saisie = Console.ReadLine();
             switch (saisie)
             {
                 case "1":
@@ -248,14 +249,15 @@ namespace Final_Project
         */
         private void AjoutClient()
         {
-            Console.WriteLine("Quel est le nom de Client que vous voulez ajouter ?");
-            string nom = System.Console.ReadLine();
-            Console.WriteLine("Quelle est son prenom ?");
-            string prenom = System.Console.ReadLine();
-            Console.WriteLine("Quelle est son adresse  ?");
-            string adresse = System.Console.ReadLine();
-            Console.WriteLine("Quels sont ces permis(séparé chaque permis par une virgule)  ?");
-            string permis = System.Console.ReadLine();
+            Console.WriteLine("Saisir le nom du Client que vous voulez ajouter");
+            string nom = Console.ReadLine();
+            Console.WriteLine("Saisir le prénom du client");
+            string prenom = Console.ReadLine();
+            Console.WriteLine("Saisir l'adresse du client");
+            string adresse = Console.ReadLine();
+            Console.WriteLine("Saisir les permis parmi cette liste (séparé chaque permis par une virgule) : ");
+            AfficherEnum<EPermis>();
+            string permis = Console.ReadLine();
             List<string> resultP = permis.Split(',').ToList();
             controller.AjoutClient(nom,prenom,adresse,resultP);
         }
@@ -265,8 +267,8 @@ namespace Final_Project
         */
         private void SupClient()
         {
-            Console.WriteLine("Quel est le numéro de Client que vous voulez supprimer ?");
-            int numClient = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Saisir le numéro de Client que vous voulez supprimer");
+            int numClient = int.Parse(Console.ReadLine());
             controller.SupClient(numClient);
         }
 
@@ -276,37 +278,40 @@ namespace Final_Project
         private void AjoutVehicule()
         {
            
-            Console.WriteLine("Quelle est la marque de Véhicule que vous voulez ajouter ?");
-            string marque = System.Console.ReadLine();
-            Console.WriteLine("Quel est son modèle?");
-            string modele = System.Console.ReadLine();
-            Console.WriteLine("Quel est le nombre de km du vehicule  ?");
-            string km = System.Console.ReadLine();
-            Console.WriteLine("Quelle est sa couleur?");
-            string couleur = System.Console.ReadLine();
+            Console.WriteLine("Saisir la marque de Véhicule que vous voulez ajouter");
+            string marque = Console.ReadLine();
+            Console.WriteLine("Saisir le modèle de la voiture");
+            string modele = Console.ReadLine();
+            Console.WriteLine("Saisir le nombre de km du vehicule");
+            string km = Console.ReadLine();
+            Console.WriteLine("Saisir la couleur du véhicule");
+            string couleur = Console.ReadLine();
 
-            Console.WriteLine("Quel type de Véhicule voulez vous ajouter ?");
+            Console.WriteLine("Saisir le type de Véhicule que voulez vous ajouter");
             Console.WriteLine("     1- Voiture");
             Console.WriteLine("     2- Moto");
             Console.WriteLine("     3- Camion");
-            string choix = System.Console.ReadLine();
+            string choix = Console.ReadLine();
             switch (choix)
             {
                 case "1":
-                    Console.WriteLine("Quel est le nombre de portes de la voiture  ?");
-                    string nbPorte = System.Console.ReadLine();
-                    Console.WriteLine("Quelle est sa puissance?");
-                    string puissance = System.Console.ReadLine();
-                    controller.AjoutVoiture(couleur, km, marque, modele, nbPorte, puissance);
+                    Console.WriteLine("Saisir le nombre de portes de la voiture");
+                    string nbPorte = Console.ReadLine();
+                    Console.WriteLine("Saisir la puissance de la voiture");
+                    string puissance = Console.ReadLine();
+                    Console.WriteLine("Saisir le type de la voiture parmi cette liste");
+                    AfficherEnum<TypeVoiture>();
+                    string type = Console.ReadLine();
+                    controller.AjoutVoiture(couleur, km, marque, modele, nbPorte, puissance,type);
                     break;
                 case "2":
-                    Console.WriteLine("Quel est le cylindre de la moto  ?");
-                    string cylindre = System.Console.ReadLine();
+                    Console.WriteLine("Saisir le cylindre de la moto");
+                    string cylindre = Console.ReadLine();
                     controller.AjoutMoto(couleur, km, marque, modele, cylindre);
                     break;
                 case "3":
-                    Console.WriteLine("Quelle est la capacité du camion  ?");
-                    string cap = System.Console.ReadLine();
+                    Console.WriteLine("Saisir la capacité du camion");
+                    string cap = Console.ReadLine();
                     controller.AjoutCamion(couleur, km, marque, modele, cap);
                     break;
                 default:
@@ -320,8 +325,8 @@ namespace Final_Project
         */
         private void SupVehicule()
         {
-            Console.WriteLine("Quel est le numéro de Vehicule que vous voulez supprimer ?");
-            int numVehicule = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Saisir le numéro de Vehicule que vous voulez supprimer");
+            int numVehicule = int.Parse(Console.ReadLine());
             controller.SupVehicule(numVehicule);
         }
 
@@ -330,12 +335,12 @@ namespace Final_Project
         */
         private void AjoutTrajet()
         {
-            Console.WriteLine("Quel est le numéro de client associé au trajet que vous voulez ajouter ?");
-            string numClient = System.Console.ReadLine();
-            Console.WriteLine("Quel est le numéro de véhicule associé au trajet ?");
-            string numVehi = System.Console.ReadLine();
-            Console.WriteLine("Quelle est la distance de ce trajet ?");
-            string dist = System.Console.ReadLine();
+            Console.WriteLine("Saisir le numéro de client associé au trajet que vous voulez ajouter");
+            string numClient = Console.ReadLine();
+            Console.WriteLine("Saisir le numéro de véhicule associé au trajet");
+            string numVehi = Console.ReadLine();
+            Console.WriteLine("Saisir la distance de ce trajet");
+            string dist = Console.ReadLine();
             controller.AjoutTrajet(numClient, numVehi, dist);
         }
 
@@ -344,8 +349,8 @@ namespace Final_Project
         */
         private void SupTrajet()
         {
-            Console.WriteLine("Quel est le numéro de Trajet que vous voulez supprimer ?");
-            int numTrajet = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Saisir le numéro de Trajet que vous voulez supprimer");
+            int numTrajet = int.Parse(Console.ReadLine());
             controller.SupTrajet(numTrajet);
         }
 
@@ -354,7 +359,13 @@ namespace Final_Project
 
         /****** Methodes Annexe *****/
 
-
+        private void AfficherEnum<T>()
+        {
+            foreach(string i in Enum.GetNames(typeof(T)))
+            {
+                Console.Write("{0}, ",i);
+            }
+        }
 
 
         /****** Fin Methodes Annexe *****/
