@@ -52,7 +52,7 @@ namespace Final_Project
                     AfficherAjoutSup();
                     break;
                 default:
-                    ErreurSaisie(AfficherAccueil);
+                    ErreurSaisie("Erreur choix invalide", AfficherAccueil);
                     break;
             }
         }
@@ -105,7 +105,7 @@ namespace Final_Project
                     AfficherAccueil();
                     break;
                 default:
-                   ErreurSaisie(AfficherVisu);
+                    ErreurSaisie("Erreur choix invalide", AfficherVisu);
                     break;
             }
         }
@@ -115,6 +115,7 @@ namespace Final_Project
         */
         private void AfficherStats()
         {
+            Console.Clear();
             Console.WriteLine("Stats");
             Console.WriteLine("     Nombre de Vehicules : {0}", gestionFlotte.LastNumVehicule+1);
             Console.WriteLine("     Nombre de Clients   : {0}", gestionFlotte.LastNumClient + 1);
@@ -126,6 +127,7 @@ namespace Final_Project
         */
         private void AfficherClients()
         {
+            Console.Clear();
             gestionFlotte.ClientList.ForEach(li =>
             {
                 Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ", li.NClient, li.Nom, li.Prenom, li.Adresse);
@@ -140,8 +142,20 @@ namespace Final_Project
         */
         private void AfficherClient()
         {
+            Client choisi = null;
+
+            Console.Clear();
             Console.WriteLine("Saisir le numéro du client que vous voulez afficher ");
-            Client choisi = controller.Client(numClient);
+            try
+            {
+                choisi = controller.GetClient(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ErreurSaisie(null,AfficherClient);
+            }
+           
             Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ",choisi.NClient,choisi.Nom,choisi.Prenom,choisi.Adresse);
             choisi.PermisList.ForEach(permis => Console.Write(permis + ", "));
             Console.Write(" TOTAL LOC :{0}", choisi.TotalLoc);
@@ -153,6 +167,7 @@ namespace Final_Project
         */
         private void AfficherVehicules()
         {
+            Console.Clear();
             gestionFlotte.VehiculeList.ForEach(li => {
                 Console.Write("\t NUM :{0}  MARQUE :{1} , MODELE : {2} , KM :{3}, COULEUR : {4}, DISPONIBLE :{5},COUT :{6}", li.NVehicule, li.Marque, li.Modele, li.Km,li.Couleur,li.IsDisponible,li.Cout);
                 Console.WriteLine();
@@ -165,10 +180,22 @@ namespace Final_Project
         */
         private void AfficherVehicule()
         {
+            Console.Clear();
+            Vehicule choisi = null;
             Console.WriteLine("Saisir le numéro du véhicule que vous voulez afficher");
-            int numVehicule = int.Parse(Console.ReadLine());
-            Vehicule choisi = gestionFlotte.GetVehicule(numVehicule);
-            Console.Write("\t NUM :{0}  MARQUE :{1} , MODELE : {2} , KM :{3}, COULEUR : {4}, DISPONIBLE :{5},COUT :{6}", choisi.NVehicule, choisi.Marque, choisi.Modele, choisi.Km, choisi.Couleur, choisi.IsDisponible,choisi.Cout);
+            try
+            {
+                choisi = controller.GetVehicule(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ErreurSaisie(null, AfficherVehicule);
+            }
+
+            Console.Write("\t NUM :{0}  MARQUE :{1} , MODELE : {2} , KM :{3}, COULEUR : {4}, DISPONIBLE :{5},COUT :{6}",
+                choisi.NVehicule, choisi.Marque, choisi.Modele, choisi.Km, choisi.Couleur,
+                choisi.IsDisponible ? "oui" : "non", choisi.Cout);
             Console.WriteLine();
         }
 
@@ -177,6 +204,7 @@ namespace Final_Project
         */
         private void AfficherTrajets()
         {
+            Console.Clear();
             gestionFlotte.TrajetList.ForEach(li => {
                 Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", li.NTrajet,li.Client.NClient,li.Vehicule.NVehicule,li.Distance,li.Cout); 
                 Console.WriteLine();
@@ -188,9 +216,18 @@ namespace Final_Project
         */
         private void AfficherTrajet()
         {
+            Console.Clear();
+            Trajet choisi = null;
             Console.WriteLine("Saisir le numéro de trajet que vous voulez afficher");
-            int numTrajet = int.Parse(Console.ReadLine());
-            Trajet choisi = gestionFlotte.GetTrajet(numTrajet);
+            try
+            {
+                choisi = controller.GetTrajet(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ErreurSaisie(null, AfficherTrajet);
+            }
             Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", choisi.NTrajet, choisi.Client.NClient, choisi.Vehicule.NVehicule, choisi.Distance, choisi.Cout);
             Console.WriteLine();
         }
@@ -206,6 +243,7 @@ namespace Final_Project
 
         private void AfficherAjoutSup()
         {
+            Console.Clear();
             Console.WriteLine("Ajout / Suppression ");
             Console.WriteLine("Choisissez parmi ces choix : ");
             Console.WriteLine("     1- Ajouter client");
@@ -240,7 +278,7 @@ namespace Final_Project
                     AfficherAccueil();
                     break;
                 default:
-                    Console.WriteLine("Default case");
+                    ErreurSaisie("ERREUR : Saisie invalide", AfficherAjoutSup);
                     break;
             }
         }
@@ -250,6 +288,8 @@ namespace Final_Project
         */
         private void AjoutClient()
         {
+            Console.Clear();
+
             Console.WriteLine("Saisir le nom du Client que vous voulez ajouter");
             string nom = Console.ReadLine();
             Console.WriteLine("Saisir le prénom du client");
@@ -268,9 +308,17 @@ namespace Final_Project
         */
         private void SupClient()
         {
+            Console.Clear();
             Console.WriteLine("Saisir le numéro de Client que vous voulez supprimer");
-            string numClient = Console.ReadLine();
-            controller.SupClient(numClient);
+            try
+            {
+                controller.SupClient(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ErreurSaisie(null, SupClient);
+            } 
         }
 
         /**
@@ -278,6 +326,7 @@ namespace Final_Project
         */
         private void AjoutVehicule()
         {
+            Console.Clear();
            
             Console.WriteLine("Saisir la marque de Véhicule que vous voulez ajouter");
             string marque = Console.ReadLine();
@@ -326,8 +375,17 @@ namespace Final_Project
         */
         private void SupVehicule()
         {
+            Console.Clear();
             Console.WriteLine("Saisir le numéro de Vehicule que vous voulez supprimer");
-            controller.SupVehicule(Console.ReadLine());
+            try
+            {
+                controller.SupVehicule(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ErreurSaisie(null, SupVehicule);
+            }
         }
 
         /**
@@ -349,8 +407,17 @@ namespace Final_Project
         */
         private void SupTrajet()
         {
+            Console.Clear();
             Console.WriteLine("Saisir le numéro de Trajet que vous voulez supprimer");
-            controller.SupTrajet(Console.ReadLine());
+            try
+            {
+                controller.SupTrajet(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ErreurSaisie(null, SupTrajet);
+            }
         }
 
         /****** Fin Layout Ajout/Sup ******/
@@ -371,11 +438,13 @@ namespace Final_Project
 
         }
 
-        private void ErreurSaisie(Action function)
+        private void ErreurSaisie(string before, Action after)
         {
-            Console.WriteLine("Erreur choix invalide veuillez appuyez sur une touche pour continuer ...");
+            if(before != null)
+                Console.WriteLine(before);
+            Console.WriteLine("Veuillez appuyez sur une touche pour continuer ...");
             Console.ReadKey();
-            function();
+            after();
         }
 
 
