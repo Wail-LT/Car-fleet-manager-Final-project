@@ -45,7 +45,27 @@ namespace Final_Project.Vehicules
         public bool IsDisponible { get => isDisponible; set => isDisponible = value; }
         public int NVehicule { get => nVehicule; set => nVehicule = value; }
         public double Cout { get => cout; set => cout = value; }
-        public Place Place { get => place; set => place = value; }
+
+        public Place Place
+        {
+            get => place;
+            set
+            {
+                place = value;
+                place.Vehicule = this;
+            }
+        }
+
+        /* Public Methodes */
+
+        public void Supprimer()
+        {
+            nVehicule = -1;
+            place.Vehicule = null;
+            place = null;
+        }
+
+        /* Protected Methodes */
 
         protected abstract void CalculerCout();
     }

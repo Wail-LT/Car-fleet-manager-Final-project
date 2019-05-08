@@ -26,6 +26,7 @@ namespace Final_Project
             this.distance = distance;
             this.vehicule.Km += distance;
             CalculerCout();
+            this.vehicule.IsDisponible = false;
         }
 
 
@@ -46,6 +47,7 @@ namespace Final_Project
         public void Supprimer()
         {
             Vehicule.Km -= distance;
+            client.TotalLoc -= cout + vehicule.Cout;
         }
 
 

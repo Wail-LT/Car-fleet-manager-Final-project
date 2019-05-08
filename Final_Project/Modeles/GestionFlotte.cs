@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Final_Project.Exceptions.Parking;
 
 namespace Final_Project
 {
@@ -76,7 +77,7 @@ namespace Final_Project
          */
         public void AjoutVehicule(Vehicule vehicule)
         {
-            vehicule.Place = new Place();
+            vehicule.Place = GetPlaceDisp();
             vehiculeList.Add(vehicule);
         }
 
@@ -105,18 +106,7 @@ namespace Final_Project
          */
         public void SupVehicule(int nVehicule)
         {
-            /*Vehicule v = vehiculeList[nVehicule];
-            List<int> listNTrajet = new List<int>();
-
-            trajetList.ForEach(x =>
-            {
-                if (x.Vehicule == v) 
-                    listNTrajet.Add(x.NTrajet);
-            });
-
-            listNTrajet.ForEach(x => SupTrajet(trajetList[x].NTrajet));*/
-
-            vehiculeList[nVehicule].NVehicule = -1;
+            vehiculeList[nVehicule].Supprimer();
 
             vehiculeList.RemoveAt(nVehicule);
 
@@ -130,17 +120,6 @@ namespace Final_Project
          */
         public void SupClient(int nClient)
         {
-            /*Client c = clientList[nClient];
-            List<int> listNTrajet = new List<int>();
-
-            trajetList.ForEach(x =>
-            {
-                if (x.Client == c)
-                    listNTrajet.Add(x.NTrajet);
-            });
-
-            listNTrajet.ForEach(x => SupTrajet(trajetList[x].NTrajet));*/
-
             clientList[nClient].NClient = -1;
 
             clientList.RemoveAt(nClient);
@@ -169,7 +148,13 @@ namespace Final_Project
 
         private Place GetPlaceDisp()
         {
+            int i = 0;
+            while (i < parkingList.Count && parkingList[i].IsPlein) { i++; }
 
+            if (i==parkingList.Count && parkingList[i-1].IsPlein)
+                throw new ErreurPlaceIndisp();
+
+            return i == parkingList.Count ? parkingList[i - 1].GetPlaceDisp() : parkingList[i].GetPlaceDisp();
         }
 
 

@@ -13,7 +13,7 @@ namespace Final_Project
         private readonly string prenom;
         private readonly string adresse;
         private readonly List<EPermis> permisList;
-        private int totalLoc;
+        private double totalLoc;
 
         public Client(string nom, string prenom, string adresse, List<EPermis> permisList)
         {
@@ -36,7 +36,7 @@ namespace Final_Project
 
         public List<EPermis> PermisList => permisList;
 
-        public int TotalLoc { get => totalLoc; set => totalLoc = value; }
+        public double TotalLoc { get => totalLoc; set => totalLoc = value; }
 
         /* Public Methodes */
 
