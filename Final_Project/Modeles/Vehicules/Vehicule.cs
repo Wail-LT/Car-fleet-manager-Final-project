@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Final_Project.Parking;
 
-namespace Final_Project
+namespace Final_Project.Vehicules
 {
     public abstract class Vehicule
     {
@@ -15,6 +16,7 @@ namespace Final_Project
         private string couleur;
         private bool isDisponible;
         private double cout;
+        private Place place;
 
         /**
          * Constructeur pour vehicule d'occasion
@@ -28,6 +30,7 @@ namespace Final_Project
             this.km = km;
             this.couleur = couleur;
             this.isDisponible = true;
+            this.place = null;
             CalculerCout();
         }
 
@@ -42,6 +45,7 @@ namespace Final_Project
         public bool IsDisponible { get => isDisponible; set => isDisponible = value; }
         public int NVehicule { get => nVehicule; set => nVehicule = value; }
         public double Cout { get => cout; set => cout = value; }
+        public Place Place { get => place; set => place = value; }
 
         protected abstract void CalculerCout();
     }

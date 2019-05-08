@@ -60,6 +60,8 @@
     <Compile Include="Exceptions\Vehicule\Moto\ErreurCylindre.cs" />
     <Compile Include="Modeles\Enums\EPermis.cs" />
     <Compile Include="Modeles\Enums\TypeVoiture.cs" />
+    <Compile Include="Modeles\Parking\Parking.cs" />
+    <Compile Include="Modeles\Parking\Place.cs" />
     <Compile Include="Modeles\Vehicules\Camion.cs" />
     <Compile Include="Modeles\Client.cs" />
     <Compile Include="MVC\Controller.cs" />

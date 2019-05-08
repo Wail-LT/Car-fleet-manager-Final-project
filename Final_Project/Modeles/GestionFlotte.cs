@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Final_Project.Parking;
+using Final_Project.Vehicules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,7 @@ namespace Final_Project
         private readonly List<Vehicule> vehiculeList;
         private readonly List<Client> clientList;
         private readonly List<Trajet> trajetList;
+        private readonly List<Parking.Parking> parkingList;
 
 
 
@@ -18,6 +21,7 @@ namespace Final_Project
             vehiculeList = new List<Vehicule>();
             clientList = new List<Client>();
             trajetList = new List<Trajet>();
+            parkingList = new List<Parking.Parking>();
         }
 
 
@@ -30,6 +34,8 @@ namespace Final_Project
         public List<Vehicule> VehiculeList => vehiculeList;
         public List<Client> ClientList => clientList;
         public List<Trajet> TrajetList => trajetList;
+
+        public List<Parking.Parking> ParkingList => parkingList;
 
 
         /* Public Methodes */
@@ -70,6 +76,7 @@ namespace Final_Project
          */
         public void AjoutVehicule(Vehicule vehicule)
         {
+            vehicule.Place = new Place();
             vehiculeList.Add(vehicule);
         }
 
@@ -155,6 +162,16 @@ namespace Final_Project
             for (int i = nTrajet; i < trajetList.Count; i++)
                 trajetList[i].NTrajet = i;
         }
+
+
+
+        /* Private Methodes */
+
+        private Place GetPlaceDisp()
+        {
+
+        }
+
 
     }
 }
