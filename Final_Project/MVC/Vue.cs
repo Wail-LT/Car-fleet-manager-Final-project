@@ -141,8 +141,7 @@ namespace Final_Project
         private void AfficherClient()
         {
             Console.WriteLine("Saisir le numéro du client que vous voulez afficher ");
-            int numClient = int.Parse(Console.ReadLine());
-            Client choisi =gestionFlotte.GetClient(numClient);
+            Client choisi = controller.Client(numClient);
             Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ",choisi.NClient,choisi.Nom,choisi.Prenom,choisi.Adresse);
             choisi.PermisList.ForEach(permis => Console.Write(permis + ", "));
             Console.Write(" TOTAL LOC :{0}", choisi.TotalLoc);

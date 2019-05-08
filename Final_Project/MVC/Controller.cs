@@ -185,7 +185,7 @@ namespace Final_Project
         * @Params nClient int : numéro du client à supprimer
         * @Returns : Client
         */ 
-        public Client AfficherClient(string strnClient)
+        public Client GetClient(string strnClient)
         {
             return gestionFlotte.GetClient(CheckNClient(strnClient));
         }
@@ -195,7 +195,7 @@ namespace Final_Project
          * @Params nVehicule int : numéro du véhicule à supprimer
          * @Returns : Vehicule
          */
-        public Vehicule AfficherVehicule(string strnVehicule)
+        public Vehicule GetVehicule(string strnVehicule)
         {
             return gestionFlotte.GetVehicule(CheckNVehicule(strnVehicule));
         }
@@ -205,7 +205,7 @@ namespace Final_Project
          * @Params nTrajet int : numéro du trajet à supprimer
          * @Returns : Trajet
          */
-        public Trajet AfficherTrajet(string strnTrajet)
+        public Trajet GetTrajet(string strnTrajet)
         {
             return gestionFlotte.GetTrajet(CheckNTrajet(strnTrajet));
         }
