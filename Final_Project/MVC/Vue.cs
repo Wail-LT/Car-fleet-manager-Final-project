@@ -253,6 +253,10 @@ namespace Final_Project
             string prenom = System.Console.ReadLine();
             Console.WriteLine("Quelle est son adresse  ?");
             string adresse = System.Console.ReadLine();
+            Console.WriteLine("Quels sont ces permis(séparé chaque permis par une virgule)  ?");
+            string permis = System.Console.ReadLine();
+            List<string> resultP = permis.Split(',').ToList();
+            controller.AjoutClient(nom,prenom,adresse,resultP);
         }
 
         /**
@@ -262,8 +266,7 @@ namespace Final_Project
         {
             Console.WriteLine("Quel est le numéro de Client que vous voulez supprimer ?");
             int numClient = int.Parse(System.Console.ReadLine());
-            gestionFlotte.ClientList.RemoveAll(c => c.NClient == numClient);
-             // OU gestionFlotte.SupClient(numClient);
+            controller.SupClient(numClient);
         }
 
         /**
@@ -271,18 +274,44 @@ namespace Final_Project
         */
         private void AjoutVehicule()
         {
+           
             Console.WriteLine("Quelle est la marque de Véhicule que vous voulez ajouter ?");
             string marque = System.Console.ReadLine();
             Console.WriteLine("Quel est son modèle?");
             string modele = System.Console.ReadLine();
-            Console.WriteLine("Quel est le nombre de km de la voiture  ?");
-            int km = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Quel est le nombre de km du vehicule  ?");
+            string km = System.Console.ReadLine();
             Console.WriteLine("Quelle est sa couleur?");
             string couleur = System.Console.ReadLine();
-            Console.WriteLine("La voiture est - elle disponible ? True (oui) ou false(non)");
-            string isdispo = System.Console.ReadLine();
-            Console.WriteLine("Quel est le coût de la voiture ?");
-            int ncout = int.Parse(System.Console.ReadLine());
+
+            Console.WriteLine("Quel type de Véhicule voulez vous ajouter ?");
+            Console.WriteLine("     1- Voiture");
+            Console.WriteLine("     2- Moto");
+            Console.WriteLine("     3- Camion");
+            string choix = System.Console.ReadLine();
+            switch (choix)
+            {
+                case "1":
+                    Console.WriteLine("Quel est le nombre de portes de la voiture  ?");
+                    string nbPorte = System.Console.ReadLine();
+                    Console.WriteLine("Quelle est sa puissance?");
+                    string puissance = System.Console.ReadLine();
+                    controller.AjoutVoiture(couleur, km, marque, modele, nbPorte, puissance);
+                    break;
+                case "2":
+                    Console.WriteLine("Quel est le cylindre de la moto  ?");
+                    string cylindre = System.Console.ReadLine();
+                    controller.AjoutMoto(couleur, km, marque, modele, cylindre);
+                    break;
+                case "3":
+                    Console.WriteLine("Quelle est la capacité du camion  ?");
+                    string cap = System.Console.ReadLine();
+                    controller.AjoutCamion(couleur, km, marque, modele, cap);
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+            }                  
         }
 
         /**
@@ -292,8 +321,7 @@ namespace Final_Project
         {
             Console.WriteLine("Quel est le numéro de Vehicule que vous voulez supprimer ?");
             int numVehicule = int.Parse(System.Console.ReadLine());
-            gestionFlotte.VehiculeList.RemoveAll(c => c.NVehicule == numVehicule);
-            // OU gestionFlotte.SupVehicule(numVehicule);
+            controller.SupVehicule(numVehicule);
         }
 
         /**
@@ -302,13 +330,12 @@ namespace Final_Project
         private void AjoutTrajet()
         {
             Console.WriteLine("Quel est le numéro de client associé au trajet que vous voulez ajouter ?");
-            int numClient = int.Parse(System.Console.ReadLine());
+            string numClient = System.Console.ReadLine();
             Console.WriteLine("Quel est le numéro de véhicule associé au trajet ?");
-            int numVehi = int.Parse(System.Console.ReadLine());
+            string numVehi = System.Console.ReadLine();
             Console.WriteLine("Quelle est la distance de ce trajet ?");
-            int dist = int.Parse(System.Console.ReadLine());
-            Console.WriteLine("Quel est le coût de ce trajet?");
-            int ncout = int.Parse(System.Console.ReadLine());
+            string dist = System.Console.ReadLine();
+            controller.AjoutTrajet(numClient, numVehi, dist);
         }
 
         /**
@@ -318,8 +345,7 @@ namespace Final_Project
         {
             Console.WriteLine("Quel est le numéro de Trajet que vous voulez supprimer ?");
             int numTrajet = int.Parse(System.Console.ReadLine());
-            gestionFlotte.TrajetList.RemoveAll(c => c.NTrajet == numTrajet);
-            // OU gestionFlotte.SupTrajet(numTrajet);
+            controller.SupTrajet(numTrajet);
         }
 
         /****** Fin Layout Ajout/Sup ******/
