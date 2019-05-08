@@ -24,7 +24,6 @@ namespace Final_Project
             this.client = client;
             this.vehicule = vehicule;
             this.distance = distance;
-            this.vehicule.Km += distance;
             CalculerCout();
             this.vehicule.IsDisponible = false;
         }

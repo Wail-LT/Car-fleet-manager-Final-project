@@ -153,41 +153,64 @@ namespace Final_Project
          * Supprimer un client à la liste du gestionnaire de flotte
          * @Params nClient int : numéro du client à supprimer
          */
-        public void SupClient(int nClient)
+        public void SupClient(string strnClient)
         {
-            if (nClient > gestionFlotte.LastNumClient)
-                throw new ErreurNClient();
-
-            gestionFlotte.SupClient(nClient);
+            gestionFlotte.SupClient(CheckNClient(strnClient));
         }
 
         /**
          * Supprimer un véhicule à la liste du gestionnaire de flotte
          * @Params nVehicule int : numéro du véhicule à supprimer
          */
-        public void SupVehicule(int nVehicule)
+        public void SupVehicule(string strnVehicule)
         {
-            if (nVehicule > gestionFlotte.LastNumVehicule)
-                throw new ErreurNVehicule();
-
-            gestionFlotte.SupVehicule(nVehicule);
+            gestionFlotte.SupVehicule(CheckNVehicule(strnVehicule));
         }
 
         /**
          * Supprimer un trajet à la liste du gestionnaire de flotte
          * @Params nTrajet int : numéro du trajet à supprimer
          */
-        public void SupTrajet(int nTrajet)
-        {
-            if (nTrajet > gestionFlotte.LastNumTrajet)
-                throw new ErreurDistance();
-            
-            gestionFlotte.SupTrajet(nTrajet);
+        public void SupTrajet(string strnTrajet)
+        {   
+            gestionFlotte.SupTrajet(CheckNTrajet(strnTrajet));
         }
 
         /***** Fin Suppression *****/
 
+        /***** Affichage *****/
 
+        /**
+        * Afficher un client de la liste du gestionnaire de flotte
+        * @Params nClient int : numéro du client à supprimer
+        * @Returns : Client
+        */ 
+        public Client AfficherClient(string strnClient)
+        {
+            return gestionFlotte.GetClient(CheckNClient(strnClient));
+        }
+
+        /**
+         * Afficher un véhicule de la liste du gestionnaire de flotte
+         * @Params nVehicule int : numéro du véhicule à supprimer
+         * @Returns : Vehicule
+         */
+        public Vehicule AfficherVehicule(string strnVehicule)
+        {
+            return gestionFlotte.GetVehicule(CheckNVehicule(strnVehicule));
+        }
+
+        /**
+         * Afficher un trajet de la liste du gestionnaire de flotte
+         * @Params nTrajet int : numéro du trajet à supprimer
+         * @Returns : Trajet
+         */
+        public Trajet AfficherTrajet(string strnTrajet)
+        {
+            return gestionFlotte.GetTrajet(CheckNTrajet(strnTrajet));
+        }
+
+        /***** Fin Affichage *****/
 
 
 
@@ -217,7 +240,7 @@ namespace Final_Project
         /**
          * Convertie un string en strPermis et l'ajout à une list de strPermis
          * @Params  strPermis       : string         string à convertir
-         * @Params  listPermis   : List<EPermis>  list de strPermis à remplir
+         * @Params  listPermis      : List<EPermis>  list de strPermis à remplir
          */
         private void StrToEPermis(string strPermis, List<EPermis> permisList)
         {
@@ -226,6 +249,30 @@ namespace Final_Project
                 throw new ErreurPermis();
 
             permisList.Add(permis);    
+        }
+
+        private int CheckNVehicule(string strNVehicule)
+        {
+            int nVehicule = -1;
+            if (!int.TryParse(strNVehicule, out nVehicule) || nVehicule > gestionFlotte.LastNumVehicule)
+                throw new ErreurNVehicule();
+            return nVehicule;
+        }
+
+        private int CheckNTrajet(string strNTrajet)
+        {
+            int nTrajet = -1;
+            if (!int.TryParse(strNTrajet, out nTrajet) || nTrajet > gestionFlotte.LastNumTrajet)
+                throw new ErreurNTrajet();
+            return nTrajet;
+        }
+
+        private int CheckNClient(string strNClient)
+        {
+            int nClient = -1;
+            if (!int.TryParse(strNClient, out nClient) || nClient > gestionFlotte.LastNumClient)
+                throw new ErreurNClient();
+            return nClient;
         }
 
     }

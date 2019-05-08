@@ -38,11 +38,12 @@ namespace Final_Project
          */
         private void AfficherAccueil()
         {
+            Console.Clear();
             Console.WriteLine("Choisissez parmi ces choix : ");
             Console.WriteLine("1- Visualisation");
             Console.WriteLine("2- Ajout / Suppression");
-            string saisie = Console.ReadLine();
-            switch (saisie)
+
+            switch (Console.ReadLine())
             {
                 case "1":
                     AfficherVisu();
@@ -51,7 +52,7 @@ namespace Final_Project
                     AfficherAjoutSup();
                     break;
                 default:
-                    Console.WriteLine("Default case");
+                    ErreurSaisie(AfficherAccueil);
                     break;
             }
         }
@@ -76,8 +77,8 @@ namespace Final_Project
             Console.WriteLine("     6- List Trajets");
             Console.WriteLine("     7- Trajet");
             Console.WriteLine("     #- Accueil");
-            string saisie = Console.ReadLine();
-            switch (saisie)
+
+            switch (Console.ReadLine())
             {
                 case "1":
                     AfficherStats();
@@ -104,7 +105,7 @@ namespace Final_Project
                     AfficherAccueil();
                     break;
                 default:
-                    Console.WriteLine("Default case");
+                   ErreurSaisie(AfficherVisu);
                     break;
             }
         }
@@ -125,10 +126,11 @@ namespace Final_Project
         */
         private void AfficherClients()
         {
-            gestionFlotte.ClientList.ForEach(li => {
+            gestionFlotte.ClientList.ForEach(li =>
+            {
                 Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ", li.NClient, li.Nom, li.Prenom, li.Adresse);
                 li.PermisList.ForEach(permis => Console.Write(permis + ", "));
-                Console.Write(" TOTAL LOC :{0}",li.TotalLoc);
+                Console.Write("COÛT TOTAL DES LOCATIONS :{0}",li.TotalLoc);
                 Console.WriteLine();
              });                    
         }
@@ -268,7 +270,7 @@ namespace Final_Project
         private void SupClient()
         {
             Console.WriteLine("Saisir le numéro de Client que vous voulez supprimer");
-            int numClient = int.Parse(Console.ReadLine());
+            string numClient = Console.ReadLine();
             controller.SupClient(numClient);
         }
 
@@ -326,8 +328,7 @@ namespace Final_Project
         private void SupVehicule()
         {
             Console.WriteLine("Saisir le numéro de Vehicule que vous voulez supprimer");
-            int numVehicule = int.Parse(Console.ReadLine());
-            controller.SupVehicule(numVehicule);
+            controller.SupVehicule(Console.ReadLine());
         }
 
         /**
@@ -350,8 +351,7 @@ namespace Final_Project
         private void SupTrajet()
         {
             Console.WriteLine("Saisir le numéro de Trajet que vous voulez supprimer");
-            int numTrajet = int.Parse(Console.ReadLine());
-            controller.SupTrajet(numTrajet);
+            controller.SupTrajet(Console.ReadLine());
         }
 
         /****** Fin Layout Ajout/Sup ******/
@@ -365,6 +365,18 @@ namespace Final_Project
             {
                 Console.Write("{0}, ",i);
             }
+        }
+
+        private void RetourAccueil()
+        {
+
+        }
+
+        private void ErreurSaisie(Action function)
+        {
+            Console.WriteLine("Erreur choix invalide veuillez appuyez sur une touche pour continuer ...");
+            Console.ReadKey();
+            function();
         }
 
 
