@@ -239,7 +239,7 @@ namespace Final_Project
 
         /**
          * Convertie un string en strPermis et l'ajout à une list de strPermis
-         * @Params  strPermis       : string         string à convertir
+         * @Params  strPermi    string : string à convertir
          * @Params  listPermis      : List<EPermis>  list de strPermis à remplir
          */
         private void StrToEPermis(string strPermis, List<EPermis> permisList)
@@ -251,6 +251,11 @@ namespace Final_Project
             permisList.Add(permis);    
         }
 
+        /**
+         * Convertie un string en int et vérifie que le numéro du véhicule est correct
+         * @Params  strNVehicule    string : string à convertir
+         * * @Returns   int : numero du véhicule
+         */
         private int CheckNVehicule(string strNVehicule)
         {
             int nVehicule = -1;
@@ -259,6 +264,11 @@ namespace Final_Project
             return nVehicule;
         }
 
+        /**
+         * Convertie un string en int et vérifie que le numéro du trajet est correct
+         * @Params  strNTrajet    string : string à convertir
+         * * @Returns   int : numero du trajet
+         */
         private int CheckNTrajet(string strNTrajet)
         {
             int nTrajet = -1;
@@ -266,7 +276,11 @@ namespace Final_Project
                 throw new ErreurNTrajet();
             return nTrajet;
         }
-
+        /**
+         * Convertie un string en int et vérifie que le numéro du client est correct
+         * @Params  strNClient    string : string à convertir
+         * * @Returns   int : numero du client
+         */
         private int CheckNClient(string strNClient)
         {
             int nClient = -1;
