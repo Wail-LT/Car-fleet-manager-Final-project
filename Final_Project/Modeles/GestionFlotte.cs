@@ -77,6 +77,7 @@ namespace Final_Project
          */
         public void AjoutVehicule(Vehicule vehicule)
         {
+            vehicule.NVehicule = LastNumVehicule + 1;
             vehicule.Place = GetPlaceDisp();
             vehiculeList.Add(vehicule);
         }
@@ -87,6 +88,7 @@ namespace Final_Project
          */
         public void AjoutClient(Client client)
         {
+            client.NClient = LastNumClient + 1;
             clientList.Add(client);
         }
 
@@ -96,6 +98,7 @@ namespace Final_Project
          */
         public void AjoutTrajet(Trajet trajet)
         {
+            trajet.NTrajet = LastNumTrajet + 1;
             trajetList.Add(trajet);
         }
 

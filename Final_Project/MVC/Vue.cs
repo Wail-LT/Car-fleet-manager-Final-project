@@ -120,6 +120,8 @@ namespace Final_Project
             Console.WriteLine("     Nombre de Vehicules : {0}", gestionFlotte.LastNumVehicule+1);
             Console.WriteLine("     Nombre de Clients   : {0}", gestionFlotte.LastNumClient + 1);
             Console.WriteLine("     Nombre de Trajets   : {0}", gestionFlotte.LastNumTrajet + 1);
+
+            RetourAccueil();
         }
 
         /**
@@ -134,7 +136,9 @@ namespace Final_Project
                 li.PermisList.ForEach(permis => Console.Write(permis + ", "));
                 Console.Write("COÛT TOTAL DES LOCATIONS :{0}",li.TotalLoc);
                 Console.WriteLine();
-             });                    
+             });
+
+            RetourAccueil();
         }
 
         /**
@@ -160,6 +164,7 @@ namespace Final_Project
             choisi.PermisList.ForEach(permis => Console.Write(permis + ", "));
             Console.Write(" TOTAL LOC :{0}", choisi.TotalLoc);
 
+            RetourAccueil();
         }
 
         /**
@@ -173,6 +178,7 @@ namespace Final_Project
                 Console.WriteLine();
             });
 
+            RetourAccueil();
         }
 
         /**
@@ -197,6 +203,8 @@ namespace Final_Project
                 choisi.NVehicule, choisi.Marque, choisi.Modele, choisi.Km, choisi.Couleur,
                 choisi.IsDisponible ? "oui" : "non", choisi.Cout);
             Console.WriteLine();
+
+            RetourAccueil();
         }
 
         /**
@@ -208,7 +216,9 @@ namespace Final_Project
             gestionFlotte.TrajetList.ForEach(li => {
                 Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", li.NTrajet,li.Client.NClient,li.Vehicule.NVehicule,li.Distance,li.Cout); 
                 Console.WriteLine();
-            });          
+            });
+
+            RetourAccueil();
         }
 
         /**
@@ -230,6 +240,8 @@ namespace Final_Project
             }
             Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", choisi.NTrajet, choisi.Client.NClient, choisi.Vehicule.NVehicule, choisi.Distance, choisi.Cout);
             Console.WriteLine();
+
+            RetourAccueil();
         }
 
         /****** Fin Layout Visualisation ******/
@@ -296,11 +308,15 @@ namespace Final_Project
             string prenom = Console.ReadLine();
             Console.WriteLine("Saisir l'adresse du client");
             string adresse = Console.ReadLine();
-            Console.WriteLine("Saisir les permis parmi cette liste (séparé chaque permis par une virgule) : ");
+            Console.Write("Saisir les permis parmi cette liste (séparé chaque permis par une virgule) { ");
             AfficherEnum<EPermis>();
+            Console.WriteLine(" } :");
             string permis = Console.ReadLine();
             List<string> resultP = permis.Split(',').ToList();
+
             controller.AjoutClient(nom,prenom,adresse,resultP);
+
+            RetourAccueil();
         }
 
         /**
@@ -318,7 +334,9 @@ namespace Final_Project
             {
                 Console.WriteLine(e.Message);
                 ErreurSaisie(null, SupClient);
-            } 
+            }
+
+            RetourAccueil();
         }
 
         /**
@@ -367,7 +385,9 @@ namespace Final_Project
                 default:
                     Console.WriteLine("Default case");
                     break;
-            }                  
+            }
+
+            RetourAccueil();
         }
 
         /**
@@ -386,6 +406,8 @@ namespace Final_Project
                 Console.WriteLine(e.Message);
                 ErreurSaisie(null, SupVehicule);
             }
+
+            RetourAccueil();
         }
 
         /**
@@ -400,6 +422,8 @@ namespace Final_Project
             Console.WriteLine("Saisir la distance de ce trajet");
             string dist = Console.ReadLine();
             controller.AjoutTrajet(numClient, numVehi, dist);
+
+            RetourAccueil();
         }
 
         /**
@@ -418,9 +442,22 @@ namespace Final_Project
                 Console.WriteLine(e.Message);
                 ErreurSaisie(null, SupTrajet);
             }
+
+            RetourAccueil();
         }
 
         /****** Fin Layout Ajout/Sup ******/
+
+
+        /****** Layout Rendre Vehicule ******/
+
+        private void AfficherRendreVehicule()
+        {
+           // AfficherPlacesLibres();
+
+        }
+
+        /****** Layout Rendre Vehicule ******/
 
 
         /****** Methodes Annexe *****/
@@ -433,10 +470,6 @@ namespace Final_Project
             }
         }
 
-        private void RetourAccueil()
-        {
-
-        }
 
         private void ErreurSaisie(string before, Action after)
         {
@@ -445,6 +478,13 @@ namespace Final_Project
             Console.WriteLine("Veuillez appuyez sur une touche pour continuer ...");
             Console.ReadKey();
             after();
+        }
+
+        private void RetourAccueil()
+        {
+            Console.WriteLine("Veuillez appuyez sur une touche pour retourner à l'accueil ...");
+            Console.ReadKey();
+            AfficherAccueil();
         }
 
 

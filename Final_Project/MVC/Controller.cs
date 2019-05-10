@@ -133,10 +133,9 @@ namespace Final_Project
             int nVehicule = -1;
             int distance = -1;
 
-            if (!int.TryParse(strNClient, out nClient))
-                throw new ErreurNClient();
-            if (!int.TryParse(strNVehicule, out nVehicule))
-                throw new ErreurNVehicule();
+            nClient = CheckNClient(strNClient);
+            nVehicule = CheckNVehicule(strNVehicule);
+ 
             if (!int.TryParse(strDistance, out distance))
                 throw new ErreurDistance();
 
@@ -259,7 +258,8 @@ namespace Final_Project
         private int CheckNVehicule(string strNVehicule)
         {
             int nVehicule = -1;
-            if (!int.TryParse(strNVehicule, out nVehicule) || nVehicule > gestionFlotte.LastNumVehicule)
+            if (!int.TryParse(strNVehicule, out nVehicule) || nVehicule > gestionFlotte.LastNumVehicule ||
+                nVehicule < 0) 
                 throw new ErreurNVehicule();
             return nVehicule;
         }
@@ -272,10 +272,11 @@ namespace Final_Project
         private int CheckNTrajet(string strNTrajet)
         {
             int nTrajet = -1;
-            if (!int.TryParse(strNTrajet, out nTrajet) || nTrajet > gestionFlotte.LastNumTrajet)
+            if (!int.TryParse(strNTrajet, out nTrajet) || nTrajet > gestionFlotte.LastNumTrajet || nTrajet < 0)
                 throw new ErreurNTrajet();
             return nTrajet;
         }
+
         /**
          * Convertie un string en int et vérifie que le numéro du client est correct
          * @Params  strNClient    string : string à convertir
@@ -284,7 +285,7 @@ namespace Final_Project
         private int CheckNClient(string strNClient)
         {
             int nClient = -1;
-            if (!int.TryParse(strNClient, out nClient) || nClient > gestionFlotte.LastNumClient)
+            if (!int.TryParse(strNClient, out nClient) || nClient > gestionFlotte.LastNumClient || nClient < 0)
                 throw new ErreurNClient();
             return nClient;
         }
