@@ -453,11 +453,10 @@ namespace Final_Project
 
         private void AfficherRendreVehicule()
         {
-           // AfficherPlacesLibres();
-
+            //AfficherParking(); 
         }
 
-        /****** Layout Rendre Vehicule ******/
+        /****** Fin Layout Rendre Vehicule ******/
 
 
         /****** Methodes Annexe *****/
