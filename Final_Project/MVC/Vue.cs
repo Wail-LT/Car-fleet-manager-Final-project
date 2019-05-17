@@ -453,36 +453,44 @@ namespace Final_Project
 
         private void AfficherRendreVehicule()
         {
-            Console.WriteLine("Selectionnez le parking de retour du vehicule parmis la liste suivante : ");
-            AfficherParkingsDisp("\t");
-
-            string nomParking = Console.ReadLine().ToUpper();
-            
-            if (!gestionFlotte.GetParkingsDisp().ContainsKey(nomParking))
-                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherRendreVehicule, "Erreur : le parking saisie ne fait pas partie de la liste");
-            else
-            {   
-                do
-                {
-                    bool b = true;
-                    Console.Clear();
-                    Console.WriteLine("Selectionnez la place de retour du vehicule parmis la liste suivante : ");
-
-                    AfficherPlacesDisp(gestionFlotte.GetParkingsDisp()[nomParking]);
-
-                    int place = -1;
-
-                    if (!int.TryParse(Console.ReadLine(), out place) ||
-                        !gestionFlotte.GetParkingsDisp()[nomParking].GetPlacesDisp().Contains(place))
-                        EndFunction("Erreur : Numero de parking incorrect");
-                    else
-                    {
-
-                    }
-
-                } while (b);
-            }
+            Parking.Parking parking = AfficherParking();
+            Place place = AfficherPlace(parking);
         }
+
+
+        private Parking.Parking AfficherParking()
+        {
+            List<Parking.Parking> lParking = gestionFlotte.GetParkingsDisp();
+            if (lParking.Count == 0)
+                Console.WriteLine("aucune place de libre");
+            else
+            {
+                Console.WriteLine("Selectionnez un parking parmis la liste suivante :");
+                lParking.ForEach(parking =>
+                {
+                    Console.WriteLine($"\t-{parking.Nom}");
+                });
+
+                string nParking = Console.ReadLine();
+                return controller.SelectParking(nParking, gestionFlotte.GetParkingsDisp);
+            }
+
+            return null;
+        }
+
+        private Place AfficherPlace(Parking.Parking p)
+        {
+            Console.WriteLine("Selectionnez une place parmis la liste suivante :");
+            for (int i = 0; i < p.Places.Length; i++)
+            {
+                if (p.Places[i].IsDisponible)
+                    Console.WriteLine($"\t-A{i}");
+            }
+
+            string nPlace = Console.ReadLine();
+            return controller.SelectPlace(nPlace, p.GetPlacesDisp);
+        }
+
 
         /****** Fin Layout Rendre Vehicule ******/
 
@@ -512,24 +520,10 @@ namespace Final_Project
             After?.Invoke();
         }
 
-        private void AfficherParkingsDisp(string before = "")
-        {
-            Dictionary<string, Parking.Parking> parkingsDisp = gestionFlotte.GetParkingsDisp();
-
-            if (parkingsDisp.Count == 0)
-                Console.WriteLine("Aucun Parking n'a de places libre");
-            else
-            {
-                foreach (KeyValuePair<string, Parking.Parking> parking in parkingsDisp)
-                {
-                    Console.WriteLine(before + parking.Key);
-                }
-            }
-        }
 
         private void AfficherPlacesDisp(Parking.Parking parking)
         {
-            List<int> placesDisp = parking.GetPlacesDisp();
+            List<Place> placesDisp = parking.GetPlacesDisp();
 
             if (placesDisp.Count == 0)
                 Console.WriteLine("Aucune Place Disponible dans ce parking");

@@ -48,6 +48,7 @@
     <Compile Include="Exceptions\Client\ErreurPermis.cs" />
     <Compile Include="Exceptions\Client\NomVide.cs" />
     <Compile Include="Exceptions\Client\PrenomVide.cs" />
+    <Compile Include="Exceptions\Parking\ErreurNomParking.cs" />
     <Compile Include="Exceptions\Parking\ErreurPlaceIndisp.cs" />
     <Compile Include="Exceptions\Trajet\ErreurNTrajet.cs" />
     <Compile Include="Exceptions\Trajet\ErreurDistance.cs" />

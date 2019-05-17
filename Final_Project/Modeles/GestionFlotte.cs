@@ -13,7 +13,7 @@ namespace Final_Project
         private readonly List<Vehicule> vehiculeList;
         private readonly List<Client> clientList;
         private readonly List<Trajet> trajetList;
-        private readonly Dictionary<string,Parking.Parking> parkingList;
+        private readonly List<Parking.Parking> parkingList;
 
 
 
@@ -22,7 +22,7 @@ namespace Final_Project
             vehiculeList = new List<Vehicule>();
             clientList = new List<Client>();
             trajetList = new List<Trajet>();
-            parkingList = new Dictionary<string, Parking.Parking>();
+            parkingList = new List<Parking.Parking>();
         }
 
 
@@ -36,7 +36,7 @@ namespace Final_Project
         public List<Client> ClientList => clientList;
         public List<Trajet> TrajetList => trajetList;
 
-        public Dictionary<string, Parking.Parking> ParkingList => parkingList;
+        public List<Parking.Parking> ParkingList => parkingList;
 
 
         /* Public Methodes */
@@ -145,43 +145,32 @@ namespace Final_Project
                 trajetList[i].NTrajet = i;
         }
 
-
-        /**
-         * Retourne les parkings non plein
-         * @Returns Dictionary <string, Parking.Parking>
-         */
-        public Dictionary<string, Parking.Parking> GetParkingsDisp()
+        public List<Parking.Parking> GetParkingsDisp()
         {
-            Dictionary<string, Parking.Parking> parkingsDisp= new Dictionary<string, Parking.Parking>();
+            List<Parking.Parking> list = new List<Parking.Parking>();
 
-            int i = 0;
-
-            while (i < parkingList.Count)
+            parkingList.ForEach(parking =>
             {
-                if (!parkingList.Values.ElementAt(i).IsPlein)
-                    parkingsDisp.Add(parkingList.Keys.ElementAt(i), parkingList.Values.ElementAt(i));
-                i++;
-            }
+                if (!parking.IsPlein)
+                    list.Add(parking);
+            });
 
-            return parkingsDisp;
+            return list;
         }
 
 
 
         /* Private Methodes */
 
-        /**
-         * Récupérer une place disponible dans un des parkings
-         */
         private Place GetPlaceDisp()
         {
             int i = 0;
-            while (i < parkingList.Count && parkingList.Values.ElementAt(i).IsPlein) { i++; }
+            while (i < parkingList.Count && parkingList[i].IsPlein) { i++; }
 
-            if (i==parkingList.Count && parkingList.Values.ElementAt(i).IsPlein)
+            if (i == parkingList.Count && parkingList[i - 1].IsPlein)
                 throw new ErreurPlaceIndisp();
 
-            return i == parkingList.Count ? parkingList.Values.ElementAt(i-1).GetPlaceDisp() : parkingList.Values.ElementAt(i).GetPlaceDisp();
+            return i == parkingList.Count ? parkingList[i - 1].GetPlaceDisp() : parkingList[i].GetPlaceDisp();
         }
 
 

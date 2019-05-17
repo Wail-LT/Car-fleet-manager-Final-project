@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Final_Project.Exceptions;
 
 namespace Final_Project.Parking
 {
@@ -8,11 +9,13 @@ namespace Final_Project.Parking
     {
         private readonly Place[] places;
         public const int NbPlaces = 10;
+        private string nom;
 
-        public Parking(Action<Place[], Parking> remplirTab)
+        public Parking(Action<Place[], Parking> remplirTab, string nom)
         {
             places = new Place[NbPlaces];
             remplirTab(places, this);
+            this.nom = nom;
         }
 
         /* Properties */
@@ -25,9 +28,11 @@ namespace Final_Project.Parking
                 int i = 0;
                 while (i < NbPlaces && !places[i].IsDisponible) { i++; }
 
-                return i == NbPlaces && !places[NbPlaces-1].IsDisponible;
+                return i == NbPlaces && !places[NbPlaces - 1].IsDisponible;
             }
         }
+
+        public string Nom { get => nom; set => nom = value; }
 
         /* Public Methodes */
 
@@ -44,16 +49,16 @@ namespace Final_Project.Parking
             return i == NbPlaces & !places[i - 1].IsDisponible ? null : places[i - 1];
         }
 
-        public List<int> GetPlacesDisp()
+        public List<Place> GetPlacesDisp()
         {
-            List<int> placesDisp = new List<int>();
-            for (int i = 0; i < places.Length; i++) 
+            List<Place> lPlaces = new List<Place>();
+            for (int i = 0; i < places.Length; i++)
             {
-                if (places[i].IsDisponible) 
-                    placesDisp.Add(i);
+                if (places[i].IsDisponible)
+                    lPlaces.Add(places[i]);
             }
 
-            return placesDisp;
+            return lPlaces.Count == 0 ? null : lPlaces;
         }
 
     }

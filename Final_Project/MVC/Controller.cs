@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Final_Project.Enums;
 using Final_Project.Exceptions;
+using Final_Project.Exceptions.Parking;
 using Final_Project.Exceptions.Trajet;
 using Final_Project.Exceptions.Voiture;
 using Final_Project.Exceptions.Voiture.Camion;
@@ -35,7 +36,7 @@ namespace Final_Project
          */
         public void AjoutClient(string nom, string prenom, string adresse, List<string> srtPermisList)
         {
-            if(string.IsNullOrWhiteSpace(nom))
+            if (string.IsNullOrWhiteSpace(nom))
                 throw new NomVide();
             if (string.IsNullOrWhiteSpace(prenom))
                 throw new PrenomVide();
@@ -44,7 +45,7 @@ namespace Final_Project
 
             List<EPermis> permisList = new List<EPermis>();
 
-            srtPermisList.ForEach(x => StrToEPermis(x,permisList));
+            srtPermisList.ForEach(x => StrToEPermis(x, permisList));
 
             gestionFlotte.AjoutClient(new Client(nom, prenom, adresse, permisList));
 
@@ -68,11 +69,11 @@ namespace Final_Project
             CheckVehicule(couleur, km, marque, modele, out iKm);
 
 
-            if (!TypeVoiture.TryParse(type, true, out typeV)) 
+            if (!TypeVoiture.TryParse(type, true, out typeV))
                 throw new ErreurType();
             if (!int.TryParse(nbPortes, out iNbPortes) || iNbPortes < 3 || iNbPortes > 5)
                 throw new ErreurNBPortes();
-            if (!int.TryParse(puissance, out iPuissances) || iPuissances < 70 || iPuissances > 650) 
+            if (!int.TryParse(puissance, out iPuissances) || iPuissances < 70 || iPuissances > 650)
                 throw new ErreurPuissance();
 
             gestionFlotte.AjoutVehicule(new Voiture(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iNbPortes, iPuissances, typeV));
@@ -86,14 +87,14 @@ namespace Final_Project
          * @Params modele    string   : modele du véhicule
          * @Params capacite  int      : capacité en m3 du camion
          */
-        public void AjoutCamion(string couleur, string km, string marque, string modele , string capacite)
+        public void AjoutCamion(string couleur, string km, string marque, string modele, string capacite)
         {
             int iKm = -1;
             int iCapacite = -1;
 
             CheckVehicule(couleur, km, marque, modele, out iKm);
 
-            if (!int.TryParse(capacite, out iCapacite) || iCapacite < 2.75 || iCapacite > 22) 
+            if (!int.TryParse(capacite, out iCapacite) || iCapacite < 2.75 || iCapacite > 22)
                 throw new ErreurCapacite();
 
             gestionFlotte.AjoutVehicule(new Camion(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iCapacite));
@@ -107,7 +108,7 @@ namespace Final_Project
          * @Params modele    string   : modele du véhicule
          * @Params cylindre  int      : cylindré du véhicule en cm3
          */
-        public void AjoutMoto(string couleur, string km, string marque, string modele , string cylindre)
+        public void AjoutMoto(string couleur, string km, string marque, string modele, string cylindre)
         {
             int iKm = -1;
             int iCylindre = -1;
@@ -135,7 +136,7 @@ namespace Final_Project
 
             nClient = CheckNClient(strNClient);
             nVehicule = CheckNVehicule(strNVehicule);
- 
+
             if (!int.TryParse(strDistance, out distance))
                 throw new ErreurDistance();
 
@@ -171,7 +172,7 @@ namespace Final_Project
          * @Params nTrajet int : numéro du trajet à supprimer
          */
         public void SupTrajet(string strnTrajet)
-        {   
+        {
             gestionFlotte.SupTrajet(CheckNTrajet(strnTrajet));
         }
 
@@ -183,7 +184,7 @@ namespace Final_Project
         * Afficher un client de la liste du gestionnaire de flotte
         * @Params nClient int : numéro du client à supprimer
         * @Returns : Client
-        */ 
+        */
         public Client GetClient(string strnClient)
         {
             return gestionFlotte.GetClient(CheckNClient(strnClient));
@@ -225,7 +226,7 @@ namespace Final_Project
          */
         private void CheckVehicule(string couleur, string km, string marque, string modele, out int iKm)
         {
-          
+
             if (string.IsNullOrWhiteSpace(couleur))
                 throw new ErreurCouleur();
             if (!int.TryParse(km, out iKm) || iKm < 0)
@@ -247,7 +248,7 @@ namespace Final_Project
             if (!EPermis.TryParse(strPermis, true, out permis))
                 throw new ErreurPermis();
 
-            permisList.Add(permis);    
+            permisList.Add(permis);
         }
 
         /**
@@ -259,7 +260,7 @@ namespace Final_Project
         {
             int nVehicule = -1;
             if (!int.TryParse(strNVehicule, out nVehicule) || nVehicule > gestionFlotte.LastNumVehicule ||
-                nVehicule < 0) 
+                nVehicule < 0)
                 throw new ErreurNVehicule();
             return nVehicule;
         }
@@ -290,5 +291,21 @@ namespace Final_Project
             return nClient;
         }
 
+        public Parking.Parking SelectParking(string nParking, Func<List<Parking.Parking>> getListParking)
+        {
+            List<Parking.Parking> list = getListParking();
+
+            Parking.Parking result = null;
+
+            list.ForEach(parking =>
+            {
+                if (!parking.IsPlein && nParking.Equals(parking.Nom))
+                    result = parking;
+            });
+
+            if (result == null)
+                throw new ErreurNomParking();
+            return result;
+        }
     }
 }
