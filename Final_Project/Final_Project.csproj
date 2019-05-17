@@ -62,6 +62,8 @@
     <Compile Include="Exceptions\Vehicule\ErreurNVehicule.cs" />
     <Compile Include="Exceptions\Vehicule\Voiture\ErreurPuissance.cs" />
     <Compile Include="Exceptions\Vehicule\Moto\ErreurCylindre.cs" />
+    <Compile Include="Modeles\Controleurs\Controleur.cs" />
+    <Compile Include="Modeles\Controleurs\IControleur.cs" />
     <Compile Include="Modeles\Enums\EPermis.cs" />
     <Compile Include="Modeles\Enums\TypeVoiture.cs" />
     <Compile Include="Modeles\Parking\Parking.cs" />
@@ -70,7 +72,6 @@
     <Compile Include="Modeles\Client.cs" />
     <Compile Include="MVC\Controller.cs" />
     <Compile Include="Modeles\GestionFlotte.cs" />
-    <Compile Include="Interfaces\IManager.cs" />
     <Compile Include="Interfaces\IVue.cs" />
     <Compile Include="Modeles\Vehicules\Moto.cs" />
     <Compile Include="Program.cs" />

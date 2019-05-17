@@ -9,6 +9,7 @@ using Final_Project.Exceptions.Trajet;
 using Final_Project.Exceptions.Voiture;
 using Final_Project.Exceptions.Voiture.Camion;
 using Final_Project.Exceptions.Voiture.Moto;
+using Final_Project.Parking;
 using Final_Project.Vehicules;
 
 namespace Final_Project
@@ -291,21 +292,38 @@ namespace Final_Project
             return nClient;
         }
 
-        public Parking.Parking SelectParking(string nParking, Func<List<Parking.Parking>> getListParking)
+        public Parking.Parking SelectParking(string nParking, List<Parking.Parking> list)
         {
-            List<Parking.Parking> list = getListParking();
+            if (list == null)
+                throw new NotImplementedException("Erreur Controller.SelectParking() : list null");
 
             Parking.Parking result = null;
 
             list.ForEach(parking =>
             {
-                if (!parking.IsPlein && nParking.Equals(parking.Nom))
+                if (!parking.IsPlein && nParking.ToUpper().Equals(parking.Nom.ToUpper()))
                     result = parking;
             });
 
             if (result == null)
                 throw new ErreurNomParking();
             return result;
+        }
+
+        public Parking.Place SelectPlace(string nPlace, List<Place> listPlace)
+        {
+            if(listPlace == null)
+                throw  new NotImplementedException("Erreur Controller.SelectPlace() : listPlace null");
+
+            int i = 0;
+            while (i < listPlace.Count && nPlace.ToUpper().Equals("A" + i)) {
+                i++;
+            }
+
+            if (i == listPlace.Count && ! nPlace.ToUpper().Equals("A" + (i-1)))
+                throw new ErreurNomParking();
+
+            return listPlace[i-1];
         }
     }
 }
