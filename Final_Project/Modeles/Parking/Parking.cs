@@ -9,13 +9,11 @@ namespace Final_Project.Parking
     {
         private readonly Place[] places;
         public const int NbPlaces = 10;
-        private string nom;
 
-        public Parking(Action<Place[], Parking> remplirTab, string nom)
+        public Parking(Action<Place[], Parking> remplirTab)
         {
             places = new Place[NbPlaces];
             remplirTab(places, this);
-            this.nom = nom;
         }
 
         /* Properties */
@@ -31,8 +29,6 @@ namespace Final_Project.Parking
                 return i == NbPlaces && !places[NbPlaces-1].IsDisponible;
             }
         }
-
-        public string Nom { get => nom; set => nom = value; }
 
         /* Public Methodes */
 

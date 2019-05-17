@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Final_Project.Parking;
 
 namespace Final_Project
 {
@@ -483,6 +482,10 @@ namespace Final_Project
 
             string nPlace = Console.ReadLine();
             return controller.SelectPlace(nPlace, p.GetPlacesDisp);
+        }
+
+                } while (b);
+            }
         }
 
         /****** Fin Layout Rendre Vehicule ******/
