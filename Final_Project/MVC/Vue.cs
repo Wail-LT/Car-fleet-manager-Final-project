@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Final_Project.Parking;
 
 namespace Final_Project
 {
@@ -52,7 +53,7 @@ namespace Final_Project
                     AfficherAjoutSup();
                     break;
                 default:
-                    ErreurSaisie("Erreur choix invalide", AfficherAccueil);
+                    EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Erreur choix invalide");
                     break;
             }
         }
@@ -105,7 +106,8 @@ namespace Final_Project
                     AfficherAccueil();
                     break;
                 default:
-                    ErreurSaisie("Erreur choix invalide", AfficherVisu);
+                    EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil,
+                        "Erreur choix invalide");
                     break;
             }
         }
@@ -121,7 +123,7 @@ namespace Final_Project
             Console.WriteLine("     Nombre de Clients   : {0}", gestionFlotte.LastNumClient + 1);
             Console.WriteLine("     Nombre de Trajets   : {0}", gestionFlotte.LastNumTrajet + 1);
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -138,7 +140,7 @@ namespace Final_Project
                 Console.WriteLine();
              });
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -156,15 +158,14 @@ namespace Final_Project
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                ErreurSaisie(null,AfficherClient);
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherClient, e.Message);
             }
            
             Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ",choisi.NClient,choisi.Nom,choisi.Prenom,choisi.Adresse);
             choisi.PermisList.ForEach(permis => Console.Write(permis + ", "));
             Console.Write(" TOTAL LOC :{0}", choisi.TotalLoc);
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -178,7 +179,7 @@ namespace Final_Project
                 Console.WriteLine();
             });
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -195,8 +196,7 @@ namespace Final_Project
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                ErreurSaisie(null, AfficherVehicule);
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherVehicule, e.Message);
             }
 
             Console.Write("\t NUM :{0}  MARQUE :{1} , MODELE : {2} , KM :{3}, COULEUR : {4}, DISPONIBLE :{5},COUT :{6}",
@@ -204,7 +204,7 @@ namespace Final_Project
                 choisi.IsDisponible ? "oui" : "non", choisi.Cout);
             Console.WriteLine();
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -218,7 +218,7 @@ namespace Final_Project
                 Console.WriteLine();
             });
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -235,13 +235,12 @@ namespace Final_Project
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                ErreurSaisie(null, AfficherTrajet);
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherTrajet, e.Message);
             }
             Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", choisi.NTrajet, choisi.Client.NClient, choisi.Vehicule.NVehicule, choisi.Distance, choisi.Cout);
             Console.WriteLine();
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /****** Fin Layout Visualisation ******/
@@ -290,7 +289,7 @@ namespace Final_Project
                     AfficherAccueil();
                     break;
                 default:
-                    ErreurSaisie("ERREUR : Saisie invalide", AfficherAjoutSup);
+                    EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAjoutSup, "ERREUR : Saisie invalide");
                     break;
             }
         }
@@ -316,7 +315,7 @@ namespace Final_Project
 
             controller.AjoutClient(nom,prenom,adresse,resultP);
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -332,11 +331,10 @@ namespace Final_Project
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                ErreurSaisie(null, SupClient);
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", SupClient, e.Message);
             }
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -387,7 +385,7 @@ namespace Final_Project
                     break;
             }
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -403,11 +401,10 @@ namespace Final_Project
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                ErreurSaisie(null, SupVehicule);
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", SupVehicule, e.Message);
             }
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -423,7 +420,7 @@ namespace Final_Project
             string dist = Console.ReadLine();
             controller.AjoutTrajet(numClient, numVehi, dist);
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -439,11 +436,10 @@ namespace Final_Project
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                ErreurSaisie(null, SupTrajet);
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", SupTrajet, e.Message);
             }
 
-            RetourAccueil();
+            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /****** Fin Layout Ajout/Sup ******/
@@ -451,12 +447,48 @@ namespace Final_Project
 
         /****** Layout Rendre Vehicule ******/
 
+        /**
+        * Retourner un vehicule  fin de location
+        */
+
         private void AfficherRendreVehicule()
         {
-            //AfficherParking(); 
+            Console.WriteLine("Selectionnez le parking de retour du vehicule parmis la liste suivante : ");
+            AfficherParkingsDisp("\t");
+
+            string nomParking = Console.ReadLine().ToUpper();
+            
+            if (!gestionFlotte.GetParkingsDisp().ContainsKey(nomParking))
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherRendreVehicule, "Erreur : le parking saisie ne fait pas partie de la liste");
+            else
+            {   
+                do
+                {
+                    bool b = true;
+                    Console.Clear();
+                    Console.WriteLine("Selectionnez la place de retour du vehicule parmis la liste suivante : ");
+
+                    AfficherPlacesDisp(gestionFlotte.GetParkingsDisp()[nomParking]);
+
+                    int place = -1;
+
+                    if (!int.TryParse(Console.ReadLine(), out place) ||
+                        !gestionFlotte.GetParkingsDisp()[nomParking].GetPlacesDisp().Contains(place))
+                        EndFunction("Erreur : Numero de parking incorrect");
+                    else
+                    {
+
+                    }
+
+                } while (b);
+            }
         }
 
         /****** Fin Layout Rendre Vehicule ******/
+
+
+
+
 
 
         /****** Methodes Annexe *****/
@@ -470,23 +502,45 @@ namespace Final_Project
         }
 
 
-        private void ErreurSaisie(string before, Action after)
+        private void EndFunction(string msg, Action After = null, string before = null)
         {
             if(before != null)
                 Console.WriteLine(before);
-            Console.WriteLine("Veuillez appuyez sur une touche pour continuer ...");
+            Console.WriteLine(msg);
             Console.ReadKey();
-            after();
+
+            After?.Invoke();
         }
 
-        private void RetourAccueil()
+        private void AfficherParkingsDisp(string before = "")
         {
-            Console.WriteLine("Veuillez appuyez sur une touche pour retourner à l'accueil ...");
-            Console.ReadKey();
-            AfficherAccueil();
+            Dictionary<string, Parking.Parking> parkingsDisp = gestionFlotte.GetParkingsDisp();
+
+            if (parkingsDisp.Count == 0)
+                Console.WriteLine("Aucun Parking n'a de places libre");
+            else
+            {
+                foreach (KeyValuePair<string, Parking.Parking> parking in parkingsDisp)
+                {
+                    Console.WriteLine(before + parking.Key);
+                }
+            }
         }
 
+        private void AfficherPlacesDisp(Parking.Parking parking)
+        {
+            List<int> placesDisp = parking.GetPlacesDisp();
 
+            if (placesDisp.Count == 0)
+                Console.WriteLine("Aucune Place Disponible dans ce parking");
+            else
+            {
+                placesDisp.ForEach( num =>
+                {
+                    Console.WriteLine($"{num}- A{num}");
+                });
+            }
+        }
         /****** Fin Methodes Annexe *****/
     }
 }

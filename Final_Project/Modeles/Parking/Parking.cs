@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Final_Project.Parking
 {
@@ -41,6 +42,18 @@ namespace Final_Project.Parking
             while (!places[i].IsDisponible && i < NbPlaces) { i++; }
 
             return i == NbPlaces & !places[i - 1].IsDisponible ? null : places[i - 1];
+        }
+
+        public List<int> GetPlacesDisp()
+        {
+            List<int> placesDisp = new List<int>();
+            for (int i = 0; i < places.Length; i++) 
+            {
+                if (places[i].IsDisponible) 
+                    placesDisp.Add(i);
+            }
+
+            return placesDisp;
         }
 
     }

@@ -13,7 +13,7 @@ namespace Final_Project
         private readonly List<Vehicule> vehiculeList;
         private readonly List<Client> clientList;
         private readonly List<Trajet> trajetList;
-        private readonly List<Parking.Parking> parkingList;
+        private readonly Dictionary<string,Parking.Parking> parkingList;
 
 
 
@@ -22,7 +22,7 @@ namespace Final_Project
             vehiculeList = new List<Vehicule>();
             clientList = new List<Client>();
             trajetList = new List<Trajet>();
-            parkingList = new List<Parking.Parking>();
+            parkingList = new Dictionary<string, Parking.Parking>();
         }
 
 
@@ -36,7 +36,7 @@ namespace Final_Project
         public List<Client> ClientList => clientList;
         public List<Trajet> TrajetList => trajetList;
 
-        public List<Parking.Parking> ParkingList => parkingList;
+        public Dictionary<string, Parking.Parking> ParkingList => parkingList;
 
 
         /* Public Methodes */
@@ -146,18 +146,42 @@ namespace Final_Project
         }
 
 
+        /**
+         * Retourne les parkings non plein
+         * @Returns Dictionary <string, Parking.Parking>
+         */
+        public Dictionary<string, Parking.Parking> GetParkingsDisp()
+        {
+            Dictionary<string, Parking.Parking> parkingsDisp= new Dictionary<string, Parking.Parking>();
+
+            int i = 0;
+
+            while (i < parkingList.Count)
+            {
+                if (!parkingList.Values.ElementAt(i).IsPlein)
+                    parkingsDisp.Add(parkingList.Keys.ElementAt(i), parkingList.Values.ElementAt(i));
+                i++;
+            }
+
+            return parkingsDisp;
+        }
+
+
 
         /* Private Methodes */
 
+        /**
+         * Récupérer une place disponible dans un des parkings
+         */
         private Place GetPlaceDisp()
         {
             int i = 0;
-            while (i < parkingList.Count && parkingList[i].IsPlein) { i++; }
+            while (i < parkingList.Count && parkingList.Values.ElementAt(i).IsPlein) { i++; }
 
-            if (i==parkingList.Count && parkingList[i-1].IsPlein)
+            if (i==parkingList.Count && parkingList.Values.ElementAt(i).IsPlein)
                 throw new ErreurPlaceIndisp();
 
-            return i == parkingList.Count ? parkingList[i - 1].GetPlaceDisp() : parkingList[i].GetPlaceDisp();
+            return i == parkingList.Count ? parkingList.Values.ElementAt(i-1).GetPlaceDisp() : parkingList.Values.ElementAt(i).GetPlaceDisp();
         }
 
 
