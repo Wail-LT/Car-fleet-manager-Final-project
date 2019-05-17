@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Final_Project.Parking;
 
 namespace Final_Project
 {
@@ -453,7 +454,35 @@ namespace Final_Project
 
         private void AfficherRendreVehicule()
         {
-            //AfficherParking(); 
+            Parking.Parking parking = AfficherParking(); 
+            Place place = 
+        }
+
+
+        private Parking.Parking AfficherParking()
+        {
+            Console.WriteLine("Selectionnez un parking parmis la liste suivante :");
+            gestionFlotte.ParkingList.ForEach(parking =>
+            {
+                if (!parking.IsPlein)
+                    Console.WriteLine($"\t-{parking.Nom}");
+            });
+
+            string nParking = Console.ReadLine();
+            return controller.SelectParking(nParking, gestionFlotte.GetParkingsDisp);
+        }
+
+        private Place AfficherPlace(Parking.Parking p)
+        {
+            Console.WriteLine("Selectionnez une place parmis la liste suivante :");
+            for (int i = 0; i < p.Places.Length; i++)
+            {
+                if (p.Places[i].IsDisponible)
+                    Console.WriteLine($"\t-A{i}");
+            }
+
+            string nPlace = Console.ReadLine();
+            return controller.SelectPlace(nPlace, p.GetPlacesDisp);
         }
 
         /****** Fin Layout Rendre Vehicule ******/

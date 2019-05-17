@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using Final_Project.Exceptions;
 
 namespace Final_Project.Parking
 {
@@ -7,11 +9,13 @@ namespace Final_Project.Parking
     {
         private readonly Place[] places;
         public const int NbPlaces = 10;
+        private string nom;
 
-        public Parking(Action<Place[], Parking> remplirTab)
+        public Parking(Action<Place[], Parking> remplirTab, string nom)
         {
             places = new Place[NbPlaces];
             remplirTab(places, this);
+            this.nom = nom;
         }
 
         /* Properties */
@@ -28,6 +32,8 @@ namespace Final_Project.Parking
             }
         }
 
+        public string Nom { get => nom; set => nom = value; }
+
         /* Public Methodes */
 
         public Place GetPlace(int numPlace)
@@ -41,6 +47,18 @@ namespace Final_Project.Parking
             while (!places[i].IsDisponible && i < NbPlaces) { i++; }
 
             return i == NbPlaces & !places[i - 1].IsDisponible ? null : places[i - 1];
+        }
+
+        public List<Place> GetPlacesDisp()
+        {
+            List<Place> lPlaces = new List<Place>();
+            for (int i = 0; i < places.Length; i++)
+            {
+                if (places[i].IsDisponible)
+                    lPlaces.Add(places[i]);
+            }
+
+            return lPlaces.Count == 0 ? null : lPlaces;
         }
 
     }

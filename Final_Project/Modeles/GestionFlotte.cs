@@ -145,6 +145,19 @@ namespace Final_Project
                 trajetList[i].NTrajet = i;
         }
 
+        public List<Parking.Parking> GetParkingsDisp()
+        {
+            List<Parking.Parking> list = new List<Parking.Parking>();
+
+            parkingList.ForEach(parking =>
+            {
+                if (!parking.IsPlein)
+                    list.Add(parking);
+            });
+
+            return list;
+        }
+
 
 
         /* Private Methodes */
