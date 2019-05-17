@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Final_Project.Enums;
 using Final_Project.Exceptions;
-using Final_Project.Exceptions.Parking;
 using Final_Project.Exceptions.Trajet;
 using Final_Project.Exceptions.Voiture;
 using Final_Project.Exceptions.Voiture.Camion;
@@ -291,21 +290,5 @@ namespace Final_Project
             return nClient;
         }
 
-        public Parking.Parking SelectParking(string nParking, Func<List<Parking.Parking>> getListParking)
-        {
-            List<Parking.Parking> list = getListParking();
-
-            Parking.Parking result = null;
-
-            list.ForEach(parking =>
-            {
-                if (!parking.IsPlein && nParking.Equals(parking.Nom))
-                    result = parking;
-            });
-
-            if (result==null)
-                throw new ErreurNomParking();
-            return result;
-        }
     }
 }
