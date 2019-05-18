@@ -186,8 +186,7 @@ namespace Final_Project
         {
             Console.Clear();
             gestionFlotte.VehiculeList.ForEach(li => {
-                Console.Write("\t NUM :{0}  MARQUE :{1} , MODELE : {2} , KM :{3}, COULEUR : {4}, DISPONIBLE :{5},COUT :{6}", li.NVehicule, li.Marque, li.Modele, li.Km, li.Couleur, li.IsDisponible, li.Cout);
-                Console.WriteLine();
+                AfficherVehicule(li);
             });
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
@@ -212,12 +211,28 @@ namespace Final_Project
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherVehicule, e.Message);
             }
 
-            Console.Write("\t NUM :{0}  MARQUE :{1} , MODELE : {2} , KM :{3}, COULEUR : {4}, DISPONIBLE :{5},COUT :{6}",
-                choisi.NVehicule, choisi.Marque, choisi.Modele, choisi.Km, choisi.Couleur,
-                choisi.IsDisponible ? "oui" : "non", choisi.Cout);
-            Console.WriteLine();
+            AfficherVehicule(choisi);
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
+        }
+
+        public void AfficherVehicule(Vehicule vehicule)
+        {
+            if (vehicule is Voiture)
+
+            {
+                Console.WriteLine(((Voiture)vehicule).ToString());
+            }
+            if (vehicule is Moto)
+
+            {
+                Console.WriteLine(((Moto)vehicule).ToString());
+            }
+            if (vehicule is Camion)
+
+            {
+                Console.WriteLine(((Camion)vehicule).ToString());
+            }
         }
 
         /**
