@@ -214,6 +214,46 @@ namespace Final_Project
         /***** Fin Affichage *****/
 
 
+        public Parking.Parking SelectParking(string nParking, List<Parking.Parking> list)
+        {
+            if (list == null)
+                throw new NotImplementedException("Erreur Controller.SelectParking() : list null");
+
+            Parking.Parking result = null;
+
+            list.ForEach(parking =>
+            {
+                if (!parking.IsPlein && nParking.ToUpper().Equals(parking.Nom.ToUpper()))
+                    result = parking;
+            });
+
+            if (result == null)
+                throw new ErreurNomParking();
+            return result;
+        }
+
+        public Parking.Place SelectPlace(string nPlace, List<Place> listPlace)
+        {
+            if (listPlace == null)
+                throw new NotImplementedException("Erreur Controller.SelectPlace() : listPlace null");
+
+            int i = 0;
+            while (i < listPlace.Count && nPlace.ToUpper().Equals("A" + i))
+            {
+                i++;
+            }
+
+            if (i == listPlace.Count && !nPlace.ToUpper().Equals("A" + (i - 1)))
+                throw new ErreurNomParking();
+
+            return listPlace[i - 1];
+        }
+
+        public void RendreVehicule(string nTrajet, Parking.Parking parking, Place place)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /* Private Methodes */
 
@@ -290,40 +330,6 @@ namespace Final_Project
             if (!int.TryParse(strNClient, out nClient) || nClient > gestionFlotte.LastNumClient || nClient < 0)
                 throw new ErreurNClient();
             return nClient;
-        }
-
-        public Parking.Parking SelectParking(string nParking, List<Parking.Parking> list)
-        {
-            if (list == null)
-                throw new NotImplementedException("Erreur Controller.SelectParking() : list null");
-
-            Parking.Parking result = null;
-
-            list.ForEach(parking =>
-            {
-                if (!parking.IsPlein && nParking.ToUpper().Equals(parking.Nom.ToUpper()))
-                    result = parking;
-            });
-
-            if (result == null)
-                throw new ErreurNomParking();
-            return result;
-        }
-
-        public Parking.Place SelectPlace(string nPlace, List<Place> listPlace)
-        {
-            if(listPlace == null)
-                throw  new NotImplementedException("Erreur Controller.SelectPlace() : listPlace null");
-
-            int i = 0;
-            while (i < listPlace.Count && nPlace.ToUpper().Equals("A" + i)) {
-                i++;
-            }
-
-            if (i == listPlace.Count && ! nPlace.ToUpper().Equals("A" + (i-1)))
-                throw new ErreurNomParking();
-
-            return listPlace[i-1];
         }
     }
 }
