@@ -26,5 +26,9 @@ namespace Final_Project.Vehicules
         {
             Cout = capacite * 37.5;
         }
+        public override string ToString()
+        {
+            return base.ToString() + $"CAPACITE : {capacite}";
+        }
     }
 }

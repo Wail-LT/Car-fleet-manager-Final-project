@@ -84,7 +84,18 @@ namespace Final_Project.Vehicules
         {
             interventionList.RemoveAt(interventionList.Count-1);
         }
-
+        public override string ToString()
+        {
+            string disp = isDisponible ? "Oui" : "Non";
+            string trajet = NTrajet == -1 ? "Auncun" : nTrajet.ToString();
+            string toString = $" NUM : {NVehicule} \n MARQUE : {marque} \n MODELE : {modele} \n KM : {km}\n COULEUR : {couleur}\n DISPONIBLE : {disp}\n TRAJET ASSOCIE : {trajet}\n COUT : {cout}\n Intervention :\n";
+            interventionList.ForEach(interv =>
+            {
+                toString += $" \t{interv}, \n";
+            });
+            return toString;
+             
+        }
         /* Protected Methodes */
 
         protected abstract void CalculerCout();

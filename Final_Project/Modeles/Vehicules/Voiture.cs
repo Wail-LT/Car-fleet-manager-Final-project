@@ -40,5 +40,9 @@ namespace Final_Project.Vehicules
             else if (type == TypeVoiture.Monospace)
                 Cout = 1.25 * Puissance;
         }
+        public override string ToString()
+        {
+            return base.ToString() + $"NOMBRE DE PORTES : {nbPortes}\n PUISSANCE : {puissance}";
+        }
     }
 }

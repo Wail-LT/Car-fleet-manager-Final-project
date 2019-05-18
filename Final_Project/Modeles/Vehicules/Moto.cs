@@ -28,5 +28,9 @@ namespace Final_Project.Vehicules
         {
             Cout = cylindre * 0.95;
         }
+        public override string ToString()
+        {
+            return base.ToString() + $"CYLINDRE : {cylindre}";
+        }
     }
 }
