@@ -197,7 +197,7 @@ namespace Final_Project
             Vehicule choisi = null;
             Console.WriteLine("Saisir le numéro du véhicule que vous voulez afficher parmis la list suivante : ");
             gestionFlotte.VehiculeList.ForEach(vehicule => Console.Write($" {vehicule.NVehicule} |"));
-            Console.Write("\n Numéro client : ");
+            Console.Write("\n Numéro Véhicule : ");
             try
             {
                 choisi = controller.GetVehicule(Console.ReadLine());
