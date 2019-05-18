@@ -26,7 +26,7 @@ namespace Final_Project.Vehicules
 
         protected override void CalculerCout()
         {
-            Cout = cylindre * 0.95;
+            Cout = cylindre * 0.20;
         }
         public override string ToString()
         {

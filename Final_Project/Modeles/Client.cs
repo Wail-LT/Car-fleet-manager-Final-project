@@ -9,9 +9,9 @@ namespace Final_Project
     public class Client
     {
         private readonly int nClient;
-        private readonly string nom;
-        private readonly string prenom;
-        private readonly string adresse;
+        private string nom;
+        private string prenom;
+        private string adresse;
         private readonly List<EPermis> permisList;
         private double totalLoc;
 
@@ -30,16 +30,15 @@ namespace Final_Project
 
         /* Properties */
 
-        public string Nom => nom;
-        public string Prenom => prenom;
-        public string Adresse => adresse;
-
         public int NClient => nClient;
 
         public List<EPermis> PermisList => permisList;
 
         public double TotalLoc { get => totalLoc; set => totalLoc = value; }
         public static int NbClient { get => nbClient; set => nbClient = value; }
+        public string Nom { get => nom; set => nom = value; }
+        public string Prenom { get => prenom; set => prenom = value; }
+        public string Adresse { get => adresse; set => adresse = value; }
 
 
 

@@ -218,6 +218,7 @@ namespace Final_Project
 
         public void AfficherVehicule(Vehicule vehicule)
         {
+            Console.WriteLine("------------------------------------------------------------------------------------");
             if (vehicule is Voiture)
 
             {
@@ -233,6 +234,7 @@ namespace Final_Project
             {
                 Console.WriteLine(((Camion)vehicule).ToString());
             }
+            Console.WriteLine("------------------------------------------------------------------------------------");
         }
 
         /**

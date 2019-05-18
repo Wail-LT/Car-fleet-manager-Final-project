@@ -14,7 +14,7 @@ namespace Final_Project
         private readonly int nTrajet;
         private readonly Client client;
         private readonly Vehicule vehicule;
-        private readonly int distance;
+        private int distance;
         private double cout;
 
         private static int nbTrajet = 0;
@@ -35,12 +35,20 @@ namespace Final_Project
 
         public int NTrajet => nTrajet;
 
-        public int Distance => distance;
         public Client Client => client;
         public double Cout => cout;
         public Vehicule Vehicule => vehicule;
 
         public static int NbTrajet { get => nbTrajet; set => nbTrajet = value; }
+        public int Distance
+        {
+            get => distance;
+            set
+            {
+                distance = value;
+                CalculerCout();
+            }
+        }
 
 
         /* Public Methodes */
