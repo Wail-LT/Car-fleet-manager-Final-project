@@ -25,11 +25,11 @@ namespace Final_Project
             this.client = client;
             this.vehicule = vehicule;
             this.distance = distance;
-            Console.WriteLine(vehicule.ToString());
             CalculerCout();
             this.client.TotalLoc += cout;
             this.vehicule.IsDisponible = false;
             this.vehicule.NTrajet = nTrajet;
+            this.vehicule.LibPlace();
         }
 
 
@@ -58,7 +58,7 @@ namespace Final_Project
         public void Supprimer()
         {
             Vehicule.Km -= distance;
-            client.TotalLoc -= cout + vehicule.Cout;
+            client.TotalLoc -= cout;
         }
 
 

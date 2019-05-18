@@ -55,7 +55,7 @@ namespace Final_Project
         }
 
         /**
-         * Supprimer un Permis au client
+         * LibPlace un Permis au client
          * @Params permis   EPermis : permis à supprimer
          */
         public void SupPermis(EPermis permis)

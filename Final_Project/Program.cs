@@ -31,10 +31,5 @@ namespace Final_Project
             Console.Read();
 
         }
-
-        static int test()
-        {
-            return v++;
-        }
     }
 }

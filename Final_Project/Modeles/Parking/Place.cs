@@ -17,5 +17,7 @@ namespace Final_Project.Parking
 
         public Vehicule Vehicule { get => vehicule; set => vehicule = value; }
         public bool IsDisponible => vehicule == null;
+
+        public Parking Parking => parking; 
     }
 }

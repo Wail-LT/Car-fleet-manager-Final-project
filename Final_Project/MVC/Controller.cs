@@ -136,7 +136,13 @@ namespace Final_Project
             if (!int.TryParse(strDistance, out distance) || distance<=0)
                 throw new ErreurDistance();
 
-            gestionFlotte.TrajetList.Add(new Trajet(GetClient(strNClient), GetVehicule(strNVehicule), distance));
+            Vehicule v = GetVehicule(strNVehicule);
+
+            if(!v.IsDisponible)
+                throw new NotImplementedException("ERREUR : Le vehicule n'est pas disponible");
+            gestionFlotte.TrajetList.Add(new Trajet(GetClient(strNClient), v, distance));
+            v.IsDisponible = false;
+            v.NTrajet = Trajet.NbTrajet;
         }
 
         /***** Fin Ajout *****/
@@ -146,19 +152,19 @@ namespace Final_Project
         /***** Suppression *****/
 
         /**
-         * Supprimer un client à la liste du gestionnaire de flotte
+         * LibPlace un client à la liste du gestionnaire de flotte
          * @Params nClient int : numéro du client à supprimer
          */
         public void SupClient(string strnClient)
         {
             int nVehicule = CheckNClient(strnClient);
 
-            gestionFlotte.VehiculeList.Find(vehicule => vehicule.NVehicule == nVehicule).Supprimer();
+            gestionFlotte.VehiculeList.Find(vehicule => vehicule.NVehicule == nVehicule).LibPlace();
             gestionFlotte.VehiculeList.RemoveAll(vehicule => vehicule.NVehicule == nVehicule);
         }
 
         /**
-         * Supprimer un véhicule à la liste du gestionnaire de flotte
+         * LibPlace un véhicule à la liste du gestionnaire de flotte
          * @Params nVehicule int : numéro du véhicule à supprimer
          */
         public void SupVehicule(string strnVehicule)
@@ -167,7 +173,7 @@ namespace Final_Project
         }
 
         /**
-         * Supprimer un trajet à la liste du gestionnaire de flotte
+         * LibPlace un trajet à la liste du gestionnaire de flotte
          * @Params nTrajet int : numéro du trajet à supprimer
          */
         public void SupTrajet(string strnTrajet)
@@ -246,8 +252,9 @@ namespace Final_Project
 
             if (i == listPlace.Count && !nPlace.ToUpper().Equals("A" + (i - 1)))
                 throw new ErreurNomParking();
-
-            return listPlace[i - 1];
+            if(i == listPlace.Count)
+                return listPlace[i - 1];
+            return listPlace[i];
         }
 
         public void RendreVehicule(string strNTrajet, Place place)

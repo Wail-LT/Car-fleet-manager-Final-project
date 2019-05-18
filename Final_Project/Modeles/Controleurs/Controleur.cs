@@ -31,6 +31,7 @@ namespace Final_Project.Controleurs
             v.IsDisponible = true;
             v.Km += trajetAssocie.Distance;
             v.NTrajet = -1;
+            v.Place = gestionFlotte.GetPlaceDisp();
         }
     }
 }

@@ -68,10 +68,13 @@ namespace Final_Project.Vehicules
 
         /* Public Methodes */
 
-        public void Supprimer()
+        public void LibPlace()
         {
-            place.Vehicule = null;
-            place = null;
+            if (place != null)
+            {
+                place.Vehicule = null;
+                place = null;
+            }
         }
 
         public void AddIntervention(Intervention intervention)
@@ -87,7 +90,7 @@ namespace Final_Project.Vehicules
         {
             string disp = isDisponible ? "Oui" : "Non";
             string trajet = NTrajet == -1 ? "Auncun" : nTrajet.ToString();
-            string toString = $" NUM : {NVehicule} \n MARQUE : {marque} \n MODELE : {modele} \n KM : {km}\n COULEUR : {couleur}\n DISPONIBLE : {disp}\n TRAJET ASSOCIE : {trajet}\n COUT : {cout}\n Intervention :\n";
+            string toString = $" NUM : {NVehicule} \n MARQUE : {marque} \n MODELE : {modele} \n KM : {km}\n COULEUR : {couleur}\n DISPONIBLE : {disp}\n TRAJET ASSOCIE : {trajet}\n COUT : {cout}\n PARKING : {place.Parking.Nom}\n Intervention :\n";
             interventionList.ForEach(interv =>
             {
                 toString += $" \t{interv}, \n";

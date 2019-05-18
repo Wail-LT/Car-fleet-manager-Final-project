@@ -299,11 +299,11 @@ namespace Final_Project
             Console.WriteLine("Ajout / Suppression ");
             Console.WriteLine("Choisissez parmi ces choix : ");
             Console.WriteLine("     1- Ajouter client");
-            Console.WriteLine("     2- Supprimer client");
+            Console.WriteLine("     2- LibPlace client");
             Console.WriteLine("     3- Ajouter trajet");
-            Console.WriteLine("     4- Supprimer trajet");
+            Console.WriteLine("     4- LibPlace trajet");
             Console.WriteLine("     5- Ajouter véhicule");
-            Console.WriteLine("     6- Supprimer véhicule");
+            Console.WriteLine("     6- LibPlace véhicule");
             Console.WriteLine("     #- Accueil");
             string saisie = Console.ReadLine();
             switch (saisie)
@@ -367,7 +367,7 @@ namespace Final_Project
         }
 
         /**
-        * Supprimer un Clients
+        * LibPlace un Clients
         */
         private void SupClient()
         {
@@ -444,7 +444,7 @@ namespace Final_Project
         }
 
         /**
-        * Supprimer un vehicule
+        * LibPlace un vehicule
         */
         private void SupVehicule()
         {
@@ -485,7 +485,7 @@ namespace Final_Project
         }
 
         /**
-        * Supprimer un Trajet
+        * LibPlace un Trajet
         */
         private void SupTrajet()
         {
@@ -523,7 +523,7 @@ namespace Final_Project
                 Place place = SaisirPlace(parking);
 
                 controller.RendreVehicule(nTrajet, place);
-
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil);
             }
             catch (Exception e)
             {
