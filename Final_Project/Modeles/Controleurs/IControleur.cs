@@ -2,7 +2,7 @@
 
 namespace Final_Project.Controleurs
 {
-    public interface IController
+    public interface IControleur
     {
         void Verifier(Vehicule v);
     }

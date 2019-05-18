@@ -46,7 +46,11 @@ namespace Final_Project.Parking
             int i = 0;
             while (!places[i].IsDisponible && i < NbPlaces) { i++; }
 
-            return i == NbPlaces & !places[i - 1].IsDisponible ? null : places[i - 1];
+            if (i == NbPlaces && !places[i - 1].IsDisponible)
+                return null;
+            if (i == NbPlaces)
+                return places[i - 1];
+            return places[i];
         }
 
         public List<Place> GetPlacesDisp()

@@ -49,7 +49,7 @@ namespace Final_Project
 
             srtPermisList.ForEach(x => StrToEPermis(x, permisList));
 
-            gestionFlotte.AjoutClient(new Client(nom, prenom, adresse, permisList));
+            gestionFlotte.ClientList.Add(new Client(nom, prenom, adresse, permisList));
 
         }
 
@@ -132,17 +132,11 @@ namespace Final_Project
          */
         public void AjoutTrajet(string strNClient, string strNVehicule, string strDistance)
         {
-            int nClient = -1;
-            int nVehicule = -1;
             int distance = -1;
-
-            nClient = CheckNClient(strNClient);
-            nVehicule = CheckNVehicule(strNVehicule);
-
-            if (!int.TryParse(strDistance, out distance))
+            if (!int.TryParse(strDistance, out distance) || distance<=0)
                 throw new ErreurDistance();
 
-            gestionFlotte.AjoutTrajet(new Trajet(gestionFlotte.GetClient(nClient), gestionFlotte.GetVehicule(nVehicule), distance));
+            gestionFlotte.TrajetList.Add(new Trajet(GetClient(strNClient), GetVehicule(strNVehicule), distance));
         }
 
         /***** Fin Ajout *****/
@@ -157,7 +151,10 @@ namespace Final_Project
          */
         public void SupClient(string strnClient)
         {
-            gestionFlotte.SupClient(CheckNClient(strnClient));
+            int nVehicule = CheckNClient(strnClient);
+
+            gestionFlotte.VehiculeList.Find(vehicule => vehicule.NVehicule == nVehicule).Supprimer();
+            gestionFlotte.VehiculeList.RemoveAll(vehicule => vehicule.NVehicule == nVehicule);
         }
 
         /**
@@ -166,7 +163,7 @@ namespace Final_Project
          */
         public void SupVehicule(string strnVehicule)
         {
-            gestionFlotte.SupVehicule(CheckNVehicule(strnVehicule));
+            gestionFlotte.ClientList.RemoveAll(client => client.NClient == CheckNVehicule(strnVehicule));
         }
 
         /**
@@ -175,7 +172,10 @@ namespace Final_Project
          */
         public void SupTrajet(string strnTrajet)
         {
-            gestionFlotte.SupTrajet(CheckNTrajet(strnTrajet));
+            int nTrajet = CheckNTrajet(strnTrajet);
+
+            gestionFlotte.TrajetList.Find(trajet => trajet.NTrajet == nTrajet).Supprimer();
+            gestionFlotte.TrajetList.RemoveAll(trajet => trajet.NTrajet == nTrajet);
         }
 
         /***** Fin Suppression *****/
@@ -189,7 +189,7 @@ namespace Final_Project
         */
         public Client GetClient(string strnClient)
         {
-            return gestionFlotte.GetClient(CheckNClient(strnClient));
+            return gestionFlotte.ClientList.Find(client => client.NClient == CheckNClient(strnClient));
         }
 
         /**
@@ -199,7 +199,7 @@ namespace Final_Project
          */
         public Vehicule GetVehicule(string strnVehicule)
         {
-            return gestionFlotte.GetVehicule(CheckNVehicule(strnVehicule));
+            return gestionFlotte.VehiculeList.Find(vehicule => vehicule.NVehicule == CheckNVehicule(strnVehicule));
         }
 
         /**
@@ -209,7 +209,7 @@ namespace Final_Project
          */
         public Trajet GetTrajet(string strnTrajet)
         {
-            return gestionFlotte.GetTrajet(CheckNTrajet(strnTrajet));
+            return gestionFlotte.TrajetList.Find(trajet => trajet.NTrajet == (CheckNTrajet(strnTrajet)));
         }
 
         /***** Fin Affichage *****/
@@ -256,6 +256,13 @@ namespace Final_Project
             Vehicule vehicule = gestionFlotte.TrajetList.Find(trajet => trajet.NTrajet == nTrajet).Vehicule;
 
             vehicule.Place = place;
+
+            if(vehicule is Voiture)
+                gestionFlotte.ControleurV.Verifier(vehicule);
+            else if (vehicule is Moto)
+                gestionFlotte.ControleurM.Verifier(vehicule);
+            else
+                gestionFlotte.ControleurC.Verifier(vehicule);
         }
 
 
@@ -305,7 +312,7 @@ namespace Final_Project
         {
             int nVehicule = -1;
             if (!int.TryParse(strNVehicule, out nVehicule) ||
-                gestionFlotte.VehiculeList.Exists(vehicule => vehicule.NVehicule == nVehicule)) 
+                !gestionFlotte.VehiculeList.Exists(vehicule => vehicule.NVehicule == nVehicule)) 
                 throw new ErreurNVehicule();
             return nVehicule;
         }
@@ -319,7 +326,7 @@ namespace Final_Project
         {
             int nTrajet = -1;
             if (!int.TryParse(strNTrajet, out nTrajet) ||
-                gestionFlotte.TrajetList.Exists(trajet => trajet.NTrajet == nTrajet))
+                !gestionFlotte.TrajetList.Exists(trajet => trajet.NTrajet == nTrajet))
                 throw new ErreurNTrajet();
             return nTrajet;
         }
@@ -333,7 +340,7 @@ namespace Final_Project
         {
             int nClient = -1;
             if (!int.TryParse(strNClient, out nClient) ||
-                gestionFlotte.ClientList.Exists(client => client.NClient == nClient))
+                !gestionFlotte.ClientList.Exists(client => client.NClient == nClient))
                 throw new ErreurNClient();
             return nClient;
         }

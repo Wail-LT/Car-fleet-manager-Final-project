@@ -25,7 +25,9 @@ namespace Final_Project
             this.client = client;
             this.vehicule = vehicule;
             this.distance = distance;
+            Console.WriteLine(vehicule.ToString());
             CalculerCout();
+            this.client.TotalLoc += cout;
             this.vehicule.IsDisponible = false;
             this.vehicule.NTrajet = nTrajet;
         }

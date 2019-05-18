@@ -39,7 +39,6 @@ namespace Final_Project.Vehicules
             this.place = null;
             nTrajet = -1;
             interventionList = new List<Intervention>();
-            CalculerCout();
         }
 
         

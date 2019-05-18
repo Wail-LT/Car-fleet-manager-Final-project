@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Final_Project.Controleurs;
+using Final_Project.Enums;
 using Final_Project.Exceptions.Parking;
 
 namespace Final_Project
@@ -14,8 +16,9 @@ namespace Final_Project
         private readonly List<Client> clientList;
         private readonly List<Trajet> trajetList;
         private readonly List<Parking.Parking> parkingList;
-
-
+        private readonly Controleurs.IControleur controleurV;
+        private readonly Controleurs.IControleur controleurC;
+        private readonly Controleurs.IControleur controleurM;
 
         public GestionFlotte()
         {
@@ -23,8 +26,45 @@ namespace Final_Project
             clientList = new List<Client>();
             trajetList = new List<Trajet>();
             parkingList = new List<Parking.Parking>();
+            controleurC = new Controleur(this);
+            controleurM = new Controleur(this);
+            controleurV = new Controleur(this);
+            InitParkings();
+            init();
         }
 
+        public void init()
+        {
+            AjoutVehicule(new Voiture("Peugeot", "407", 45000,"rouge", 5, 250, TypeVoiture.Berline));
+            AjoutVehicule(new Voiture("Renault", "clio", 5000, "rouge", 3, 150, TypeVoiture.Break));
+            AjoutVehicule(new Voiture("Renault", "Megane", 0, "bleu", 3, 90, TypeVoiture.Break));
+            AjoutVehicule(new Voiture("Peugeot", "208", 0, "bleu nuit", 3, 90, TypeVoiture.Break));
+            AjoutVehicule(new Voiture("Peugeot", "807", 0, "violet", 5, 150, TypeVoiture.Monospace));
+            List<EPermis> permis = new List<EPermis>();
+            permis.Add(EPermis.A);
+            permis.Add(EPermis.B);
+            clientList.Add(new Client("Latif", "Waïl", "18 square jules cesar 95120", permis));
+            permis.Remove(EPermis.B);
+            clientList.Add(new Client("Dechane", "Sanaâ", "15 rue feulifeu argentueil", permis));
+            clientList.Add(new Client("Schaub", "Yannis", "Pierrefitte", permis));
+            clientList.Add(new Client("El-Haddad", "Imrane", "Creil", permis));
+            clientList.Add(new Client("famille test", "test", "test ville", permis));
+
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "407"));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Dechane"), vehiculeList.Find(vehicule => vehicule.Modele == "clio"), 1500));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "clio"));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Schaub"), vehiculeList.Find(vehicule => vehicule.Modele == "208"),8500));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "208"));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "El-Haddad"), vehiculeList.Find(vehicule => vehicule.Modele == "807"), 250));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "807"));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "famille test"), vehiculeList.Find(vehicule => vehicule.Modele == "Megane"), 5000));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "Megane"));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "407"));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "407"));
+        }
 
         /* Properties */
 
@@ -34,38 +74,13 @@ namespace Final_Project
 
         public List<Parking.Parking> ParkingList => parkingList;
 
+        public IControleur ControleurV => controleurV;
+
+        public IControleur ControleurC => controleurC;
+
+        public IControleur ControleurM => controleurM;
 
         /* Public Methodes */
-
-        /**
-         * recupérer un vehicule de la liste de véhicules du gestionnaire de flotte
-         * @Params  nVehicule   int     : Numéro du vehicule à récupérer
-         * @Returns Vehicule : Véhicule recherché
-         */
-        public Vehicule GetVehicule(int nVehicule)
-        {
-            return vehiculeList[nVehicule];
-        }
-
-        /**
-         * recupérer un trajet de la liste de trajets
-         * @Params  nTrajet   int     : Numéro du trajet à récupérer
-         * @Returns Trajet  : Trajet recherché
-         */
-        public Trajet GetTrajet(int nTrajet)
-        {
-            return trajetList[nTrajet];
-        }
-
-        /**
-         * recupérer un client de la liste de clients
-         * @Params  nClient   int     : Numéro du client à récupérer
-         * @Returns Client  : Client recherché
-         */
-        public Client GetClient(int nClient)
-        {
-            return clientList[nClient];
-        }
 
         /**
          * Ajouter un vehicule à la liste de véhicule du gestionnaire de flotte
@@ -75,57 +90,6 @@ namespace Final_Project
         {
             vehicule.Place = GetPlaceDisp();
             vehiculeList.Add(vehicule);
-        }
-
-        /**
-         * Ajouter un client à la liste de client
-         * @Params client   Client : le client à ajouter
-         */
-        public void AjoutClient(Client client)
-        {
-            clientList.Add(client);
-        }
-
-        /**
-         * Ajouter un trajet à la liste de client
-         * @Params trajet   Trajet : le trajet à ajouter
-         */
-        public void AjoutTrajet(Trajet trajet)
-        {
-            trajetList.Add(trajet);
-        }
-
-
-        /**
-         * Supprime un vehicule de la liste de véhicule du gestionnaire de flotte
-         * @Params nVehicule   int : numero du vehicule à supprimer
-         */
-        public void SupVehicule(int nVehicule)
-        {
-            vehiculeList[nVehicule].Supprimer();
-
-            vehiculeList.RemoveAll(vehicule => vehicule.NVehicule == nVehicule);
-
-        }
-
-        /**
-         * Supprimer un client à la liste du gestionnaire de flotte
-         * @Params nClient int : numéro du client à supprimer
-         */
-        public void SupClient(int nClient)
-        {
-            clientList.RemoveAll(client => client.NClient == nClient);
-        }
-
-        /**
-         * Supprimer un trajet à la liste du gestionnaire de flotte
-         * @Params nTrajet int : numéro du trajet à supprimer
-         */
-        public void SupTrajet(int nTrajet)
-        {
-            trajetList[nTrajet].Supprimer();
-
-            trajetList.RemoveAll(trajet => trajet.NTrajet == nTrajet);
         }
 
         public List<Parking.Parking> GetParkingsDisp()
@@ -141,11 +105,7 @@ namespace Final_Project
             return list;
         }
 
-
-
-        /* Private Methodes */
-
-        private Place GetPlaceDisp()
+        public Place GetPlaceDisp()
         {
             int i = 0;
             while (i < parkingList.Count && parkingList[i].IsPlein) { i++; }
@@ -156,6 +116,18 @@ namespace Final_Project
             return i == parkingList.Count ? parkingList[i - 1].GetPlaceDisp() : parkingList[i].GetPlaceDisp();
         }
 
+
+        /* Private Methodes */
+
+        private void InitParkings()
+        {
+            parkingList.Add(new Parking.Parking(Utils.Delegate.RemplirTabPlaceDisp, "Roissy"));
+            for (int i = 1; i < 21; i++)
+            {
+                parkingList.Add(new Parking.Parking(Utils.Delegate.RemplirTabPlaceDisp, $"Paris {i}"));
+            }
+            parkingList.Add(new Parking.Parking(Utils.Delegate.RemplirTabPlaceDisp, "Orly"));
+        }
 
     }
 }

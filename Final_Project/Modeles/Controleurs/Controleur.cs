@@ -4,7 +4,7 @@ using Final_Project.Vehicules;
 
 namespace Final_Project.Controleurs
 {
-    public class Controleur : IController
+    public class Controleur : IControleur
     {
         private Random random;
         private GestionFlotte gestionFlotte;
@@ -22,13 +22,15 @@ namespace Final_Project.Controleurs
             {
             }
 
+            Trajet trajetAssocie = gestionFlotte.TrajetList.Find(trajet => trajet.NTrajet == v.NTrajet);
+
             Intervention intervention;
             Intervention.TryParse(random.Next(1, 4).ToString(), out intervention);
+
             v.AddIntervention(intervention);
             v.IsDisponible = true;
-            v.Km += gestionFlotte.TrajetList.Find(trajet => trajet.NTrajet == v.NTrajet).Distance;
+            v.Km += trajetAssocie.Distance;
             v.NTrajet = -1;
-            
         }
     }
 }

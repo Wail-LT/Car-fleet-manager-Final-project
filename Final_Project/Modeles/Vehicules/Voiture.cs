@@ -21,6 +21,7 @@ namespace Final_Project.Vehicules
             this.nbPortes = nbPortes;
             this.puissance = puissance;
             this.type = type;
+            CalculerCout();
         }
 
         /* Properties */
@@ -42,7 +43,7 @@ namespace Final_Project.Vehicules
         }
         public override string ToString()
         {
-            return base.ToString() + $"NOMBRE DE PORTES : {nbPortes}\n PUISSANCE : {puissance}";
+            return base.ToString() + $" NOMBRE DE PORTES : {nbPortes}\n PUISSANCE : {puissance}";
         }
     }
 }

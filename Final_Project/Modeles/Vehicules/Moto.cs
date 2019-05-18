@@ -17,6 +17,7 @@ namespace Final_Project.Vehicules
         public Moto(string marque, string modele, int km, string couleur, int cylindre) : base(marque, modele, km, couleur)
         {
             this.cylindre = cylindre;
+            CalculerCout();
         }
 
 

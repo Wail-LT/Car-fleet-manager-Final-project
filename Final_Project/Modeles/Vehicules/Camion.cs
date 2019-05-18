@@ -16,6 +16,7 @@ namespace Final_Project.Vehicules
         public Camion(string marque, string modele, int km, string couleur, int capacite) : base(marque, modele, km, couleur)
         {
             this.capacite = capacite;
+            CalculerCout();
         }
 
         /* Properties */

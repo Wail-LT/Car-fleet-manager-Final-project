@@ -154,26 +154,29 @@ namespace Final_Project
             Console.Clear();
             Console.WriteLine("Saisir le numéro du client que vous voulez afficher parmis la list suivante :");
             gestionFlotte.ClientList.ForEach(client=>Console.Write($" {client.NClient} |"));
+
             Console.Write("\n Numéro Client : ");
             try
             {
                 choisi = controller.GetClient(Console.ReadLine());
+
+                AfficherClient(choisi);
+
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
             }
             catch (Exception e)
             {
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherClient, e.Message);
             }
-
-            AfficherClient(choisi);
-
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         public void AfficherClient(Client client)
         {
             Console.WriteLine("------------------------------------------------------------------------------------");
-            Console.Write($" ID :{client.NClient} \n NOM :{client.Nom} \n PRENOM : {client.Prenom} \n ADRESSE : {client.Adresse} \n PERMIS : ");
+            Console.Write($" ID : {client.NClient} \n NOM : {client.Nom} \n PRENOM : {client.Prenom} \n ADRESSE : {client.Adresse} \n PERMIS : ");
+
             client.PermisList.ForEach(permis => Console.Write(permis + ", "));
+
             Console.WriteLine($"\n COÛT TOTAL DES LOCATIONS : {client.TotalLoc}");
             Console.WriteLine("------------------------------------------------------------------------------------");
         }
@@ -205,15 +208,15 @@ namespace Final_Project
             try
             {
                 choisi = controller.GetVehicule(Console.ReadLine());
+           
+                AfficherVehicule(choisi);
+
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
             }
             catch (Exception e)
             {
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherVehicule, e.Message);
             }
-
-            AfficherVehicule(choisi);
-
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         public void AfficherVehicule(Vehicule vehicule)
@@ -263,15 +266,15 @@ namespace Final_Project
             try
             {
                 choisi = controller.GetTrajet(Console.ReadLine());
+
+                AfficherTrajet(choisi);
+
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
             }
             catch (Exception e)
             {
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherTrajet, e.Message);
             }
-
-            AfficherTrajet(choisi);
-
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         private void AfficherTrajet(Trajet trajet)
@@ -346,14 +349,21 @@ namespace Final_Project
             Console.WriteLine("Saisir l'adresse du client");
             string adresse = Console.ReadLine();
             Console.Write("Saisir les permis parmi cette liste (séparé chaque permis par une virgule) { ");
+
             AfficherEnum<EPermis>();
+
             Console.WriteLine(" } :");
             string permis = Console.ReadLine();
             List<string> resultP = permis.Split(',').ToList();
-
-            controller.AjoutClient(nom, prenom, adresse, resultP);
-
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
+            try
+            {
+                controller.AjoutClient(nom, prenom, adresse, resultP);
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
+            }
+            catch (Exception e)
+            {
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AjoutClient, e.Message);
+            }
         }
 
         /**
@@ -366,13 +376,13 @@ namespace Final_Project
             try
             {
                 controller.SupClient(Console.ReadLine());
+
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
             }
             catch (Exception e)
             {
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", SupClient, e.Message);
             }
-
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -396,34 +406,41 @@ namespace Final_Project
             Console.WriteLine("     2- Moto");
             Console.WriteLine("     3- Camion");
             string choix = Console.ReadLine();
-            switch (choix)
+            try
             {
-                case "1":
-                    Console.WriteLine("Saisir le nombre de portes de la voiture");
-                    string nbPorte = Console.ReadLine();
-                    Console.WriteLine("Saisir la puissance de la voiture");
-                    string puissance = Console.ReadLine();
-                    Console.WriteLine("Saisir le type de la voiture parmi cette liste");
-                    AfficherEnum<TypeVoiture>();
-                    string type = Console.ReadLine();
-                    controller.AjoutVoiture(couleur, km, marque, modele, nbPorte, puissance, type);
-                    break;
-                case "2":
-                    Console.WriteLine("Saisir le cylindre de la moto");
-                    string cylindre = Console.ReadLine();
-                    controller.AjoutMoto(couleur, km, marque, modele, cylindre);
-                    break;
-                case "3":
-                    Console.WriteLine("Saisir la capacité du camion");
-                    string cap = Console.ReadLine();
-                    controller.AjoutCamion(couleur, km, marque, modele, cap);
-                    break;
-                default:
-                    Console.WriteLine("Default case");
-                    break;
-            }
+                switch (choix)
+                {
+                    case "1":
+                        Console.WriteLine("Saisir le nombre de portes de la voiture");
+                        string nbPorte = Console.ReadLine();
+                        Console.WriteLine("Saisir la puissance de la voiture");
+                        string puissance = Console.ReadLine();
+                        Console.WriteLine("Saisir le type de la voiture parmi cette liste");
+                        AfficherEnum<TypeVoiture>();
+                        string type = Console.ReadLine();
+                        controller.AjoutVoiture(couleur, km, marque, modele, nbPorte, puissance, type);
+                        break;
+                    case "2":
+                        Console.WriteLine("Saisir le cylindre de la moto");
+                        string cylindre = Console.ReadLine();
+                        controller.AjoutMoto(couleur, km, marque, modele, cylindre);
+                        break;
+                    case "3":
+                        Console.WriteLine("Saisir la capacité du camion");
+                        string cap = Console.ReadLine();
+                        controller.AjoutCamion(couleur, km, marque, modele, cap);
+                        break;
+                    default:
+                        Console.WriteLine("Default case");
+                        break;
+                }
 
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
+            }
+            catch (Exception e)
+            {
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AjoutVehicule, e.Message);
+            }
         }
 
         /**
@@ -436,13 +453,12 @@ namespace Final_Project
             try
             {
                 controller.SupVehicule(Console.ReadLine());
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
             }
             catch (Exception e)
             {
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", SupVehicule, e.Message);
             }
-
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
         /**
@@ -456,9 +472,16 @@ namespace Final_Project
             string numVehi = Console.ReadLine();
             Console.WriteLine("Saisir la distance de ce trajet");
             string dist = Console.ReadLine();
-            controller.AjoutTrajet(numClient, numVehi, dist);
+            try
+            {
+                controller.AjoutTrajet(numClient, numVehi, dist);
 
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
+            }
+            catch (Exception e)
+            {
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AjoutTrajet, e.Message);
+            }
         }
 
         /**
@@ -471,13 +494,12 @@ namespace Final_Project
             try
             {
                 controller.SupTrajet(Console.ReadLine());
+                EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil);
             }
             catch (Exception e)
             {
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", SupTrajet, e.Message);
             }
-
-            EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil);
         }
 
         /****** Fin Layout Ajout/Sup ******/
@@ -493,6 +515,7 @@ namespace Final_Project
         {
             try
             {
+                Console.Clear();
                 Console.WriteLine("Saisir le numero de trajet concernée");
                 string nTrajet = Console.ReadLine();
                 Parking.Parking parking = SaisirParking();
@@ -523,7 +546,15 @@ namespace Final_Project
                 });
 
                 string nParking = Console.ReadLine();
-                return controller.SelectParking(nParking, gestionFlotte.GetParkingsDisp());
+                try
+                {
+                    return controller.SelectParking(nParking, lParking);
+                }
+                catch (Exception e)
+                {
+                    EndFunction("Veuillez appuyez sur une touche pour continuer ...", null, e.Message);
+                    return SaisirParking();
+                }
             }
 
             return null;
@@ -539,7 +570,16 @@ namespace Final_Project
             }
 
             string nPlace = Console.ReadLine();
-            return controller.SelectPlace(nPlace, p.GetPlacesDisp());
+
+            try
+            {
+                return controller.SelectPlace(nPlace, p.GetPlacesDisp());
+            }
+            catch (Exception e)
+            {
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", null, e.Message);
+                return SaisirPlace(p);
+            }
         }
 
 
