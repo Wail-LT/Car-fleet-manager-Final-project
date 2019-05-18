@@ -11,34 +11,36 @@ namespace Final_Project
 {
     public class Trajet
     {
-        private int nTrajet;
+        private readonly int nTrajet;
         private readonly Client client;
         private readonly Vehicule vehicule;
         private readonly int distance;
         private double cout;
 
+        private static int nbTrajet = 0;
 
-        public Trajet(int nTrajet, Client client, Vehicule vehicule, int distance)
+        public Trajet(Client client, Vehicule vehicule, int distance)
         {
-            this.nTrajet = nTrajet;
+            this.nTrajet = ++nbTrajet;
             this.client = client;
             this.vehicule = vehicule;
             this.distance = distance;
             CalculerCout();
             this.vehicule.IsDisponible = false;
+            this.vehicule.NTrajet = nTrajet;
         }
 
 
         /* Properties */
 
- 
-
-        public int NTrajet { get => nTrajet; set => nTrajet = value; }
+        public int NTrajet => nTrajet;
 
         public int Distance => distance;
         public Client Client => client;
         public double Cout => cout;
         public Vehicule Vehicule => vehicule;
+
+        public static int NbTrajet { get => nbTrajet; set => nbTrajet = value; }
 
 
         /* Public Methodes */

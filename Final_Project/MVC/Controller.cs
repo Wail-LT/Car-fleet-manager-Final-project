@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Final_Project.Enums;
 using Final_Project.Exceptions;
@@ -77,7 +78,7 @@ namespace Final_Project
             if (!int.TryParse(puissance, out iPuissances) || iPuissances < 70 || iPuissances > 650)
                 throw new ErreurPuissance();
 
-            gestionFlotte.AjoutVehicule(new Voiture(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iNbPortes, iPuissances, typeV));
+            gestionFlotte.AjoutVehicule(new Voiture(marque, modele, iKm, couleur, iNbPortes, iPuissances, typeV));
         }
 
         /**
@@ -98,7 +99,7 @@ namespace Final_Project
             if (!int.TryParse(capacite, out iCapacite) || iCapacite < 2.75 || iCapacite > 22)
                 throw new ErreurCapacite();
 
-            gestionFlotte.AjoutVehicule(new Camion(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iCapacite));
+            gestionFlotte.AjoutVehicule(new Camion(marque, modele, iKm, couleur, iCapacite));
         }
 
         /**
@@ -119,7 +120,7 @@ namespace Final_Project
             if (!int.TryParse(cylindre, out iCylindre) || iCylindre < 50 || iCylindre > 1500)
                 throw new ErreurCylindre();
 
-            gestionFlotte.AjoutVehicule(new Moto(gestionFlotte.LastNumVehicule + 1, marque, modele, iKm, couleur, iCylindre));
+            gestionFlotte.AjoutVehicule(new Moto(marque, modele, iKm, couleur, iCylindre));
         }
 
 
@@ -141,7 +142,7 @@ namespace Final_Project
             if (!int.TryParse(strDistance, out distance))
                 throw new ErreurDistance();
 
-            gestionFlotte.AjoutTrajet(new Trajet(gestionFlotte.LastNumTrajet + 1, gestionFlotte.GetClient(nClient), gestionFlotte.GetVehicule(nVehicule), distance));
+            gestionFlotte.AjoutTrajet(new Trajet(gestionFlotte.GetClient(nClient), gestionFlotte.GetVehicule(nVehicule), distance));
         }
 
         /***** Fin Ajout *****/
@@ -249,9 +250,12 @@ namespace Final_Project
             return listPlace[i - 1];
         }
 
-        public void RendreVehicule(string nTrajet, Parking.Parking parking, Place place)
+        public void RendreVehicule(string strNTrajet, Place place)
         {
-            throw new NotImplementedException();
+            int nTrajet = CheckNTrajet(strNTrajet);
+            Vehicule vehicule = gestionFlotte.TrajetList.Find(trajet => trajet.NTrajet == nTrajet).Vehicule;
+
+            vehicule.Place = place;
         }
 
 
@@ -300,8 +304,8 @@ namespace Final_Project
         private int CheckNVehicule(string strNVehicule)
         {
             int nVehicule = -1;
-            if (!int.TryParse(strNVehicule, out nVehicule) || nVehicule > gestionFlotte.LastNumVehicule ||
-                nVehicule < 0)
+            if (!int.TryParse(strNVehicule, out nVehicule) ||
+                gestionFlotte.VehiculeList.Exists(vehicule => vehicule.NVehicule == nVehicule)) 
                 throw new ErreurNVehicule();
             return nVehicule;
         }
@@ -314,7 +318,8 @@ namespace Final_Project
         private int CheckNTrajet(string strNTrajet)
         {
             int nTrajet = -1;
-            if (!int.TryParse(strNTrajet, out nTrajet) || nTrajet > gestionFlotte.LastNumTrajet || nTrajet < 0)
+            if (!int.TryParse(strNTrajet, out nTrajet) ||
+                gestionFlotte.TrajetList.Exists(trajet => trajet.NTrajet == nTrajet))
                 throw new ErreurNTrajet();
             return nTrajet;
         }
@@ -327,7 +332,8 @@ namespace Final_Project
         private int CheckNClient(string strNClient)
         {
             int nClient = -1;
-            if (!int.TryParse(strNClient, out nClient) || nClient > gestionFlotte.LastNumClient || nClient < 0)
+            if (!int.TryParse(strNClient, out nClient) ||
+                gestionFlotte.ClientList.Exists(client => client.NClient == nClient))
                 throw new ErreurNClient();
             return nClient;
         }

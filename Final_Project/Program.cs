@@ -13,7 +13,7 @@ namespace Final_Project
 {
     class Program
     {
-
+        private static int v = 0;
         static void Main(string[] args)
         {
             /*System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(@"C:\Users\latif\Desktop\IP.csv", "");
@@ -30,6 +30,11 @@ namespace Final_Project
 
             Console.Read();
 
+        }
+
+        static int test()
+        {
+            return v++;
         }
     }
 }

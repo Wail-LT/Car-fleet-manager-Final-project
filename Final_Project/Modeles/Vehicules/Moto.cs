@@ -14,7 +14,7 @@ namespace Final_Project.Vehicules
          * Constructeur pour vehicule d'occasion
          */
      
-        public Moto(int nVehicule, string marque, string modele, int km, string couleur, int cylindre) : base(nVehicule, marque, modele, km, couleur)
+        public Moto(string marque, string modele, int km, string couleur, int cylindre) : base(marque, modele, km, couleur)
         {
             this.cylindre = cylindre;
         }

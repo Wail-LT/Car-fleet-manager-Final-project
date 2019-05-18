@@ -28,10 +28,6 @@ namespace Final_Project
 
         /* Properties */
 
-        public int LastNumVehicule => vehiculeList.Count - 1;
-        public int LastNumClient => clientList.Count - 1;
-        public int LastNumTrajet => trajetList.Count - 1;
-
         public List<Vehicule> VehiculeList => vehiculeList;
         public List<Client> ClientList => clientList;
         public List<Trajet> TrajetList => trajetList;
@@ -77,7 +73,6 @@ namespace Final_Project
          */
         public void AjoutVehicule(Vehicule vehicule)
         {
-            vehicule.NVehicule = LastNumVehicule + 1;
             vehicule.Place = GetPlaceDisp();
             vehiculeList.Add(vehicule);
         }
@@ -88,7 +83,6 @@ namespace Final_Project
          */
         public void AjoutClient(Client client)
         {
-            client.NClient = LastNumClient + 1;
             clientList.Add(client);
         }
 
@@ -98,7 +92,6 @@ namespace Final_Project
          */
         public void AjoutTrajet(Trajet trajet)
         {
-            trajet.NTrajet = LastNumTrajet + 1;
             trajetList.Add(trajet);
         }
 
@@ -111,10 +104,8 @@ namespace Final_Project
         {
             vehiculeList[nVehicule].Supprimer();
 
-            vehiculeList.RemoveAt(nVehicule);
+            vehiculeList.RemoveAll(vehicule => vehicule.NVehicule == nVehicule);
 
-            for (int i = nVehicule; i < vehiculeList.Count; i++)
-                vehiculeList[i].NVehicule = i;
         }
 
         /**
@@ -123,12 +114,7 @@ namespace Final_Project
          */
         public void SupClient(int nClient)
         {
-            clientList[nClient].NClient = -1;
-
-            clientList.RemoveAt(nClient);
-
-            for (int i = nClient; i < clientList.Count; i++)
-                clientList[i].NClient = i;
+            clientList.RemoveAll(client => client.NClient == nClient);
         }
 
         /**
@@ -139,10 +125,7 @@ namespace Final_Project
         {
             trajetList[nTrajet].Supprimer();
 
-            trajetList.RemoveAt(nTrajet);
-
-            for (int i = nTrajet; i < trajetList.Count; i++)
-                trajetList[i].NTrajet = i;
+            trajetList.RemoveAll(trajet => trajet.NTrajet == nTrajet);
         }
 
         public List<Parking.Parking> GetParkingsDisp()

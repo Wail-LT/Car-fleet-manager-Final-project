@@ -8,16 +8,18 @@ namespace Final_Project
 {
     public class Client
     {
-        private int nClient;
+        private readonly int nClient;
         private readonly string nom;
         private readonly string prenom;
         private readonly string adresse;
         private readonly List<EPermis> permisList;
         private double totalLoc;
 
-        public Client(string nom, string prenom, string adresse, List<EPermis> permisList)
+        private static int nbClient = 0;
+
+        public Client(string nom, string prenom, string adresse, List<EPermis> permisList) 
         {
-            this.nClient = -1;
+            this.nClient = ++nbClient;
             this.nom = nom;
             this.prenom = prenom;
             this.adresse = adresse;
@@ -32,11 +34,14 @@ namespace Final_Project
         public string Prenom => prenom;
         public string Adresse => adresse;
 
-        public int NClient { get => nClient; set => nClient = value; }
+        public int NClient => nClient;
 
         public List<EPermis> PermisList => permisList;
 
         public double TotalLoc { get => totalLoc; set => totalLoc = value; }
+        public static int NbClient { get => nbClient; set => nbClient = value; }
+
+
 
         /* Public Methodes */
 

@@ -43,6 +43,7 @@ namespace Final_Project
             Console.WriteLine("Choisissez parmi ces choix : ");
             Console.WriteLine("1- Visualisation");
             Console.WriteLine("2- Ajout / Suppression");
+            Console.WriteLine("3- Rendre Véhicule");
 
             switch (Console.ReadLine())
             {
@@ -51,6 +52,9 @@ namespace Final_Project
                     break;
                 case "2":
                     AfficherAjoutSup();
+                    break;
+                case "3":
+                    AfficherRendreVehicule();
                     break;
                 default:
                     EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Erreur choix invalide");
@@ -119,9 +123,9 @@ namespace Final_Project
         {
             Console.Clear();
             Console.WriteLine("Stats");
-            Console.WriteLine("     Nombre de Vehicules : {0}", gestionFlotte.LastNumVehicule + 1);
-            Console.WriteLine("     Nombre de Clients   : {0}", gestionFlotte.LastNumClient + 1);
-            Console.WriteLine("     Nombre de Trajets   : {0}", gestionFlotte.LastNumTrajet + 1);
+            Console.WriteLine("     Nombre de Vehicules : {0}", Vehicule.NbVehicule);
+            Console.WriteLine("     Nombre de Clients   : {0}", Client.NbClient);
+            Console.WriteLine("     Nombre de Trajets   : {0}", Trajet.NbTrajet);
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
@@ -151,7 +155,9 @@ namespace Final_Project
             Client choisi = null;
 
             Console.Clear();
-            Console.WriteLine("Saisir le numéro du client que vous voulez afficher ");
+            Console.WriteLine("Saisir le numéro du client que vous voulez afficher parmis la list suivante :");
+            gestionFlotte.ClientList.ForEach(client=>Console.Write($" {client.NClient} |"));
+            Console.Write("\n Numéro client : ");
             try
             {
                 choisi = controller.GetClient(Console.ReadLine());
@@ -189,7 +195,9 @@ namespace Final_Project
         {
             Console.Clear();
             Vehicule choisi = null;
-            Console.WriteLine("Saisir le numéro du véhicule que vous voulez afficher");
+            Console.WriteLine("Saisir le numéro du véhicule que vous voulez afficher parmis la list suivante : ");
+            gestionFlotte.VehiculeList.ForEach(vehicule => Console.Write($" {vehicule.NVehicule} |"));
+            Console.Write("\n Numéro client : ");
             try
             {
                 choisi = controller.GetVehicule(Console.ReadLine());
@@ -461,7 +469,7 @@ namespace Final_Project
                 Console.Clear();
                 Place place = SaisirPlace(parking);
 
-                controller.RendreVehicule(nTrajet, parking, place);
+                controller.RendreVehicule(nTrajet, place);
 
             }
             catch (Exception e)

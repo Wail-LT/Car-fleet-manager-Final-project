@@ -65,6 +65,7 @@
     <Compile Include="Modeles\Controleurs\Controleur.cs" />
     <Compile Include="Modeles\Controleurs\IControleur.cs" />
     <Compile Include="Modeles\Enums\EPermis.cs" />
+    <Compile Include="Modeles\Enums\Intervention.cs" />
     <Compile Include="Modeles\Enums\TypeVoiture.cs" />
     <Compile Include="Modeles\Parking\Parking.cs" />
     <Compile Include="Modeles\Parking\Place.cs" />
