@@ -138,10 +138,7 @@ namespace Final_Project
             Console.Clear();
             gestionFlotte.ClientList.ForEach(li =>
             {
-                Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ", li.NClient, li.Nom, li.Prenom, li.Adresse);
-                li.PermisList.ForEach(permis => Console.Write(permis + ", "));
-                Console.Write("COÛT TOTAL DES LOCATIONS :{0}", li.TotalLoc);
-                Console.WriteLine();
+                AfficherClient(li);
             });
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
@@ -157,7 +154,7 @@ namespace Final_Project
             Console.Clear();
             Console.WriteLine("Saisir le numéro du client que vous voulez afficher parmis la list suivante :");
             gestionFlotte.ClientList.ForEach(client=>Console.Write($" {client.NClient} |"));
-            Console.Write("\n Numéro client : ");
+            Console.Write("\n Numéro Client : ");
             try
             {
                 choisi = controller.GetClient(Console.ReadLine());
@@ -167,12 +164,20 @@ namespace Final_Project
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherClient, e.Message);
             }
 
-            Console.Write("\t ID :{0}  NOM :{1} , PRENOM : {2} , ADRESSE :{3}, PERMIS : ", choisi.NClient, choisi.Nom, choisi.Prenom, choisi.Adresse);
-            choisi.PermisList.ForEach(permis => Console.Write(permis + ", "));
-            Console.Write(" TOTAL LOC :{0}", choisi.TotalLoc);
+            AfficherClient(choisi);
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
+
+        public void AfficherClient(Client client)
+        {
+            Console.WriteLine("------------------------------------------------------------------------------------");
+            Console.Write($" ID :{client.NClient} \n NOM :{client.Nom} \n PRENOM : {client.Prenom} \n ADRESSE : {client.Adresse} \n PERMIS : ");
+            client.PermisList.ForEach(permis => Console.Write(permis + ", "));
+            Console.WriteLine($"\n COÛT TOTAL DES LOCATIONS : {client.TotalLoc}");
+            Console.WriteLine("------------------------------------------------------------------------------------");
+        }
+
 
         /**
         * Affiche une list de vehicule
@@ -222,8 +227,7 @@ namespace Final_Project
         {
             Console.Clear();
             gestionFlotte.TrajetList.ForEach(li => {
-                Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", li.NTrajet, li.Client.NClient, li.Vehicule.NVehicule, li.Distance, li.Cout);
-                Console.WriteLine();
+                AfficherTrajet(li);
             });
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
@@ -236,7 +240,9 @@ namespace Final_Project
         {
             Console.Clear();
             Trajet choisi = null;
-            Console.WriteLine("Saisir le numéro de trajet que vous voulez afficher");
+            Console.WriteLine("Saisir le numéro de trajet que vous voulez afficher parmis la list suivante :");
+            gestionFlotte.TrajetList.ForEach(trajet => Console.Write($" {trajet.NTrajet} |"));
+            Console.Write("\n Numéro Trajet : ");
             try
             {
                 choisi = controller.GetTrajet(Console.ReadLine());
@@ -245,12 +251,19 @@ namespace Final_Project
             {
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherTrajet, e.Message);
             }
-            Console.Write("\t N° TRAJET :{0}  N° CLIENT {1} , N° VEHICULE: {2} , DISTANCE: {3}, COUT: {4}", choisi.NTrajet, choisi.Client.NClient, choisi.Vehicule.NVehicule, choisi.Distance, choisi.Cout);
-            Console.WriteLine();
+
+            AfficherTrajet(choisi);
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
 
+        private void AfficherTrajet(Trajet trajet)
+        {
+            Console.WriteLine("------------------------------------------------------------------------------------");
+            Console.WriteLine(
+                $" N° TRAJET :{trajet.NTrajet} \n N° CLIENT {trajet.Client.NClient} \n N° VEHICULE: {trajet.Vehicule.NVehicule} \n DISTANCE: {trajet.Distance} \n COUT: {trajet.Cout}");
+            Console.WriteLine("------------------------------------------------------------------------------------");
+        }
         /****** Fin Layout Visualisation ******/
 
 
