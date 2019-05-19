@@ -56,24 +56,6 @@ namespace Final_Project
         /* Public Methodes */
 
 
-        /**
-         * Ajouter  un Permis au client
-         * @Params permis   EPermis : permis à ajouter
-         */
-        public void AjoutPermis(EPermis permis)
-        {
-            permisList.Add(permis);
-        }
-
-        /**
-         * LibPlace un Permis au client
-         * @Params permis   EPermis : permis à supprimer
-         */
-        public void SupPermis(EPermis permis)
-        {
-            permisList.Remove(permis);
-        }
-
         public void Sauvegarder(StreamWriter fWriter, string before = "", string after = "")
         {
             fWriter.WriteLine(before + "{");

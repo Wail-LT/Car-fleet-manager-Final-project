@@ -693,24 +693,20 @@ namespace Final_Project
             {
                 jData = File.ReadAllText(file);
                 JObject data = JObject.Parse(jData);
+                if (controller.ChargerVehicule(data["VehiculeList"]))
+                    EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains vehicules n'ont pas pu être chargé");
+                if (controller.ChargerClient(data["ClientList"]))
+                    EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains clients n'ont pas pu être chargé");
+                if (controller.ChargerTrajet(data["TrajetList"]))
+                    EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains trajets n'ont pas pu être chargé");
+
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Chargement terminée avec succès");
             }
             catch (Exception e)
             {
-                Console.WriteLine("ERREUR : Fichier introuvable ou corrompu");
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "ERREUR : Fichier introuvable ou corrompu");
             }
 
-            
-            
-            if(controller.ChargerVehicule(data["VehiculeList"]))
-                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains vehicules n'ont pas pu être chargé");
-            if (controller.ChargerClient(data["ClientList"]))
-                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains clients n'ont pas pu être chargé");
-            if (controller.ChargerTrajet(data["TrajetList"]))
-                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains trajets n'ont pas pu être chargé");
-
-            EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Chargement terminée avec succès");
-
-            Console.ReadLine();
         }
     }
 }
