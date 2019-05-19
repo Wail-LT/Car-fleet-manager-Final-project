@@ -1,0 +1,249 @@
+{
+	"VehiculeList" : [
+		{
+			"nVehicule" : "1",
+			"marque" : "Peugeot",
+			"modele" : "407",
+			"km" : "46500",
+			"couleur" : "rouge",
+			"isDisponible" : "True",
+			"cout" : "375",
+			"parking" : "Roissy",
+			"place" : "A0",
+			"interventionList" : [
+				{ "intervention" : "Essence" },
+				{ "intervention" : "Essence" },
+				{ "intervention" : "Essence" },
+			],
+			"nTrajet" : -1,
+			"vehicule" : "voiture",
+			"nbPortes" : "5",
+			"puissance" : "250",
+			"type" : "Berline"
+		},
+		{
+			"nVehicule" : "2",
+			"marque" : "Renault",
+			"modele" : "clio",
+			"km" : "6500",
+			"couleur" : "rouge",
+			"isDisponible" : "True",
+			"cout" : "150",
+			"parking" : "Roissy",
+			"place" : "A1",
+			"interventionList" : [
+				{ "intervention" : "Mecanique" }
+			],
+			"nTrajet" : -1,
+			"vehicule" : "voiture",
+			"nbPortes" : "3",
+			"puissance" : "150",
+			"type" : "Break"
+		},
+		{
+			"nVehicule" : "3",
+			"marque" : "Renault",
+			"modele" : "Megane",
+			"km" : "5000",
+			"couleur" : "bleu",
+			"isDisponible" : "True",
+			"cout" : "90",
+			"parking" : "Roissy",
+			"place" : "A2",
+			"interventionList" : [
+				{ "intervention" : "Nettoyage" }
+			],
+			"nTrajet" : -1,
+			"vehicule" : "voiture",
+			"nbPortes" : "3",
+			"puissance" : "90",
+			"type" : "Break"
+		},
+		{
+			"nVehicule" : "4",
+			"marque" : "Peugeot",
+			"modele" : "208",
+			"km" : "8500",
+			"couleur" : "bleu nuit",
+			"isDisponible" : "True",
+			"cout" : "90",
+			"parking" : "Roissy",
+			"place" : "A3",
+			"interventionList" : [
+				{ "intervention" : "Mecanique" }
+			],
+			"nTrajet" : -1,
+			"vehicule" : "voiture",
+			"nbPortes" : "3",
+			"puissance" : "90",
+			"type" : "Break"
+		},
+		{
+			"nVehicule" : "5",
+			"marque" : "Peugeot",
+			"modele" : "807",
+			"km" : "250",
+			"couleur" : "violet",
+			"isDisponible" : "True",
+			"cout" : "187,5",
+			"parking" : "Roissy",
+			"place" : "A4",
+			"interventionList" : [
+				{ "intervention" : "Nettoyage" }
+			],
+			"nTrajet" : -1,
+			"vehicule" : "voiture",
+			"nbPortes" : "5",
+			"puissance" : "150",
+			"type" : "Monospace"
+		},
+		{
+			"nVehicule" : "6",
+			"marque" : "Kawazaki",
+			"modele" : "Z650",
+			"km" : "0",
+			"couleur" : "Gris",
+			"isDisponible" : "True",
+			"cout" : "129,8",
+			"parking" : "Roissy",
+			"place" : "A5",
+			"interventionList" : [
+			],
+			"nTrajet" : -1,
+			"vehicule" : "moto",
+			"cylindre" : "649"
+		},
+		{
+			"nVehicule" : "7",
+			"marque" : "Citroeine",
+			"modele" : "Berlingo",
+			"km" : "0",
+			"couleur" : "Gris",
+			"isDisponible" : "True",
+			"cout" : "637,5",
+			"parking" : "Roissy",
+			"place" : "A6",
+			"interventionList" : [
+			],
+			"nTrajet" : -1,
+			"vehicule" : "camion",
+			"capacite" : "17"
+		}
+	],
+	"ClientList" : [
+		{
+			"nClient" : "1",
+			"nom" : "Latif",
+			"prenom" : "Waïl",
+			"adresse" : "18 square jules cesar 95120",
+			"nbAnneePermis" : "3",
+			"totalLoc" : "1500",
+			"permisList" : [
+				{ "permis" : "A" },
+				{ "permis" : "B" }
+			]
+		},
+		{
+			"nClient" : "2",
+			"nom" : "Dechane",
+			"prenom" : "Sanaâ",
+			"adresse" : "15 rue feulifeu argentueil",
+			"nbAnneePermis" : "3",
+			"totalLoc" : "525",
+			"permisList" : [
+				{ "permis" : "A" }
+			]
+		},
+		{
+			"nClient" : "3",
+			"nom" : "Schaub",
+			"prenom" : "Yannis",
+			"adresse" : "Pierrefitte",
+			"nbAnneePermis" : "3",
+			"totalLoc" : "2215",
+			"permisList" : [
+				{ "permis" : "A" }
+			]
+		},
+		{
+			"nClient" : "4",
+			"nom" : "El-Haddad",
+			"prenom" : "Imrane",
+			"adresse" : "Creil",
+			"nbAnneePermis" : "3",
+			"totalLoc" : "250",
+			"permisList" : [
+				{ "permis" : "A" }
+			]
+		},
+		{
+			"nClient" : "5",
+			"nom" : "famille test",
+			"prenom" : "test",
+			"adresse" : "test ville",
+			"nbAnneePermis" : "3",
+			"totalLoc" : "1340",
+			"permisList" : [
+				{ "permis" : "A" }
+			]
+		}
+	],
+	"TrajetList" : [
+		{
+			"nTrajet" : "1",
+			"NClient" : "1",
+			"NVehicule" : "1",
+			"date" : "03/12/2019",
+			"distance" : "500",
+			"cout" : "500"
+		},
+		{
+			"nTrajet" : "2",
+			"NClient" : "2",
+			"NVehicule" : "2",
+			"date" : "03/02/2019",
+			"distance" : "1500",
+			"cout" : "525"
+		},
+		{
+			"nTrajet" : "3",
+			"NClient" : "3",
+			"NVehicule" : "4",
+			"date" : "24/12/2019",
+			"distance" : "8500",
+			"cout" : "2215"
+		},
+		{
+			"nTrajet" : "4",
+			"NClient" : "4",
+			"NVehicule" : "5",
+			"date" : "03/12/2015",
+			"distance" : "250",
+			"cout" : "250"
+		},
+		{
+			"nTrajet" : "5",
+			"NClient" : "5",
+			"NVehicule" : "3",
+			"date" : "03/05/2019",
+			"distance" : "5000",
+			"cout" : "1340"
+		},
+		{
+			"nTrajet" : "6",
+			"NClient" : "1",
+			"NVehicule" : "1",
+			"date" : "05/12/2019",
+			"distance" : "500",
+			"cout" : "500"
+		},
+		{
+			"nTrajet" : "7",
+			"NClient" : "1",
+			"NVehicule" : "1",
+			"date" : "03/01/2019",
+			"distance" : "500",
+			"cout" : "500"
+		}
+	]
+}
