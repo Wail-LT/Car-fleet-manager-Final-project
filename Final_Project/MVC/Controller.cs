@@ -287,7 +287,7 @@ namespace Final_Project
         }
 
 
-        public bool ChargerVehicule(JToken jToken)
+        public bool ChargerVehicules(JToken jToken)
 
         {
             jToken = jToken.First;
@@ -358,7 +358,7 @@ namespace Final_Project
             return erreur;
         }
 
-        public bool ChargerClient(JToken jToken)
+        public bool ChargerClients(JToken jToken)
         {
             jToken = jToken.First;
             bool erreur = false;
@@ -403,7 +403,7 @@ namespace Final_Project
         }
 
 
-        public bool ChargerTrajet(JToken jToken)
+        public bool ChargerTrajets(JToken jToken)
         {
             jToken = jToken.First;
             bool erreur = false;

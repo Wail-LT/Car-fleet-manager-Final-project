@@ -650,7 +650,7 @@ namespace Final_Project
         /****** Fin Methodes Annexe *****/
 
 
-        public void Sauvegarder()
+        private void Sauvegarder()
         {
             Console.WriteLine(@"Saisir le chemin vers le répertoire de sauvegarde (C:\\Users\user\Desktop...)");
             string file = Console.ReadLine()+"\\gestion_flotte.save";
@@ -695,7 +695,7 @@ namespace Final_Project
             }
         }
 
-        public void Charger()
+        private void Charger()
         {
             Console.WriteLine(@"Saisir le chemin vers le fichier à charger (C:\\Users\user\Desktop...)");
             string file = Console.ReadLine();
@@ -704,11 +704,11 @@ namespace Final_Project
             {
                 jData = File.ReadAllText(file);
                 JObject data = JObject.Parse(jData);
-                if (controller.ChargerVehicule(data["VehiculeList"]))
+                if (controller.ChargerVehicules(data["VehiculeList"]))
                     EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains vehicules n'ont pas pu être chargé");
-                if (controller.ChargerClient(data["ClientList"]))
+                if (controller.ChargerClients(data["ClientList"]))
                     EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains clients n'ont pas pu être chargé");
-                if (controller.ChargerTrajet(data["TrajetList"]))
+                if (controller.ChargerTrajets(data["TrajetList"]))
                     EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains trajets n'ont pas pu être chargé");
 
                 EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Chargement terminée avec succès");

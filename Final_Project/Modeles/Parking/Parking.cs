@@ -8,7 +8,7 @@ namespace Final_Project.Parking
     public class Parking
     {
         private readonly Place[] places;
-        public const int NbPlaces = 10;
+        public  int NbPlaces = 10;
         private string nom;
 
         public Parking(Action<Place[], Parking> remplirTab, string nom)
