@@ -35,35 +35,37 @@ namespace Final_Project
 
         public void init()
         {
-            AjoutVehicule(new Voiture("Peugeot", "407", 45000,"rouge", 5, 250, TypeVoiture.Berline));
+            /*AjoutVehicule(new Voiture("Peugeot", "407", 45000,"rouge", 5, 250, TypeVoiture.Berline));
             AjoutVehicule(new Voiture("Renault", "clio", 5000, "rouge", 3, 150, TypeVoiture.Break));
             AjoutVehicule(new Voiture("Renault", "Megane", 0, "bleu", 3, 90, TypeVoiture.Break));
             AjoutVehicule(new Voiture("Peugeot", "208", 0, "bleu nuit", 3, 90, TypeVoiture.Break));
             AjoutVehicule(new Voiture("Peugeot", "807", 0, "violet", 5, 150, TypeVoiture.Monospace));
+            AjoutVehicule(new Moto("Kawazaki", "Z650", 0, "Gris", 649));
+            AjoutVehicule(new Camion("Citroeine", "Berlingo", 0, "Gris", 17));
             List<EPermis> permis = new List<EPermis>();
             permis.Add(EPermis.A);
             permis.Add(EPermis.B);
-            clientList.Add(new Client("Latif", "Waïl", "18 square jules cesar 95120", permis));
+            clientList.Add(new Client("Latif", "Waïl", "18 square jules cesar 95120", 3, permis));
             permis.Remove(EPermis.B);
-            clientList.Add(new Client("Dechane", "Sanaâ", "15 rue feulifeu argentueil", permis));
-            clientList.Add(new Client("Schaub", "Yannis", "Pierrefitte", permis));
-            clientList.Add(new Client("El-Haddad", "Imrane", "Creil", permis));
-            clientList.Add(new Client("famille test", "test", "test ville", permis));
+            clientList.Add(new Client("Dechane", "Sanaâ", "15 rue feulifeu argentueil", 3, permis));
+            clientList.Add(new Client("Schaub", "Yannis", "Pierrefitte", 3, permis));
+            clientList.Add(new Client("El-Haddad", "Imrane", "Creil", 3, permis));
+            clientList.Add(new Client("famille test", "test", "test ville", 3, permis));
 
-            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500, new DateTime(2019,12,3)));
             ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "407"));
-            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Dechane"), vehiculeList.Find(vehicule => vehicule.Modele == "clio"), 1500));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Dechane"), vehiculeList.Find(vehicule => vehicule.Modele == "clio"), 1500, new DateTime(2019, 2, 3)));
             ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "clio"));
-            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Schaub"), vehiculeList.Find(vehicule => vehicule.Modele == "208"),8500));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Schaub"), vehiculeList.Find(vehicule => vehicule.Modele == "208"),8500, new DateTime(2019, 12, 24)));
             ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "208"));
-            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "El-Haddad"), vehiculeList.Find(vehicule => vehicule.Modele == "807"), 250));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "El-Haddad"), vehiculeList.Find(vehicule => vehicule.Modele == "807"), 250, new DateTime(2015, 12, 3)));
             ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "807"));
-            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "famille test"), vehiculeList.Find(vehicule => vehicule.Modele == "Megane"), 5000));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "famille test"), vehiculeList.Find(vehicule => vehicule.Modele == "Megane"), 5000, new DateTime(2019, 5, 3)));
             ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "Megane"));
-            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500, new DateTime(2019, 12, 5)));
             ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "407"));
-            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500));
-            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "407"));
+            trajetList.Add(new Trajet(clientList.Find(client => client.Nom == "Latif"), vehiculeList.Find(vehicule => vehicule.Modele == "407"), 500, new DateTime(2019, 1, 3)));
+            ControleurV.Verifier(vehiculeList.Find(vehicule => vehicule.Modele == "407"));*/
         }
 
         /* Properties */

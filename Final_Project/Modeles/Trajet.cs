@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -9,19 +10,20 @@ using Final_Project.Vehicules;
 
 namespace Final_Project
 {
-    public class Trajet
+    public class Trajet : ISauvegardable
     {
         private readonly int nTrajet;
         private readonly Client client;
         private readonly Vehicule vehicule;
         private int distance;
+        private DateTime date;
         private double cout;
 
-        private static int nbTrajet = 0;
+        private static int _lastNTrajet = 0;
 
-        public Trajet(Client client, Vehicule vehicule, int distance)
+        public Trajet(Client client, Vehicule vehicule, int distance, DateTime date)
         {
-            this.nTrajet = ++nbTrajet;
+            this.nTrajet = ++_lastNTrajet;
             this.client = client;
             this.vehicule = vehicule;
             this.distance = distance;
@@ -30,6 +32,12 @@ namespace Final_Project
             this.vehicule.IsDisponible = false;
             this.vehicule.NTrajet = nTrajet;
             this.vehicule.LibPlace();
+            this.date = date;
+        }
+
+        public Trajet(int nTrajet, Client client, Vehicule vehicule, DateTime date, int distance) : this(client,vehicule,distance,date)
+        {
+            this.nTrajet = nTrajet;
         }
 
 
@@ -41,7 +49,7 @@ namespace Final_Project
         public double Cout => cout;
         public Vehicule Vehicule => vehicule;
 
-        public static int NbTrajet { get => nbTrajet; set => nbTrajet = value; }
+        public static int LastNTrajet { get => _lastNTrajet; set => _lastNTrajet = value; }
         public int Distance
         {
             get => distance;
@@ -51,6 +59,8 @@ namespace Final_Project
                 CalculerCout();
             }
         }
+
+        public DateTime Date { get => date; set => date = value; }
 
 
         /* Public Methodes */
@@ -77,6 +87,18 @@ namespace Final_Project
                 cout = 0.5 * distance;
 
             cout += vehicule.Cout;
+        }
+
+        public void Sauvegarder(StreamWriter fWriter, string before = "", string after = "")
+        {
+            fWriter.WriteLine(before + "{");
+            fWriter.WriteLine($"{before}\t\"nTrajet\" : \"{nTrajet}\",");
+            fWriter.WriteLine($"{before}\t\"NClient\" : \"{client.NClient}\",");
+            fWriter.WriteLine($"{before}\t\"NVehicule\" : \"{vehicule.NVehicule}\",");
+            fWriter.WriteLine($"{before}\t\"date\" : \"{date.ToString("dd/MM/yyyy")}\",");
+            fWriter.WriteLine($"{before}\t\"distance\" : \"{distance}\",");
+            fWriter.WriteLine($"{before}\t\"cout\" : \"{cout}\"");
+            fWriter.WriteLine(before + "}"+after);
         }
     }
 } 

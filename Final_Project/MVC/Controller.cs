@@ -12,6 +12,7 @@ using Final_Project.Exceptions.Voiture.Camion;
 using Final_Project.Exceptions.Voiture.Moto;
 using Final_Project.Parking;
 using Final_Project.Vehicules;
+using Newtonsoft.Json.Linq;
 
 namespace Final_Project
 {
@@ -36,7 +37,7 @@ namespace Final_Project
          * @Params adresse         string       : adresse du client
          * @Params srtPermisList   List<string> : list des permis du client
          */
-        public void AjoutClient(string nom, string prenom, string adresse, List<string> srtPermisList)
+        public void AjoutClient(string nom, string prenom, string adresse, string nbAnneePermis, List<string> srtPermisList)
         {
             if (string.IsNullOrWhiteSpace(nom))
                 throw new NomVide();
@@ -45,11 +46,16 @@ namespace Final_Project
             if (string.IsNullOrWhiteSpace(adresse))
                 throw new AdresseVide();
 
+            int nbAnnee = -1;
+
+            if (!int.TryParse(nbAnneePermis, out nbAnnee) || nbAnnee < 0) 
+                throw new NotImplementedException("ERREUR : Nombre d'année de permis invalide");
+            
             List<EPermis> permisList = new List<EPermis>();
 
             srtPermisList.ForEach(x => StrToEPermis(x, permisList));
 
-            gestionFlotte.ClientList.Add(new Client(nom, prenom, adresse, permisList));
+            gestionFlotte.ClientList.Add(new Client(nom, prenom, adresse, nbAnnee, permisList));
 
         }
 
@@ -130,7 +136,7 @@ namespace Final_Project
          * @Params strNVehicule  string : Numero du vehicule
          * @Params strDistance   string : distance en km
          */
-        public void AjoutTrajet(string strNClient, string strNVehicule, string strDistance)
+        public void AjoutTrajet(string strNClient, string strNVehicule, string strDistance, string date)
         {
             int distance = -1;
             if (!int.TryParse(strDistance, out distance) || distance<=0)
@@ -140,9 +146,17 @@ namespace Final_Project
 
             if(!v.IsDisponible)
                 throw new NotImplementedException("ERREUR : Le vehicule n'est pas disponible");
-            gestionFlotte.TrajetList.Add(new Trajet(GetClient(strNClient), v, distance));
+            try
+            {
+                gestionFlotte.TrajetList.Add(new Trajet(GetClient(strNClient), v, distance, DateTime.Parse(date)));
+            }
+            catch (System.FormatException e)
+            {
+                throw new NotImplementedException("ERREUR : Le date saisie est invalide");
+            }
+
             v.IsDisponible = false;
-            v.NTrajet = Trajet.NbTrajet;
+            v.NTrajet = Trajet.LastNTrajet;
         }
 
         /***** Fin Ajout *****/
@@ -270,6 +284,160 @@ namespace Final_Project
                 gestionFlotte.ControleurM.Verifier(vehicule);
             else
                 gestionFlotte.ControleurC.Verifier(vehicule);
+        }
+
+
+        public bool ChargerVehicule(JToken jToken)
+
+        {
+            jToken = jToken.First;
+            bool erreur = false;
+            int lastNVehicule = 0;
+            int i = 0;
+            while (jToken != null)
+            {
+                try
+                {
+                    int nVehicule = int.Parse(jToken["nVehicule"].ToString());
+                    string marque = jToken["marque"].ToString();
+                    string modele = jToken["modele"].ToString();
+                    int km = int.Parse(jToken["km"].ToString());
+                    string couleur = jToken["couleur"].ToString();
+                    bool isDisponible = bool.Parse(jToken["isDisponible"].ToString());
+                    string parking = jToken["parking"].ToString();
+                    string strPlace = jToken["place"].ToString();
+
+                    Place place;
+                    if (strPlace == "null")
+                        place = null;
+                    else
+                        place = gestionFlotte.ParkingList.FindLast(p => p.Nom == parking).Places[int.Parse(strPlace.Substring(1))];
+
+                    JToken subtJToken = jToken["interventionList"].First;
+                    List<Intervention> interventionList = new List<Intervention>();
+                    while (subtJToken != null)
+                    {
+                        Intervention interv;
+                        Intervention.TryParse(subtJToken["intervention"].ToString(), out interv);
+                        interventionList.Add(interv);
+                        subtJToken = subtJToken.Next;
+                    }
+                    int nTrajet = int.Parse(jToken["nTrajet"].ToString());
+                    string vehiculeT = jToken["vehicule"].ToString();
+                    if (vehiculeT.ToUpper() == "VOITURE")
+                    {
+                        int nbPortes = int.Parse(jToken["nbPortes"].ToString());
+                        int puissance = int.Parse(jToken["puissance"].ToString());
+                        TypeVoiture type;
+                        TypeVoiture.TryParse(jToken["type"].ToString(), out type);
+                        gestionFlotte.VehiculeList.Add(new Voiture(nVehicule, marque, modele, km, couleur, isDisponible, place, interventionList, nTrajet, nbPortes, puissance, type));
+                    }
+                    else if (vehiculeT.ToUpper() == "MOTO")
+                    {
+                        int cylindre = int.Parse(jToken["cylindre"].ToString());
+                        gestionFlotte.VehiculeList.Add(new Moto(nVehicule, marque, modele, km, couleur, isDisponible, place, interventionList, nTrajet, cylindre));
+                    }
+                    else if (vehiculeT.ToUpper() == "CAMION")
+                    {
+                        int capacite = int.Parse(jToken["capacite"].ToString());
+                        gestionFlotte.VehiculeList.Add(new Moto(nVehicule, marque, modele, km, couleur, isDisponible, place, interventionList, nTrajet, capacite));
+                    }
+
+                    if (lastNVehicule < nVehicule)
+                        lastNVehicule = nVehicule;
+                }
+                catch (Exception e)
+                {
+                    erreur = true;
+                }
+
+                jToken = jToken.Next;
+            }
+
+            Vehicule.LastNVehicule = lastNVehicule;
+            return erreur;
+        }
+
+        public bool ChargerClient(JToken jToken)
+        {
+            jToken = jToken.First;
+            bool erreur = false;
+            int lastNClient = 0;
+            int i = 0;
+            while (jToken != null)
+            {
+                try
+                {
+                    int nClient = int.Parse(jToken["nClient"].ToString());
+                    string nom = jToken["nom"].ToString();
+                    string prenom = jToken["prenom"].ToString();
+                    string adresse = jToken["adresse"].ToString();
+                    int nbAnneePermis = int.Parse(jToken["nbAnneePermis"].ToString());
+                    int totalLoc = int.Parse(jToken["totalLoc"].ToString());
+
+                    JToken subtJToken = jToken["permisList"].First;
+                    List<EPermis> permisList = new List<EPermis>();
+                    while (subtJToken != null)
+                    {
+                        EPermis permis;
+                        EPermis.TryParse(subtJToken["permis"].ToString(), out permis);
+                        permisList.Add(permis);
+                        subtJToken = subtJToken.Next;
+                    }
+
+                    gestionFlotte.ClientList.Add(new Client(nClient, nom, prenom, adresse, nbAnneePermis, totalLoc, permisList));
+
+                    if (lastNClient < nClient)
+                        lastNClient = nClient;
+                }
+                catch (Exception e)
+                {
+                    erreur = true;
+                }
+
+                jToken = jToken.Next;
+            }
+
+            Client.LastNClient = lastNClient;
+            return erreur;
+        }
+
+
+        public bool ChargerTrajet(JToken jToken)
+        {
+            jToken = jToken.First;
+            bool erreur = false;
+            int lastNTrajet = 0;
+            int i = 0;
+            while (jToken != null)
+            {
+                try
+                {
+                    int nTrajet = int.Parse(jToken["nTrajet"].ToString());
+                    DateTime date = DateTime.Parse(jToken["date"].ToString());
+                    int distance = int.Parse(jToken["distance"].ToString());
+
+                    int nClient = int.Parse(jToken["NClient"].ToString());
+                    Client client = gestionFlotte.ClientList.FindLast(c => c.NClient == nClient);
+
+                    int nVehicule = int.Parse(jToken["NVehicule"].ToString());
+                    Vehicule vehicule = gestionFlotte.VehiculeList.FindLast(v => v.NVehicule == nVehicule);
+
+                    gestionFlotte.TrajetList.Add(new Trajet(nTrajet, client, vehicule, date, distance));
+
+                    if (lastNTrajet < nClient)
+                        lastNTrajet = nClient;
+                }
+                catch (Exception e)
+                {
+                    erreur = true;
+                }
+
+                jToken = jToken.Next;
+            }
+
+            Trajet.LastNTrajet = lastNTrajet;
+            return erreur;
         }
 
 

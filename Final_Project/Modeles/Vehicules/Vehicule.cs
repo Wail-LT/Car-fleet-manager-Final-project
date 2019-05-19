@@ -22,7 +22,7 @@ namespace Final_Project.Vehicules
         private List<Intervention> interventionList;
         private int nTrajet;
 
-        private static int nbVehicule = 0;
+        private static int lastNVehicule = 0;
 
 
         /**
@@ -31,7 +31,7 @@ namespace Final_Project.Vehicules
 
         protected Vehicule(string marque, string modele, int km, string couleur)
         {
-            this.nVehicule = ++nbVehicule;
+            this.nVehicule = ++lastNVehicule;
             this.marque = marque;
             this.modele = modele;
             this.km = km;
@@ -42,7 +42,16 @@ namespace Final_Project.Vehicules
             interventionList = new List<Intervention>();
         }
 
-        
+        protected Vehicule(int nVehicule, string marque, string modele, int km, string couleur, bool isDisponible, Place place, List<Intervention> interventionList, int nTrajet):this(marque,modele,km,couleur)
+        {
+            this.nVehicule = nVehicule;
+            this.isDisponible = isDisponible;
+            this.nTrajet = nTrajet;
+            this.place = place;
+            this.interventionList = new List<Intervention>(interventionList);
+        }
+
+
         /* Properties */
 
         public string Marque => marque;
@@ -64,7 +73,7 @@ namespace Final_Project.Vehicules
             }
         }
 
-        public static int NbVehicule { get => nbVehicule; set => nbVehicule = value; }
+        public static int LastNVehicule { get => lastNVehicule; set => lastNVehicule = value; }
         public int NTrajet { get => nTrajet; set => nTrajet = value; }
 
         /* Public Methodes */
@@ -83,7 +92,7 @@ namespace Final_Project.Vehicules
             interventionList.Add(intervention);
         }
 
-        public void DelLastIntervantion()
+        public void DelLastIntervention()
         {
             interventionList.RemoveAt(interventionList.Count-1);
         }
@@ -105,27 +114,30 @@ namespace Final_Project.Vehicules
 
         protected abstract void CalculerCout();
 
-        public virtual void Sauvegarder(StreamWriter fWriter, string before = "")
+        public virtual void Sauvegarder(StreamWriter fWriter, string before = "", string after = "")
         {
             string parking = this.place != null ? this.place.Parking.Nom : "null";
             string place = this.place != null ? $"A{this.place.NPlace}" : "null";
             fWriter.WriteLine(before + "{");
-            fWriter.WriteLine($"{before}\t\"nVehicule\" : \"{nVehicule}\"");
-            fWriter.WriteLine($"{before}\t\"marque\" : \"{marque}\"");
-            fWriter.WriteLine($"{before}\t\"modele\" : \"{modele}\"");
-            fWriter.WriteLine($"{before}\t\"km\" : \"{km}\"");
-            fWriter.WriteLine($"{before}\t\"couleur\" : \"{couleur}\"");
-            fWriter.WriteLine($"{before}\t\"isDisponible\" : \"{isDisponible}\"");
-            fWriter.WriteLine($"{before}\t\"cout\" : \"{cout}\"");
-            fWriter.WriteLine($"{before}\t\"parking\" : \"{parking}\"");
-            fWriter.WriteLine($"{before}\t\"place\" : \"{place}\"");
+            fWriter.WriteLine($"{before}\t\"nVehicule\" : \"{nVehicule}\",");
+            fWriter.WriteLine($"{before}\t\"marque\" : \"{marque}\",");
+            fWriter.WriteLine($"{before}\t\"modele\" : \"{modele}\",");
+            fWriter.WriteLine($"{before}\t\"km\" : \"{km}\",");
+            fWriter.WriteLine($"{before}\t\"couleur\" : \"{couleur}\",");
+            fWriter.WriteLine($"{before}\t\"isDisponible\" : \"{isDisponible}\",");
+            fWriter.WriteLine($"{before}\t\"cout\" : \"{cout}\",");
+            fWriter.WriteLine($"{before}\t\"parking\" : \"{parking}\",");
+            fWriter.WriteLine($"{before}\t\"place\" : \"{place}\",");
             fWriter.WriteLine($"{before}\t\"interventionList\" : [");
             interventionList.ForEach(interv =>
             {
-                fWriter.WriteLine(before + "\t\t{ \"intervention\" : \"" + interv + "\" }");
+                if (interventionList.IndexOf(interv) == interventionList.Count - 1)
+                   fWriter.WriteLine(before + "\t\t{ \"intervention\" : \"" + interv + "\" }");
+                else
+                    fWriter.WriteLine(before + "\t\t{ \"intervention\" : \"" + interv + "\" },");
             });
-            fWriter.WriteLine($"{before}\t]");
-            fWriter.WriteLine($"{before}\t\"nTrajet\" : {nTrajet}");
+            fWriter.WriteLine($"{before}\t],");
+            fWriter.WriteLine($"{before}\t\"nTrajet\" : {nTrajet},");
         }
     }
 }

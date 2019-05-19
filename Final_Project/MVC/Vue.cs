@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Final_Project.Parking;
+using System.Xml.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Final_Project
 {
@@ -13,7 +16,6 @@ namespace Final_Project
     {
         private Controller controller;
         private GestionFlotte gestionFlotte;
-        private StreamWriter fWriter;
 
 
         public Vue()
@@ -30,7 +32,8 @@ namespace Final_Project
          */
         public void Start()
         {
-            Sauvegarder();
+            //Sauvegarder();
+            Charger();
             AfficherAccueil();
         }
 
@@ -126,9 +129,9 @@ namespace Final_Project
         {
             Console.Clear();
             Console.WriteLine("Stats");
-            Console.WriteLine("     Nombre de Vehicules : {0}", Vehicule.NbVehicule);
-            Console.WriteLine("     Nombre de Clients   : {0}", Client.NbClient);
-            Console.WriteLine("     Nombre de Trajets   : {0}", Trajet.NbTrajet);
+            Console.WriteLine("     Nombre de Vehicules : {0}", gestionFlotte.VehiculeList.Count);
+            Console.WriteLine("     Nombre de Clients   : {0}", gestionFlotte.ClientList.Count);
+            Console.WriteLine("     Nombre de Trajets   : {0}", gestionFlotte.TrajetList.Count);
 
             EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
         }
@@ -351,6 +354,8 @@ namespace Final_Project
             string prenom = Console.ReadLine();
             Console.WriteLine("Saisir l'adresse du client");
             string adresse = Console.ReadLine();
+            Console.WriteLine("Saisir le nombre d'année de permis du client");
+            string nbAnnee = Console.ReadLine();
             Console.Write("Saisir les permis parmi cette liste (séparé chaque permis par une virgule) { ");
 
             AfficherEnum<EPermis>();
@@ -360,7 +365,7 @@ namespace Final_Project
             List<string> resultP = permis.Split(',').ToList();
             try
             {
-                controller.AjoutClient(nom, prenom, adresse, resultP);
+                controller.AjoutClient(nom, prenom, adresse, nbAnnee, resultP);
                 EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
             }
             catch (Exception e)
@@ -475,9 +480,11 @@ namespace Final_Project
             string numVehi = Console.ReadLine();
             Console.WriteLine("Saisir la distance de ce trajet");
             string dist = Console.ReadLine();
+            Console.WriteLine("Saisir la date du trajet");
+            string date = Console.ReadLine();
             try
             {
-                controller.AjoutTrajet(numClient, numVehi, dist);
+                controller.AjoutTrajet(numClient, numVehi, dist, date);
 
                 EndFunction("Veuillez appuyez sur une touche pour retourner à l'accueil ...", AfficherAccueil, null);
             }
@@ -634,15 +641,76 @@ namespace Final_Project
 
         public void Sauvegarder()
         {
-            Console.WriteLine("Saisir le chemin vers le fichier de sauvegarde (C:\\Users...");
+            Console.WriteLine(@"Saisir le chemin vers le répertoire de sauvegarde (C:\\Users\user\Desktop...)");
+            string file = Console.ReadLine()+"\\gestion_flotte.save";
+
+            try
+            {
+                StreamWriter fWriter = new StreamWriter(file);
+                fWriter.WriteLine("{");
+                fWriter.WriteLine("\t\"VehiculeList\" : [");
+                gestionFlotte.VehiculeList.ForEach(vehicule =>
+                {
+                    if (gestionFlotte.VehiculeList.IndexOf(vehicule) == gestionFlotte.VehiculeList.Count - 1)
+                        vehicule.Sauvegarder(fWriter, "\t\t");
+                    else
+                        vehicule.Sauvegarder(fWriter, "\t\t", ",");
+                });
+                fWriter.WriteLine("\t],");
+                fWriter.WriteLine("\t\"ClientList\" : [");
+                gestionFlotte.ClientList.ForEach(client =>
+                {
+                    if (gestionFlotte.ClientList.IndexOf(client) == gestionFlotte.ClientList.Count - 1)
+                        client.Sauvegarder(fWriter, "\t\t");
+                    else
+                        client.Sauvegarder(fWriter, "\t\t", ",");
+                });
+                fWriter.WriteLine("\t],");
+                fWriter.WriteLine("\t\"TrajetList\" : [");
+                gestionFlotte.TrajetList.ForEach(trajet =>
+                {
+                    if (gestionFlotte.TrajetList.IndexOf(trajet) == gestionFlotte.TrajetList.Count - 1)
+                        trajet.Sauvegarder(fWriter, "\t\t");
+                    else
+                        trajet.Sauvegarder(fWriter, "\t\t", ",");
+                });
+                fWriter.WriteLine("\t]");
+                fWriter.WriteLine("}");
+                fWriter.Dispose();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ERREUR : Impossible d'ouvrir le répertoire");
+            }
+        }
+
+        public void Charger()
+        {
+            Console.WriteLine(@"Saisir le chemin vers le fichier à charger (C:\\Users\user\Desktop...)");
             string file = Console.ReadLine();
+            string jData="";
+            try
+            {
+                jData = File.ReadAllText(file);
+                JObject data = JObject.Parse(jData);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ERREUR : Fichier introuvable ou corrompu");
+            }
 
-            fWriter = new StreamWriter(file);
-            fWriter.WriteLine("{");
-            gestionFlotte.VehiculeList.ForEach(vehicule=>vehicule.Sauvegarder(fWriter, "\t"));
-            fWriter.WriteLine("}");
+            
+            
+            if(controller.ChargerVehicule(data["VehiculeList"]))
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains vehicules n'ont pas pu être chargé");
+            if (controller.ChargerClient(data["ClientList"]))
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains clients n'ont pas pu être chargé");
+            if (controller.ChargerTrajet(data["TrajetList"]))
+                EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Certains trajets n'ont pas pu être chargé");
 
-            fWriter.Dispose();
+            EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Chargement terminée avec succès");
+
+            Console.ReadLine();
         }
     }
 }

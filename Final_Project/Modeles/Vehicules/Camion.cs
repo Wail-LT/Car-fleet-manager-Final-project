@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Final_Project.Enums;
+using Final_Project.Parking;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,6 +22,14 @@ namespace Final_Project.Vehicules
             CalculerCout();
         }
 
+        public Camion(int nVehicule, string marque, string modele, int km, string couleur, bool isDisponible,
+            Place place, List<Intervention> interventionList, int nTrajet, int capacite) : base(
+            nVehicule, marque, modele, km, couleur, isDisponible, place, interventionList, nTrajet)
+        {
+            this.capacite = capacite;
+            CalculerCout();
+        }
+
         /* Properties */
 
         public int Capacite => capacite;
@@ -30,15 +40,15 @@ namespace Final_Project.Vehicules
         }
         public override string ToString()
         {
-            return base.ToString() + $"CAPACITE : {capacite}";
+            return base.ToString() + $" CAPACITE : {capacite}";
         }
 
-        public override void Sauvegarder(StreamWriter fWriter, string before = "")
+        public override void Sauvegarder(StreamWriter fWriter, string before = "", string after = "")
         {
             base.Sauvegarder(fWriter, before);
-            fWriter.WriteLine($"{before}\t\"vehicule\" : \"camion\"");
+            fWriter.WriteLine($"{before}\t\"vehicule\" : \"camion\",");
             fWriter.WriteLine($"{before}\t\"capacite\" : \"{capacite}\"");
-            fWriter.WriteLine(before + "}");
+            fWriter.WriteLine(before + "}"+after);
         }
     }
 }
