@@ -13,7 +13,6 @@ namespace Final_Project
 {
     class Program
     {
-        private static int v = 0;
         static void Main(string[] args)
         {
 
