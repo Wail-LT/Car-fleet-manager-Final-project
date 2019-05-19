@@ -4,6 +4,6 @@ namespace Final_Project
 {
     public interface ISauvegardable
     {
-        void Sauvegarder(StreamWriter fWriter);
+        void Sauvegarder(StreamWriter fWriter, string before = "");
     }
 }

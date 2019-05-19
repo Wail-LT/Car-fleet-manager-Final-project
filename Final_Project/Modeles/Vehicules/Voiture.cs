@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Final_Project.Enums;
@@ -44,6 +45,16 @@ namespace Final_Project.Vehicules
         public override string ToString()
         {
             return base.ToString() + $" NOMBRE DE PORTES : {nbPortes}\n PUISSANCE : {puissance}";
+        }
+
+        public override void Sauvegarder(StreamWriter fWriter, string before = "")
+        {
+            base.Sauvegarder(fWriter, before);
+            fWriter.WriteLine($"{before}\t\"vehicule\" : \"voiture\"");
+            fWriter.WriteLine($"{before}\t\"nbPortes\" : \"{nbPortes}\"");
+            fWriter.WriteLine($"{before}\t\"puissance\" : \"{puissance}\"");
+            fWriter.WriteLine($"{before}\t\"type\" : \"{type}\"");
+            fWriter.WriteLine(before+"}");
         }
     }
 }

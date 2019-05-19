@@ -30,6 +30,7 @@ namespace Final_Project
          */
         public void Start()
         {
+            Sauvegarder();
             AfficherAccueil();
         }
 
@@ -637,7 +638,10 @@ namespace Final_Project
             string file = Console.ReadLine();
 
             fWriter = new StreamWriter(file);
-            gestionFlotte.VehiculeList.ForEach(vehicule=>vehicule.Sauvegarder(fWriter));
+            fWriter.WriteLine("{");
+            gestionFlotte.VehiculeList.ForEach(vehicule=>vehicule.Sauvegarder(fWriter, "\t"));
+            fWriter.WriteLine("}");
+
             fWriter.Dispose();
         }
     }

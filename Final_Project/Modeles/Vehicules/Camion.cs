@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -30,6 +31,14 @@ namespace Final_Project.Vehicules
         public override string ToString()
         {
             return base.ToString() + $"CAPACITE : {capacite}";
+        }
+
+        public override void Sauvegarder(StreamWriter fWriter, string before = "")
+        {
+            base.Sauvegarder(fWriter, before);
+            fWriter.WriteLine($"{before}\t\"vehicule\" : \"camion\"");
+            fWriter.WriteLine($"{before}\t\"capacite\" : \"{capacite}\"");
+            fWriter.WriteLine(before + "}");
         }
     }
 }

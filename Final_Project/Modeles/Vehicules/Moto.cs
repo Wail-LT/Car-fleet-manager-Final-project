@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -25,13 +26,24 @@ namespace Final_Project.Vehicules
 
         public int Cylindre => cylindre;
 
+        /* Methodes*/
+
         protected override void CalculerCout()
         {
             Cout = cylindre * 0.20;
         }
+
         public override string ToString()
         {
             return base.ToString() + $"CYLINDRE : {cylindre}";
+        }
+
+        public override void Sauvegarder(StreamWriter fWriter, string before = "")
+        {
+            base.Sauvegarder(fWriter, before);
+            fWriter.WriteLine($"{before}\t\"vehicule\" : \"moto\"");
+            fWriter.WriteLine($"{before}\t\"cylindre\" : \"{cylindre}\"");
+            fWriter.WriteLine(before + "}");
         }
     }
 }
