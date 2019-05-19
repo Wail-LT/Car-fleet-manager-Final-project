@@ -32,8 +32,11 @@ namespace Final_Project
          */
         public void Start()
         {
-            //Sauvegarder();
-            Charger();
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
+            Console.WriteLine(" Afin de charger les données de test vous avez un fichier de sauvegarde dans le zip du projet 'gestion_flotte.save'\n" +
+                              " Veuillez le charger via le menu qui va suivre pour avoir des données\n");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------");
+            EndFunction("Veuillez appuyez sur une touche pour continuer ...");
             AfficherAccueil();
         }
 
@@ -50,6 +53,8 @@ namespace Final_Project
             Console.WriteLine("1- Visualisation");
             Console.WriteLine("2- Ajout / Suppression");
             Console.WriteLine("3- Rendre Véhicule");
+            Console.WriteLine("4- Sauvegarder les données");
+            Console.WriteLine("5- Charger les données");
 
             switch (Console.ReadLine())
             {
@@ -61,6 +66,12 @@ namespace Final_Project
                     break;
                 case "3":
                     AfficherRendreVehicule();
+                    break;
+                case "4":
+                    Sauvegarder();
+                    break;
+                case "5":
+                    Charger();
                     break;
                 default:
                     EndFunction("Veuillez appuyez sur une touche pour continuer ...", AfficherAccueil, "Erreur choix invalide");
