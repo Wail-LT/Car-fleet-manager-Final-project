@@ -10,7 +10,7 @@ namespace Final_Project.Utils
         public static void RemplirTabPlaceDisp(Place[] tab, Parking.Parking parking)
         {
             for (int i = 0; i < tab.Length; i++) 
-                tab[i] = new Place(parking);
+                tab[i] = new Place(parking, i);
         }
     }
 }

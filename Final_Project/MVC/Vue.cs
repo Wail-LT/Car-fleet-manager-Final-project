@@ -2,6 +2,7 @@
 using Final_Project.Vehicules;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Final_Project.Parking;
@@ -11,8 +12,9 @@ namespace Final_Project
     public class Vue : IVue
     {
         private Controller controller;
-
         private GestionFlotte gestionFlotte;
+        private StreamWriter fWriter;
+
 
         public Vue()
         {
@@ -627,5 +629,16 @@ namespace Final_Project
             }
         }
         /****** Fin Methodes Annexe *****/
+
+
+        public void Sauvegarder()
+        {
+            Console.WriteLine("Saisir le chemin vers le fichier de sauvegarde (C:\\Users...");
+            string file = Console.ReadLine();
+
+            fWriter = new StreamWriter(file);
+            gestionFlotte.VehiculeList.ForEach(vehicule=>vehicule.Sauvegarder(fWriter));
+            fWriter.Dispose();
+        }
     }
 }

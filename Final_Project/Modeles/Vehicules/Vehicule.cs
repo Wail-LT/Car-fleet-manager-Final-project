@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Final_Project.Enums;
@@ -7,7 +8,7 @@ using Final_Project.Parking;
 
 namespace Final_Project.Vehicules
 {
-    public abstract class Vehicule
+    public abstract class Vehicule : ISauvegardable
     {
 
         private readonly int nVehicule;
@@ -90,7 +91,9 @@ namespace Final_Project.Vehicules
         {
             string disp = isDisponible ? "Oui" : "Non";
             string trajet = NTrajet == -1 ? "Auncun" : nTrajet.ToString();
-            string toString = $" NUM : {NVehicule} \n MARQUE : {marque} \n MODELE : {modele} \n KM : {km}\n COULEUR : {couleur}\n DISPONIBLE : {disp}\n TRAJET ASSOCIE : {trajet}\n COUT : {cout}\n PARKING : {place.Parking.Nom}\n Intervention :\n";
+            string parking = this.place != null ? this.place.Parking.Nom : "Aucun";
+            string place = this.place != null ? $"A{this.place.NPlace}" : "Auncune";
+            string toString = $" NUM : {NVehicule} \n MARQUE : {marque} \n MODELE : {modele} \n KM : {km}\n COULEUR : {couleur}\n DISPONIBLE : {disp}\n TRAJET ASSOCIE : {trajet}\n COUT : {cout}\n PARKING : {parking}\n PLACE : {place}\n Intervention :\n";
             interventionList.ForEach(interv =>
             {
                 toString += $" \t{interv}, \n";
@@ -101,5 +104,25 @@ namespace Final_Project.Vehicules
         /* Protected Methodes */
 
         protected abstract void CalculerCout();
+
+        public virtual void Sauvegarder(StreamWriter fWriter)
+        {
+            string parking = this.place != null ? this.place.Parking.Nom : "null";
+            string place = this.place != null ? $"A{this.place.NPlace}" : "null";
+            fWriter.WriteLine("{");
+            fWriter.WriteLine($"\t\"nVehicule\" : \"{nVehicule}\"");
+            fWriter.WriteLine($"\t\"marque\" : \"{marque}\"");
+            fWriter.WriteLine($"\t\"modele\" : \"{modele}\"");
+            fWriter.WriteLine($"\t\"km\" : \"{km}\"");
+            fWriter.WriteLine($"\t\"couleur\" : \"{couleur}\"");
+            fWriter.WriteLine($"\t\"isDisponible\" : \"{isDisponible}\"");
+            fWriter.WriteLine($"\t\"cout\" : \"{cout}\"");
+            fWriter.WriteLine($"\t\"parking\" : \"{parking}\"");
+            fWriter.WriteLine($"\t\"place\" : \"{place}\"");
+            fWriter.WriteLine($"\t\"interventionList\" : [");
+            interventionList.ForEach(interv => { fWriter.WriteLine("\t\t{ \"intervention\" : \"" + interv + "\" }"); });
+            fWriter.WriteLine($"\t]");
+            fWriter.WriteLine($"\t\"nTrajet\" : {nTrajet}");
+        }
     }
 }

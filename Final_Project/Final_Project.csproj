@@ -62,6 +62,7 @@
     <Compile Include="Exceptions\Vehicule\ErreurNVehicule.cs" />
     <Compile Include="Exceptions\Vehicule\Voiture\ErreurPuissance.cs" />
     <Compile Include="Exceptions\Vehicule\Moto\ErreurCylindre.cs" />
+    <Compile Include="Interfaces\ISauvegardable.cs" />
     <Compile Include="Modeles\Controleurs\Controleur.cs" />
     <Compile Include="Modeles\Controleurs\IControleur.cs" />
     <Compile Include="Modeles\Enums\EPermis.cs" />
