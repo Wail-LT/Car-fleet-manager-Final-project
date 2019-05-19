@@ -52,7 +52,7 @@ namespace Final_Project
                 throw new NotImplementedException("ERREUR : Nombre d'année de permis invalide");
             
             List<EPermis> permisList = new List<EPermis>();
-
+            
             srtPermisList.ForEach(x => StrToEPermis(x, permisList));
 
             gestionFlotte.ClientList.Add(new Client(nom, prenom, adresse, nbAnnee, permisList));
@@ -171,10 +171,7 @@ namespace Final_Project
          */
         public void SupClient(string strnClient)
         {
-            int nVehicule = CheckNClient(strnClient);
-
-            gestionFlotte.VehiculeList.Find(vehicule => vehicule.NVehicule == nVehicule).LibPlace();
-            gestionFlotte.VehiculeList.RemoveAll(vehicule => vehicule.NVehicule == nVehicule);
+            gestionFlotte.ClientList.RemoveAll(client => client.NClient == CheckNClient(strnClient));
         }
 
         /**
@@ -183,7 +180,10 @@ namespace Final_Project
          */
         public void SupVehicule(string strnVehicule)
         {
-            gestionFlotte.ClientList.RemoveAll(client => client.NClient == CheckNVehicule(strnVehicule));
+            int nVehicule = CheckNVehicule(strnVehicule);
+
+            gestionFlotte.VehiculeList.Find(vehicule => vehicule.NVehicule == nVehicule).LibPlace();
+            gestionFlotte.VehiculeList.RemoveAll(vehicule => vehicule.NVehicule == nVehicule);
         }
 
         /**

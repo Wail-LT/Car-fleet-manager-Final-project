@@ -1,47 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Final_Project.Program" Collapsed="true">
-    <Position X="27.75" Y="0.5" Width="1.5" />
+    <Position X="8" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Final_Project.Vehicules.Vehicule">
-    <Position X="12.5" Y="0.5" Width="5" />
+    <Position X="12.25" Y="12.25" Width="9.25" />
     <TypeIdentifier>
-      <HashCode>AEAAAAhEAAAIBAAQAAAAMBAAAAAQQAAAAEgAAABIAAA=</HashCode>
+      <HashCode>AEACAAgEAgAIBAQUQAIAMDAAAAAwYAEAAEgAAABIAAA=</HashCode>
       <FileName>Modeles\Vehicules\Vehicule.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="place" />
     </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="interventionList" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Final_Project.Vehicules.Voiture">
-    <Position X="17.5" Y="6.25" Width="7.5" />
+    <Position X="21.75" Y="19.5" Width="11.75" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAAAAAAAAAAAAIAABAAABAQAAAQAAAAAAAIA=</HashCode>
+      <HashCode>AAAAgAAAAAAAAAAEAAIAIAABAAABAQAAAQAAAAAAAIA=</HashCode>
       <FileName>Modeles\Vehicules\Voiture.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="type" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Final_Project.Vehicules.Moto">
-    <Position X="11.25" Y="6.25" Width="5.5" />
+    <Position X="11.25" Y="19.5" Width="9.75" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAQAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAQAAAAAEAAIAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Modeles\Vehicules\Moto.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Final_Project.Vehicules.Camion">
-    <Position X="5" Y="6.25" Width="5.5" />
+    <Position X="0.5" Y="19.5" Width="10" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAkAAIAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Modeles\Vehicules\Camion.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Final_Project.Vue">
-    <Position X="12.75" Y="11.5" Width="2" />
+    <Position X="23" Y="1.25" Width="4.75" />
     <TypeIdentifier>
-      <HashCode>QABBAkAAACAABAMAAAKAAAAIAEAAEAAAEEgAAAAAEAA=</HashCode>
+      <HashCode>QABBQkAAACAABAMAgAaBAAAIAEAAUAAAEEgAAAABEAA=</HashCode>
       <FileName>MVC\Vue.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -51,9 +58,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Final_Project.Controller">
-    <Position X="7.75" Y="18" Width="7.5" />
+    <Position X="14.5" Y="0.5" Width="7.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAIAAAJAICAACAAAAIgAAAEAAAEAAAAAAAAAA=</HashCode>
+      <HashCode>AQBAAiAAIAAApAICAALAAAAIgAAAEAAAEEABAEDAAAA=</HashCode>
       <FileName>MVC\Controller.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -61,72 +68,100 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Final_Project.GestionFlotte">
-    <Position X="7.5" Y="11.75" Width="2.75" />
+    <Position X="19" Y="7.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AQABAEIAAAAAJwIAACUAAAAMAAAAFIAAEgAAAADAAAA=</HashCode>
+      <HashCode>GAABAEoAAAAAIQAAAiUAAAQEgAAEAAIAAgAAABAAAAA=</HashCode>
       <FileName>Modeles\GestionFlotte.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="controleurC" />
+      <Field Name="controleurM" />
+      <Field Name="controleurV" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Field Name="clientList" />
       <Field Name="trajetList" />
+      <Field Name="vehiculeList" />
+      <Field Name="parkingList" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Final_Project.Client">
-    <Position X="2" Y="18.25" Width="4.75" />
+    <Position X="29.5" Y="8.75" Width="7.25" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAQCAIAAAACAAIQBAASEAQCAAAIA=</HashCode>
+      <HashCode>IAAAAAAAAAAgAAAAIQIEIAAABCAAIQBAASEAQCAAAAA=</HashCode>
       <FileName>Modeles\Client.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="permisList" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Final_Project.Trajet">
-    <Position X="0.5" Y="12.5" Width="4" />
+    <Position X="22.5" Y="11" Width="5" />
     <TypeIdentifier>
-      <HashCode>AAAAAABAAAAAAAAAAAAAIDAAAEAwEABAABAABAAAAAQ=</HashCode>
+      <HashCode>AAAAAABAAAgAAAAAAAIAIDAAAEAwEABBABAABQACAAQ=</HashCode>
       <FileName>Modeles\Trajet.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="client" />
+      <Field Name="vehicule" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Final_Project.Parking.Parking">
-    <Position X="4.5" Y="1.75" Width="3.25" />
+    <Position X="10.5" Y="8.75" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAABAAAAAAAAAAAQAgAAEAAAAAAIAA=</HashCode>
+      <HashCode>AAAAAEAAAAAAAAAABAAAIAAAACAAQAgAAEAACAAAIAA=</HashCode>
       <FileName>Modeles\Parking\Parking.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
+    <ShowAsCollectionAssociation>
       <Field Name="places" />
-    </ShowAsAssociation>
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Final_Project.Parking.Place">
-    <Position X="9" Y="2" Width="2.25" />
+    <Position X="15.75" Y="7.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAEAAAABgAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAEAAAABQAAAAEAAAAAAEAAAABgAAAAAAAA=</HashCode>
       <FileName>Modeles\Parking\Place.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="vehicule" />
+      <Field Name="parking" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Final_Project.Utils.Delegate" Collapsed="true">
-    <Position X="26" Y="0.5" Width="1.5" />
+    <Position X="6.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Utils\Delegate.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Interface Name="Final_Project.Controleurs.IControleur">
+    <Position X="24.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Modeles\Controleurs\IControleur.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="Final_Project.Enums.TypeVoiture" Collapsed="true">
-    <Position X="27.75" Y="1.75" Width="1.5" />
+    <Position X="27" Y="18" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAEAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>Modeles\Enums\TypeVoiture.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Final_Project.Enums.EPermis" Collapsed="true">
-    <Position X="26" Y="1.75" Width="1.5" />
+    <Position X="31.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAEAAAA=</HashCode>
       <FileName>Modeles\Enums\EPermis.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Final_Project.Enums.Intervention" Collapsed="true">
+    <Position X="7.5" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAABAAQ=</HashCode>
+      <FileName>Modeles\Enums\Intervention.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
